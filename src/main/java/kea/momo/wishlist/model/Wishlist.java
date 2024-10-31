@@ -1,5 +1,5 @@
 package kea.momo.wishlist.model;
 
-public class WishList {
+public class Wishlist {
     //Hvad så idioter
 }
