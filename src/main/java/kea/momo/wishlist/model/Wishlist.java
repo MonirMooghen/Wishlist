@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Wishlist {
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
+    private int wishlistId; // todo autoincrement
     private String wishlistName;
     private int wishListId;
     private List<Wish> wishlist;
     private List<Wishlist> wishlistList;
+
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
     public Wishlist(String wishlistName, List<Wish> wishList){
