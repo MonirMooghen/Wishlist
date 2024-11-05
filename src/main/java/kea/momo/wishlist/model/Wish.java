@@ -3,54 +3,55 @@ package kea.momo.wishlist.model;
 public class Wish {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
-    private String name;
-    private String description;
-    private double price;
-    private String link;
+    private int wishId; // todo autoincrement
+    private String wishName;
+    private String wishDescription;
+    private double wishPrice;
+    private String wishLink;
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
-    public Wish(String name, String description, double price, String link){
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.link = link;
+    public Wish(String wishName, String wishDescription, double wishPrice, String wishLink){
+        this.wishName = wishName;
+        this.wishDescription = wishDescription;
+        this.wishPrice = wishPrice;
+        this.wishLink = wishLink;
     }
 
     public Wish(){
     }
 
     //***GETTER***------------------------------------------------------------------------------------------------------
-    public String getName() {
-        return name;
+    public String getWishName() {
+        return wishName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getWishDescription() {
+        return wishDescription;
     }
 
-    public double getPrice() {
-        return price;
+    public double getWishPrice() {
+        return wishPrice;
     }
 
-    public String getLink() {
-        return link;
+    public String getWishLink() {
+        return wishLink;
     }
 
     //***SETTER***------------------------------------------------------------------------------------------------------
-    public void setName(String name) {
-        this.name = name;
+    public void setWishName(String name) {
+        this.wishName = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWishDescription(String wishDescription) {
+        this.wishDescription = wishDescription;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setWishPrice(double price) {
+        this.wishPrice = price;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setWishLink(String link) {
+        this.wishLink = link;
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

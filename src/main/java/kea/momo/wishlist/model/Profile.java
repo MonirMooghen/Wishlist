@@ -3,11 +3,11 @@ package kea.momo.wishlist.model;
 public class Profile {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
+    private int profileId; // todo autoincrement
     private String profileName;
     private String profileLastName;
     private String profileEmail;
     private String profilePassword;
-    private int profileId; // todo autoincrement
 
     //***USER***--------------------------------------------------------------------------------------------------------
     public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword) {
