@@ -1,6 +1,5 @@
 package kea.momo.wishlist.service;
 
-import kea.momo.wishlist.repository.UserRepository;
 import kea.momo.wishlist.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
 
