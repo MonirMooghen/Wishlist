@@ -7,7 +7,6 @@ public class Profile {
     private String profileLastName;
     private String profileEmail;
     private String profilePassword;
-    private int profileId; // todo autoincrement
 
     //***USER***--------------------------------------------------------------------------------------------------------
     public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword) {
@@ -15,7 +14,6 @@ public class Profile {
         this.profileLastName = profileLastName;
         this.profileEmail = profileEmail;
         this.profilePassword = profilePassword;
-        // profileId =
 
     }
 
@@ -57,5 +55,4 @@ public class Profile {
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
-
 }
