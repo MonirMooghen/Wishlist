@@ -4,10 +4,10 @@ import kea.momo.wishlist.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class ProfileService {
     private final ProfileRepository profileRepository;
 
-    UserService(ProfileRepository profileRepository){
+    ProfileService(ProfileRepository profileRepository){
         this.profileRepository = profileRepository;
     }
 }

@@ -1,14 +1,51 @@
 package kea.momo.wishlist.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Wishlist {
-    private List<Wish> wishList;
+    //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
+    private String wishlistName;
+    private int wishListId;
+    private List<Wish> wishlist;
+    private List<Wishlist> wishlistList;
 
-    public Wishlist(List<Wish> wishList){
-        wishList = new ArrayList<>();
+    //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
+    public Wishlist(String wishlistName, List<Wish> wishList){
+        this.wishlistName = wishlistName;
+        wishlist = new ArrayList<>();
     }
 
+    //***GETTER METHODS***----------------------------------------------------------------------------------------------
+    public String getWishlistName() {
+        return wishlistName;
+    }
+
+    public int getWishListId() {
+        return wishListId;
+    }
+
+    public List<Wishlist> getWishlistList() {
+        return wishlistList;
+    }
+
+    //***SETTER METHODS***----------------------------------------------------------------------------------------------
+    public void setWishlistName(String wishlistName) {
+        this.wishlistName = wishlistName;
+    }
+
+    public void setWishListId(int wishListId) {
+        this.wishListId = wishListId;
+    }
+
+    public void setWishlistList(List<Wishlist> wishlistList) {
+        this.wishlistList = wishlistList;
+    }
+
+    //***ADD METHODS***-------------------------------------------------------------------------------------------------
+    public void addWishlist(Wishlist wishList){
+        wishlistList.add(wishList);
+    }
+
+    //***END***---------------------------------------------------------------------------------------------------------
 }
