@@ -1,6 +1,7 @@
 package kea.momo.wishlist.model;
 
-public class User {
+public class
+User {
 
     private String userName;
     private String userFamilyName;
