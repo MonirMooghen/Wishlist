@@ -15,6 +15,8 @@ public class Wish {
         this.wishDescription = wishDescription;
         this.wishPrice = wishPrice;
         this.wishLink = wishLink;
+
+        // this is a test
     }
 
     public Wish(){
