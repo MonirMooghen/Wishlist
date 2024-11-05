@@ -1,17 +1,14 @@
 package kea.momo.wishlist.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wishlist {
-    private String name;
-    private LocalDate date; //TODO vil vi have date?
+    private List<Wish> wishList;
 
-    public Wishlist(){
-    }
-
-    public Wishlist(String name, LocalDate date){
-        this.name = name;
-        this.date = date;
+    public Wishlist(List<Wish> wishList){
+        wishList = new ArrayList<>();
     }
 
 }
