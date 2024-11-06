@@ -11,7 +11,6 @@ public class Wishlist {
     private List<Wish> wishlist;
     private List<Wishlist> wishlistList;
 
-
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
     public Wishlist(String wishlistName, List<Wish> wishList){
         this.wishlistName = wishlistName;

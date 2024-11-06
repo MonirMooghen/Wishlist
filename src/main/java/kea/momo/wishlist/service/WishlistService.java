@@ -19,17 +19,17 @@ public class WishlistService {
     }
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
-    public ArrayList<Wish> getAllWishes(){
+    public List<Wish> getAllWishes(){
         return wishlistRepository.getAllWishes();
     }
 
-    public void addWish(Wish wish){
-        wishlistRepository.addWish(wish);
-    }
-
-    public List<Wishlist> getAllWishLists() {
-        return wishlistRepository.getAllWishLists();
-    }
+//    public void addWish(Wish wish){
+//        wishlistRepository.addWish(wish);
+//    }
+//
+//    public List<Wishlist> getAllWishLists() {
+//        return wishlistRepository.getAllWishLists();
+//    }
 
     //***END***---------------------------------------------------------------------------------------------------------
 

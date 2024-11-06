@@ -1,5 +1,6 @@
 package kea.momo.wishlist;
 
+import kea.momo.wishlist.repository.WishlistRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,9 @@ public class WishlistApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WishlistApplication.class, args);
+        WishlistRepository wishlistRepository = new WishlistRepository();
+        System.out.println(wishlistRepository.getAllWishes());
     }
+
 
 }
