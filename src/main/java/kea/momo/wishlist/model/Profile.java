@@ -15,7 +15,6 @@ public class Profile {
         this.profileLastName = profileLastName;
         this.profileEmail = profileEmail;
         this.profilePassword = profilePassword;
-        // profileId =
 
     }
 
@@ -57,5 +56,4 @@ public class Profile {
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
-
 }
