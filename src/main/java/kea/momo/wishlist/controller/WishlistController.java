@@ -23,33 +23,33 @@ public class WishlistController {
     }
 
     //***MAPPING METHODS***---------------------------------------------------------------------------------------------
-    @GetMapping("") //TODO Skal rettes til
-    public String getAllWishLists(Model model) {
-        List<Wishlist> wishLists = wishlistService.getAllWishLists();
-        model.addAttribute("wishLists", wishLists);
-        return "allWishLists";
-    }
-
-    @GetMapping("")//TODO Skal rettes til
-    public String getAllWishes(Model model) {
-        List<Wish> wishes = wishlistService.getAllWishes();
-        model.addAttribute("wishes", wishes);
-        return "allWishes";
-    }
+//    @GetMapping("") //TODO Skal rettes til
+//    public String getAllWishLists(Model model) {
+//        List<Wishlist> wishLists = wishlistService.getAllWishLists();
+//        model.addAttribute("wishLists", wishLists);
+//        return "allWishLists";
+//    }
+//
+//    @GetMapping("")//TODO Skal rettes til
+//    public String getAllWishes(Model model) {
+//        List<Wish> wishes = wishlistService.getAllWishes();
+//        model.addAttribute("wishes", wishes);
+//        return "allWishes";
+//    }
 
     //***(/add)***------------------------------------------------------------------------------------------------------
-    @GetMapping("/add")
-    public String addWish(Model model) {
-        Wish wish = new Wish();
-        model.addAttribute("wish", wish);
-        return "addWish";
-    }
-
-    @PostMapping("/save")
-    public String saveWish(@ModelAttribute Wish wish){
-        wishlistService.addWish(wish);
-        return "redirect:/wishlist";
-    }
+//    @GetMapping("/add")
+//    public String addWish(Model model) {
+//        Wish wish = new Wish();
+//        model.addAttribute("wish", wish);
+//        return "addWish";
+//    }
+//
+//    @PostMapping("/save")
+//    public String saveWish(@ModelAttribute Wish wish){
+//        wishlistService.addWish(wish);
+//        return "redirect:/wishlist";
+//    }
 
     //***(/update)***---------------------------------------------------------------------------------------------------
     //TODO
