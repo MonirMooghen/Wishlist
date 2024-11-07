@@ -2,6 +2,7 @@ package kea.momo.wishlist.model;
 
 public class Profile {
 
+
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private int profileId; // todo autoincrement
     private String profileName;
@@ -10,11 +11,12 @@ public class Profile {
     private String profilePassword;
 
     //***USER***--------------------------------------------------------------------------------------------------------
-    public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword) {
+    public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword, int profileId) {
         this.profileName = profileName;
         this.profileLastName = profileLastName;
         this.profileEmail = profileEmail;
         this.profilePassword = profilePassword;
+        this.profileId = profileId;
 
     }
 
@@ -38,6 +40,10 @@ public class Profile {
         return profilePassword;
     }
 
+    public int getProfileId() {
+        return profileId;
+    }
+
     //***SETTER***------------------------------------------------------------------------------------------------------
     public void setProfileName(String profileName) {
         this.profileName = profileName;
@@ -53,6 +59,11 @@ public class Profile {
 
     public void setProfilePassword(String profilePassword) {
         this.profilePassword = profilePassword;
+    }
+
+
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

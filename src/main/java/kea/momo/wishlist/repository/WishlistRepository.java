@@ -31,9 +31,10 @@ public class WishlistRepository {
                 String description = rs.getString("wishDescription");
                 int price = rs.getInt("wishPrice");
                 String link = rs.getString("wishLink");
+                int wishId = rs.getInt("wishId");
                 // opretter ny liste af tags for nye attraction
 
-                Wish wishObj = new Wish(wishName, description, price, link);
+                Wish wishObj = new Wish(wishName, description, price, link, wishId);
                 wishes.add(wishObj);
            }
         } catch (SQLException ex) {
