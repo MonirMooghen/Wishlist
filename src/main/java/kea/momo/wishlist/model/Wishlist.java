@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wishlist {
+    public int getWishlistId() {
+        return wishlistId;
+    }
+
+
+
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private int wishlistId; // todo autoincrement
     private String wishlistName;
-    private int wishListId;
+    private int profileId;
     private List<Wish> wishlist;
-    private List<Wishlist> wishlistList;
+
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
-    public Wishlist(String wishlistName, List<Wish> wishList){
+    public Wishlist(String wishlistName, int profileId, int wishlistId){
         this.wishlistName = wishlistName;
         wishlist = new ArrayList<>();
     }
@@ -22,31 +28,42 @@ public class Wishlist {
         return wishlistName;
     }
 
-    public int getWishListId() {
-        return wishListId;
+    public List<Wish> getWishlist() {
+        return wishlist;
     }
 
-    public List<Wishlist> getWishlistList() {
-        return wishlistList;
+    public int getProfileId() {
+        return profileId;
     }
+
+
+
+
 
     //***SETTER METHODS***----------------------------------------------------------------------------------------------
     public void setWishlistName(String wishlistName) {
         this.wishlistName = wishlistName;
     }
 
-    public void setWishListId(int wishListId) {
-        this.wishListId = wishListId;
+    public void setWishlist(List<Wish> wishlist) {
+        this.wishlist = wishlist;
     }
 
-    public void setWishlistList(List<Wishlist> wishlistList) {
-        this.wishlistList = wishlistList;
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
     }
+
+
+
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
+    }
+
+
 
     //***ADD METHODS***-------------------------------------------------------------------------------------------------
-    public void addWishlist(Wishlist wishList){
-        wishlistList.add(wishList);
-    }
+
+
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
 
