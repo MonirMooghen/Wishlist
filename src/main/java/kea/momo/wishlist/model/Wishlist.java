@@ -48,5 +48,15 @@ public class Wishlist {
         wishlistList.add(wishList);
     }
 
+    //***TO STRING METHOD***--------------------------------------------------------------------------------------------
+
+    @Override
+    public String toString() {
+        return
+                "\n Wishlist name: " + wishlistName +
+                "\n Wishlist Id: "   + wishlistId   +
+                "\n Wishes: "        + wishlist     ;
+    }
+
     //***END***---------------------------------------------------------------------------------------------------------
 }
