@@ -17,7 +17,7 @@ public class WishlistRepository {
     private String db_username = System.getenv("DB_USER");
     private String db_password = System.getenv("DB_PASSWORD");
 
-    //***METHODS***--------------------------
+    //***METHODS***-----------------------------------------------------------------------------------------------------
     public List<Wish> getAllWishes(){
         System.out.println("Wishes");
         List<Wish> wishes = new ArrayList<>();
@@ -41,17 +41,13 @@ public class WishlistRepository {
         } catch (SQLException ex) {
                 throw new RuntimeException(ex);
     }
-           
             return wishes;
-
     }
-
 
 
     public List<Wishlist> getAllWishLists() {
         System.out.println("WishListssssssss");
         List<Wishlist> allWishLists = new ArrayList<>();
-
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             String query = "SELECT * FROM Wishlist";
@@ -75,7 +71,62 @@ public class WishlistRepository {
         return allWishLists;
     }
 
+//    public void addWish(Wish wish) { //TODO rettes
+//    }
 
+    public void addWish(Wish wish/*, Wishlist wishlist*/){
+        System.out.println("Add wish"); //TODO hvorfor skal der være en sout her?
+        //String getWishlistIdSQL = "SELECT wishlistId FROM Wishlist WHERE wishlistName = ?";
+        String insertWishSQL = """
+                                    INSERT INTO Wish(
+                                     wishName, wishDescription, wishPrice, 
+                                     wishLink) VALUES (?,?,?,?)""";
+
+        try (Connection con = DriverManager.getConnection(db_url,db_username,db_password)){
+
+            //con.setAutoCommit(false);
+            //transaction begin
+
+//            // gette wishlist id
+//            PreparedStatement preparedStatement1 = con.prepareStatement(getWishlistIdSQL);
+//            preparedStatement1.setString(1, wish.get());
+//            ResultSet resultSet1 = preparedStatement1.executeQuery();
+//            resultSet1.next();
+//            int cityId = resultSet1.getInt("city_id");
+
+
+            //indsæt attraktion  (hvordan ved vi at det er en ny attraktion vi opretter?)
+
+            int wishlistId;
+            PreparedStatement wishStatement = con.prepareStatement(insertWishSQL, Statement.RETURN_GENERATED_KEYS);
+
+            wishStatement.setString(1,wish.getWishName());
+            wishStatement.setString(2, wish.getWishDescription());
+            wishStatement.setDouble(3, wish.getWishPrice());
+            wishStatement.setString(4, wish.getWishLink());
+            ResultSet generatedKeys = wishStatement.getGeneratedKeys();
+            if (generatedKeys.next()){
+            wishlistId = generatedKeys.getInt(1);
+            }
+
+            // TODO: get wishListID wishStatement.setString()
+
+
+//            //Få det genererede attraction_id
+//            ResultSet generatedKeys = wishStatement.getGeneratedKeys();
+//            int wishId = -1;
+//            if(generatedKeys.next()){
+//                wishId = generatedKeys.getInt(1);
+
+                wishStatement.executeUpdate(); //gemmer hvad man har gjort?
+            }
+
+            //con.commit(); //transaction end
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
 
     //***END***-----------------------------------------------------------------------------------------------------
@@ -84,8 +135,6 @@ public class WishlistRepository {
 //
 
 //
-//    public void addWish(Wish wish) { //TODO rettes
-//    }
 //
 //    public ArrayList<Wish> getAllWishes() { //TODO rettes
 //        return null;
