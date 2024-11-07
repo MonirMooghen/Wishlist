@@ -1,5 +1,6 @@
 package kea.momo.wishlist.repository;
 
+import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import org.springframework.stereotype.Repository;
@@ -44,13 +45,44 @@ public class WishlistRepository {
             return wishes;
 
     }
-        //***END***-----------------------------------------------------------------------------------------------------
+
+
+
+    public List<Wishlist> getAllWishLists() {
+        System.out.println("WishListssssssss");
+        List<Wishlist> allWishLists = new ArrayList<>();
+
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            String query = "SELECT * FROM Wishlist";
+            Statement stmt = con.createStatement(); //Opretter et statement til at udføre SQL-forespørgsler
+            ResultSet rs = stmt.executeQuery(query); //Udfører en SELECT-forespørgsel og returnerer resultaterne som et ResultSet.
+
+            while (rs.next()) {
+                String wishlistName = rs.getString("wishlistName");
+                int wishlistId = rs.getInt("wishlistId");
+                int profileId = rs.getInt("profileId");
+
+                // opretter ny liste af tags for nye attraction
+
+                Wishlist wishListObj = new Wishlist(wishlistName, profileId,wishlistId);
+
+                allWishLists.add(wishListObj);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return allWishLists;
+    }
+
+
+
+
+    //***END***-----------------------------------------------------------------------------------------------------
 }
 //
 //
-//    public List<Wishlist> getAllWishLists() { //TODO rettes
-//        return List.of();
-//    }
+
 //
 //    public void addWish(Wish wish) { //TODO rettes
 //    }

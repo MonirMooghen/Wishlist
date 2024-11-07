@@ -18,6 +18,8 @@ public class Wish {
         this.wishId = wishId;
     }
 
+
+
     public Wish(){
     }
 

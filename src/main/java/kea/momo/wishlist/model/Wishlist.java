@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wishlist {
-    public int getWishlistId() {
-        return wishlistId;
-    }
-
 
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
-    private int wishlistId; // todo autoincrement
+    private int wishlistId; //
     private String wishlistName;
     private int profileId;
     private List<Wish> wishlist;
@@ -20,6 +16,8 @@ public class Wishlist {
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
     public Wishlist(String wishlistName, int profileId, int wishlistId){
         this.wishlistName = wishlistName;
+        this.profileId = profileId;
+        this.wishlistId = wishlistId;
         wishlist = new ArrayList<>();
     }
 
@@ -34,6 +32,10 @@ public class Wishlist {
 
     public int getProfileId() {
         return profileId;
+    }
+
+    public int getWishlistId() {
+        return wishlistId;
     }
 
 
@@ -69,7 +71,7 @@ public class Wishlist {
 
     @Override
     public String toString() {
-        return 
+        return
                 "\n Wishlist name: " + wishlistName +
                 "\n Wishlist Id: "   + wishlistId   +
                 "\n Wishes: "        + wishlist     ;
