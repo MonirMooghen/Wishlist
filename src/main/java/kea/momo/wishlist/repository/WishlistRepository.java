@@ -46,8 +46,6 @@ public class WishlistRepository {
 
     }
 
-
-
     public List<Wishlist> getAllWishLists() {
         System.out.println("WishListssssssss");
         List<Wishlist> allWishLists = new ArrayList<>();
@@ -74,9 +72,6 @@ public class WishlistRepository {
         }
         return allWishLists;
     }
-
-
-
 
     //***END***-----------------------------------------------------------------------------------------------------
 }

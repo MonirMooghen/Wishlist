@@ -18,4 +18,9 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+//    @GetMapping("/addprofile")
+//    public Profile addProfile(){
+//
+//    }
+
 }
