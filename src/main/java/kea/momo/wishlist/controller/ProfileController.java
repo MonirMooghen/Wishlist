@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("HomePage")
 public class ProfileController {
 
     private final ProfileService profileService;
