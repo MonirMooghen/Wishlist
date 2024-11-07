@@ -19,13 +19,4 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    // todo this method is just to test the HTML PAGE, must be deleted.
-    @GetMapping("")
-    public String profile(Model model) {
-        //List<Profile> profileLists = profileService.
-        return "homePage";
-    }
-
-
-
 }
