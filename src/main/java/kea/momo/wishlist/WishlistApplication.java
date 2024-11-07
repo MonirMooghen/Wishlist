@@ -1,6 +1,6 @@
 package kea.momo.wishlist;
 
-import kea.momo.wishlist.model.Wish;
+import kea.momo.wishlist.repository.ProfileRepository;
 import kea.momo.wishlist.repository.WishlistRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,14 +10,14 @@ public class WishlistApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WishlistApplication.class, args);
+
+        //Wishlist
         WishlistRepository wishlistRepository = new WishlistRepository();
-//        for(Wish wishes : wishlistRepository.getAllWishes()){
-//
-//            System.out.println(wishes.getWishName());
-//
-//        }
-        System.out.println(wishlistRepository.getAllWishLists());
         System.out.println(wishlistRepository.getAllWishes());
+
+        //Profile
+        ProfileRepository profileRepository = new ProfileRepository();
+        System.out.println(profileRepository.getAllProfiles());
     }
 
 
