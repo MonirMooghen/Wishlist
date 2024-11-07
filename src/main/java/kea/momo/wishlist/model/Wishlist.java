@@ -52,7 +52,7 @@ public class Wishlist {
 
     @Override
     public String toString() {
-        return
+        return 
                 "\n Wishlist name: " + wishlistName +
                 "\n Wishlist Id: "   + wishlistId   +
                 "\n Wishes: "        + wishlist     ;
