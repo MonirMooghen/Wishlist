@@ -17,6 +17,8 @@ public class Wish {
         this.wishLink = wishLink;
     }
 
+
+
     public Wish(){
     }
 

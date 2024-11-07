@@ -12,7 +12,7 @@ public class Wishlist {
     private List<Wishlist> wishlistList;
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
-    public Wishlist(String wishlistName, List<Wish> wishList){
+    public Wishlist(String wishlistName ){
         this.wishlistName = wishlistName;
         wishlist = new ArrayList<>();
     }
