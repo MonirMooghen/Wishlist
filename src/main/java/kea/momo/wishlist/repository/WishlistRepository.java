@@ -1,5 +1,6 @@
 package kea.momo.wishlist.repository;
 
+import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import org.springframework.stereotype.Repository;
@@ -47,7 +48,7 @@ public class WishlistRepository {
 
 
 
-    public List<Wishlist> getAllWishLists() { //TODO
+    public List<Wishlist> getAllWishLists() {
         System.out.println("WishListssssssss");
         List<Wishlist> allWishLists = new ArrayList<>();
 
@@ -64,16 +65,20 @@ public class WishlistRepository {
 
                 // opretter ny liste af tags for nye attraction
 
-                Wishlist wishListObj = new Wishlist(wishlistName);
-                //wishes.add(wishObj);
+                Wishlist wishListObj = new Wishlist(wishlistName, profileId,wishlistId);
+
+                allWishLists.add(wishListObj);
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
-        return List.of();
+        return allWishLists;
     }
-        //***END***-----------------------------------------------------------------------------------------------------
+
+
+
+
+    //***END***-----------------------------------------------------------------------------------------------------
 }
 //
 //

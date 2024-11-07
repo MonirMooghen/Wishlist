@@ -11,12 +11,13 @@ public class WishlistApplication {
     public static void main(String[] args) {
         SpringApplication.run(WishlistApplication.class, args);
         WishlistRepository wishlistRepository = new WishlistRepository();
-        for(Wish wishes : wishlistRepository.getAllWishes()){
-
-            System.out.println(wishes.getWishName());
-
-        }
-       // System.out.println(wishlistRepository.getAllWishes());
+//        for(Wish wishes : wishlistRepository.getAllWishes()){
+//
+//            System.out.println(wishes.getWishName());
+//
+//        }
+        System.out.println(wishlistRepository.getAllWishLists());
+        System.out.println(wishlistRepository.getAllWishes());
     }
 
 
