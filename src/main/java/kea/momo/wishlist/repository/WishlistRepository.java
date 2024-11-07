@@ -74,11 +74,12 @@ public class WishlistRepository {
 //    public void addWish(Wish wish) { //TODO rettes
 //    }
 
-    public void addWish(Wish wish/*, Wishlist wishlist*/){
+    public void addWish(Wish wish/*, Wishlist wishlist*/) {
         System.out.println("Add wish"); //TODO hvorfor skal der være en sout her?
         //String getWishlistIdSQL = "SELECT wishlistId FROM Wishlist WHERE wishlistName = ?";
         String insertWishSQL = """
-                                    INSERT INTO Wish(
+                                    
+                INSERT INTO Wish(
                                      wishName, wishDescription, wishPrice, 
                                      wishLink) VALUES (?,?,?,?)""";
 
@@ -105,7 +106,8 @@ public class WishlistRepository {
             wishStatement.setDouble(3, wish.getWishPrice());
             wishStatement.setString(4, wish.getWishLink());
             ResultSet generatedKeys = wishStatement.getGeneratedKeys();
-            if (generatedKeys.next()){
+            if
+                (generatedKeys.next()){
             wishlistId = generatedKeys.getInt(1);
             }
 
@@ -116,21 +118,19 @@ public class WishlistRepository {
 //            ResultSet generatedKeys = wishStatement.getGeneratedKeys();
 //            int wishId = -1;
 //            if(generatedKeys.next()){
-//                wishId = generatedKeys.getInt(1);
+//            wishId = generatedKeys.getInt(1);
 
-                wishStatement.executeUpdate(); //gemmer hvad man har gjort?
-            }
-
-            //con.commit(); //transaction end
-
-        } catch (SQLException e){
+                wishStatement.
+        executeUpdate(); //ge mmer hvad man har gjort?
+            } catch (
+    SQLException e){
             e.printStackTrace();
         }
-    }
+        }
 
 
     //***END***-----------------------------------------------------------------------------------------------------
-}
+    }
 //
 //
 
