@@ -66,5 +66,15 @@ public class Profile {
         this.profileId = profileId;
     }
 
+    //***TO STRING METHOD***--------------------------------------------------------------------------------------------
+    @Override
+    public String toString() {
+        return
+                "\nProfile name: "     + profileName     +
+                "\nProfile lastname: " + profileLastName +
+                "\nProfile Id: "       + profileId       +
+                "\nProfile Id: "       + profilePassword + '\n' ;
+    }
+
     //***END***---------------------------------------------------------------------------------------------------------
 }
