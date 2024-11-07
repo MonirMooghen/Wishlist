@@ -45,6 +45,7 @@ public class WishlistRepository {
     }
 
 
+
     public List<Wishlist> getAllWishLists() {
         System.out.println("WishListssssssss");
         List<Wishlist> allWishLists = new ArrayList<>();
@@ -70,6 +71,7 @@ public class WishlistRepository {
         }
         return allWishLists;
     }
+
 
 //    public void addWish(Wish wish) { //TODO rettes
 //    }
@@ -127,6 +129,7 @@ public class WishlistRepository {
             e.printStackTrace();
         }
         }
+
 
 
     //***END***-----------------------------------------------------------------------------------------------------
