@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class yWishlistRepository {
+public class WishlistRepository {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private String db_url = System.getenv("DB_URL");
