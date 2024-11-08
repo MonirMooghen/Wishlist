@@ -18,22 +18,23 @@ public class WishlistService {
         this.wishlistRepository = wishlistRepository;
     }
 
-    //***METHODS***-----------------------------------------------------------------------------------------------------
-    public List<Wish> getAllWishes(){
-        return wishlistRepository.getAllWishes();
-    }
-
+    //***WISHLIST METHODS***--------------------------------------------------------------------------------------------
     public void addWishlist(Wishlist wishlist){
         wishlistRepository.addWishList(wishlist);
     }
 
-//    public void addWish(Wish wish){
-//        wishlistRepository.addWish(wish);
-//    }
-//
-//    public List<Wishlist> getAllWishLists() {
-//        return wishlistRepository.getAllWishLists();
-//    }
+    public List<Wishlist> getAllWishLists() {
+        return wishlistRepository.getAllWishLists();
+    }
+
+    //***WISH METHODS***------------------------------------------------------------------------------------------------
+    public List<Wish> getAllWishes(){
+        return wishlistRepository.getAllWishes();
+    }
+
+    public void addWish(Wish wish, int wishlistId){
+        wishlistRepository.addWish(wish, wishlistId);
+    }
 
     //***END***---------------------------------------------------------------------------------------------------------
 
