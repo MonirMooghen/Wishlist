@@ -23,6 +23,10 @@ public class WishlistService {
         return wishlistRepository.getAllWishes();
     }
 
+    public void addWishlist(Wishlist wishlist){
+        wishlistRepository.addWishList(wishlist);
+    }
+
 //    public void addWish(Wish wish){
 //        wishlistRepository.addWish(wish);
 //    }

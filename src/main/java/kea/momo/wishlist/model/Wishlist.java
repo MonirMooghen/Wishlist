@@ -14,10 +14,8 @@ public class Wishlist {
 
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
-    public Wishlist(String wishlistName, int profileId, int wishlistId){
+    public Wishlist(String wishlistName){
         this.wishlistName = wishlistName;
-        this.profileId = profileId;
-        this.wishlistId = wishlistId;
         wishlist = new ArrayList<>();
     }
 
@@ -30,17 +28,6 @@ public class Wishlist {
         return wishlist;
     }
 
-    public int getProfileId() {
-        return profileId;
-    }
-
-    public int getWishlistId() {
-        return wishlistId;
-    }
-
-
-
-
 
     //***SETTER METHODS***----------------------------------------------------------------------------------------------
     public void setWishlistName(String wishlistName) {
@@ -50,18 +37,6 @@ public class Wishlist {
     public void setWishlist(List<Wish> wishlist) {
         this.wishlist = wishlist;
     }
-
-    public void setWishlistId(int wishlistId) {
-        this.wishlistId = wishlistId;
-    }
-
-
-
-    public void setProfileId(int profileId) {
-        this.profileId = profileId;
-    }
-
-
 
     //***ADD METHODS***-------------------------------------------------------------------------------------------------
 

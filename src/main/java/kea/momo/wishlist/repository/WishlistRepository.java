@@ -17,23 +17,56 @@ public class WishlistRepository {
     private String db_username = System.getenv("DB_USER");
     private String db_password = System.getenv("DB_PASSWORD");
 
-    //***METHODS***-----------------------------------------------------------------------------------------------------
-
-
-
     //***WISHLIST METHODS***--------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------------------------
+    //***GET***---------------------------------------------------------------------------------------------------------
+    public List<Wishlist> getAllWishLists() {
+        List<Wishlist> allWishLists = new ArrayList<>();
 
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            String query = "SELECT * FROM Wishlist";
+            Statement stmt = con.createStatement(); //Opretter et statement til at udføre SQL-forespørgsler
+            ResultSet rs = stmt.executeQuery(query); //Udfører en SELECT-forespørgsel og returnerer resultaterne som et ResultSet.
+
+            while (rs.next()) {
+                String wishlistName = rs.getString("wishlistName");
+
+                Wishlist wishListObj = new Wishlist(wishlistName);
+                allWishLists.add(wishListObj);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return allWishLists;
+    }
+
+    public void addWishList(Wishlist wishlist){
+        System.out.println("Add wishlist");
+        String insertWishlistQuery = """
+        INSERT INTO Wishlist (wishlistName) VALUES (?)""";
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement profileStatement = con.prepareStatement(insertWishlistQuery);
+            profileStatement.setString(1, wishlist.getWishlistName());
+            profileStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //***WISH METHODS***------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     public List<Wish> getAllWishes(){
         System.out.println("Wishes");
         List<Wish> wishes = new ArrayList<>();
 
-           try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
-                String query = "SELECT * FROM Wish";
-                Statement stmt = con.createStatement(); //Opretter et statement til at udføre SQL-forespørgsler
-                ResultSet rs = stmt.executeQuery(query); //Udfører en SELECT-forespørgsel og returnerer resultaterne som et ResultSet.
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            String query = "SELECT * FROM Wish";
+            Statement stmt = con.createStatement(); //Opretter et statement til at udføre SQL-forespørgsler
+            ResultSet rs = stmt.executeQuery(query); //Udfører en SELECT-forespørgsel og returnerer resultaterne som et ResultSet.
 
-                while (rs.next()) {
+            while (rs.next()) {
                 String wishName = rs.getString("wishName");
                 String description = rs.getString("wishDescription");
                 int price = rs.getInt("wishPrice");
@@ -43,46 +76,14 @@ public class WishlistRepository {
 
                 Wish wishObj = new Wish(wishName, description, price, link, wishId);
                 wishes.add(wishObj);
-           }
-        } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-    }
-           
-            return wishes;
-
-    }
-
-    public List<Wishlist> getAllWishLists() {
-        System.out.println("WishListssssssss");
-        List<Wishlist> allWishLists = new ArrayList<>();
-
-
-        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
-            String query = "SELECT * FROM Wishlist";
-            Statement stmt = con.createStatement(); //Opretter et statement til at udføre SQL-forespørgsler
-            ResultSet rs = stmt.executeQuery(query); //Udfører en SELECT-forespørgsel og returnerer resultaterne som et ResultSet.
-
-            while (rs.next()) {
-                String wishlistName = rs.getString("wishlistName");
-                int wishlistId = rs.getInt("wishlistId");
-                int profileId = rs.getInt("profileId");
-
-                // opretter ny liste af tags for nye attraction
-
-                Wishlist wishListObj = new Wishlist(wishlistName, profileId,wishlistId);
-
-                allWishLists.add(wishListObj);
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        return allWishLists;
+
+        return wishes;
+
     }
-
-
-    //***WISH METHODS***------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------------------------
-
 
     //***END***-----------------------------------------------------------------------------------------------------
 }
