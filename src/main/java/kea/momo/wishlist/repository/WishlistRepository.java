@@ -56,7 +56,7 @@ public class WishlistRepository {
 
 
     //***WISH METHODS***------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------------------------
+    //***GET***---------------------------------------------------------------------------------------------------------
     public List<Wish> getAllWishes(){
         System.out.println("Wishes");
         List<Wish> wishes = new ArrayList<>();
@@ -85,16 +85,36 @@ public class WishlistRepository {
 
     }
 
+    //***ADD WISH***----------------------------------------------------------------------------------------------------
+    public void addWish(Wish wish, int wishlistId) {
+        System.out.println("Add wish");
+        String insertWishQuery = """
+        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink, wishlistId)  
+        VALUES (?, ?, ?, ?, ?)
+    """;
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            // Prepare the insert statement
+            PreparedStatement profileStatement = con.prepareStatement(insertWishQuery);
+
+            // Set values for the wish
+            profileStatement.setString(1, wish.getWishName());
+            profileStatement.setString(2, wish.getWishDescription());
+            profileStatement.setDouble(3, wish.getWishPrice());
+            profileStatement.setString(4, wish.getWishLink());
+
+            // Set the wishlistId directly (this comes from the existing Wishlist object or elsewhere)
+            profileStatement.setInt(5, wishlistId);
+
+            // Execute the insert statement
+            profileStatement.executeUpdate();
+
+            System.out.println("Wish added successfully to the wishlist.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //***END***-----------------------------------------------------------------------------------------------------
 }
-//
-//-
-
-//
-//    public void addWish(Wish wish) { //TODO rettes
-//    }
-//
-//    public ArrayList<Wish> getAllWishes() { //TODO rettes
-//        return null;
-//    }
 
