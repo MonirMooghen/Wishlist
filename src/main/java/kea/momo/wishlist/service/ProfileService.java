@@ -26,5 +26,13 @@ public class ProfileService {
                profileRepository.addProfile(profile);
     }
 
+    public void updateProfile(Profile profile){
+        profileRepository.updateProfile(profile);
+    }
+
+    public void deleteProfile(Profile profile){
+        profileRepository.deleteProfile(profile);
+    }
+
     //***END***---------------------------------------------------------------------------------------------------------
 }
