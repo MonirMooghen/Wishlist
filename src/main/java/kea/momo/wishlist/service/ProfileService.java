@@ -22,8 +22,8 @@ public class ProfileService {
         return profileRepository.getAllProfiles();
     }
 
-    public Profile getProfile(Profile profile){
-        return profileRepository.addProfile(profile);
+    public void addProfile(Profile profile){
+               profileRepository.addProfile(profile);
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

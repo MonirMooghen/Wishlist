@@ -1,5 +1,6 @@
 package kea.momo.wishlist;
 
+import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.repository.ProfileRepository;
 import kea.momo.wishlist.repository.WishlistRepository;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +20,9 @@ public class WishlistApplication {
 
         //Profile
         ProfileRepository profileRepository = new ProfileRepository();
+        profileRepository.addProfile(new Profile("Hassan", "Katchan", "hk@gmail.com","jfoifonwdwd2"));
         System.out.println(profileRepository.getAllProfiles());
+
 
         //Wishlist
         System.out.println(wishlistRepository.getAllWishLists());

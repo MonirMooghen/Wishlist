@@ -46,21 +46,19 @@ public class ProfileRepository {
     }
 
     //***ADD PROFILE***-------------------------------------------------------------------------------------------------
-    public Profile addProfile(Profile profile){
+    //TODO vi skal sikre at profile objekt ikke er tomt... if(profile != null) ....
+    public void addProfile(Profile profile) {
         System.out.println("Add Profile");
-        Profile profile1 = null;
-
         String insertProfileQuery = """
-                                        INSERT INTO Profile (
-                                        profile_profileName,
-                                        profile_profileLastname,
-                                        profile_profileEmail),
-                                        profile_profilePassword)
-                                        VALUES (?,?,?,?)""";
+        INSERT INTO Profile (
+            profileName,
+            profileLastName,
+            profileEmail,
+            profilePassword)
+        VALUES (?,?,?,?)
+    """;
 
-        try (Connection con = DriverManager.getConnection(db_url,db_username,db_password)){
-
-            //Opret en profile
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             PreparedStatement profileStatement = con.prepareStatement(insertProfileQuery);
             profileStatement.setString(1, profile.getProfileName());
             profileStatement.setString(2, profile.getProfileLastName());
@@ -68,21 +66,36 @@ public class ProfileRepository {
             profileStatement.setString(4, profile.getProfilePassword());
             profileStatement.executeUpdate();
 
-            ResultSet rs = profileStatement.getGeneratedKeys();
-            String profileName = rs.getString("profileName");
-            String profileLastName = rs.getString("profileLastName");
-            String profileEmail = rs.getString("profileEmail");
-            String profilePassword = rs.getString("profilePassword");
-
-
-            profile1 = new Profile(profileName,profileLastName,profileEmail,profilePassword);
-
-
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
-        return profile1;
+    //***DELETE PROFILE***------------------------------------------------------------------------------------------------
+//    public void deleteProfile(Profile profile){
+//        String deleteSQL = "DELETE FROM Profile WHERE profile_profileName = ?";
+//
+//        try(Connection con = DriverManager.getConnection(db_url,db_username,db_password)){
+//            PreparedStatement prepstmt = con.prepareStatement(deleteSQL);
+//            prepstmt.setString(1, profile.getProfileName());
+//            prepstmt.executeUpdate();
+//
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void deleteProfile(Profile profile) {
+        String deleteSQL = "DELETE FROM Profile WHERE profileId = ?";
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement prepstmt = con.prepareStatement(deleteSQL);
+            prepstmt.setInt(1, profile.getProfileId());  // Assuming profile has a getProfileId() method
+            prepstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
