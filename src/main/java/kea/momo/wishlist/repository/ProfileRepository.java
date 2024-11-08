@@ -32,7 +32,6 @@ public class ProfileRepository {
                 String profileEmail = rs.getString("profileEmail");
                 String profilePassword = rs.getString("profilePassword");
                 int profileId = rs.getInt("profileId");
-                // opretter ny liste af tags for nye attraction
 
                 Profile profileObj = new Profile(profileName,profileLastName,profileEmail,profilePassword);
                 profiles.add(profileObj);
@@ -72,30 +71,43 @@ public class ProfileRepository {
     }
 
     //***DELETE PROFILE***------------------------------------------------------------------------------------------------
-//    public void deleteProfile(Profile profile){
-//        String deleteSQL = "DELETE FROM Profile WHERE profile_profileName = ?";
-//
-//        try(Connection con = DriverManager.getConnection(db_url,db_username,db_password)){
-//            PreparedStatement prepstmt = con.prepareStatement(deleteSQL);
-//            prepstmt.setString(1, profile.getProfileName());
-//            prepstmt.executeUpdate();
-//
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
-
     public void deleteProfile(Profile profile) {
-        String deleteSQL = "DELETE FROM Profile WHERE profileId = ?";
+        String deleteQuery = "DELETE FROM Profile WHERE profileId = ?";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
-            PreparedStatement prepstmt = con.prepareStatement(deleteSQL);
+            PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
             prepstmt.setInt(1, profile.getProfileId());  // Assuming profile has a getProfileId() method
             prepstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    //***UPDATE***------------------------------------------------------------------------------------------------------
+    public void updateProfile(Profile profile){
+    String updateQuery = """
+        UPDATE Profile
+        SET profileName = ?, profileLastName = ?, profileEmail = ?, profilePassword = ?
+        WHERE profileId = ?
+    """;
+
+    try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement profileStatement = con.prepareStatement(updateQuery);
+            profileStatement.setString(1, profile.getProfileName());
+            profileStatement.setString(2, profile.getProfileLastName());
+            profileStatement.setString(3, profile.getProfileEmail());
+            profileStatement.setString(4, profile.getProfilePassword());
+
+            //profilId
+            profileStatement.setInt(5, profile.getProfileId());
+
+            profileStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

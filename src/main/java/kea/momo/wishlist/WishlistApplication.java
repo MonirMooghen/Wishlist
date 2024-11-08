@@ -20,7 +20,8 @@ public class WishlistApplication {
 
         //Profile
         ProfileRepository profileRepository = new ProfileRepository();
-        profileRepository.addProfile(new Profile("Hassan", "Katchan", "hk@gmail.com","jfoifonwdwd2"));
+        Profile hassan = new Profile("Hassan", "Katchan", "hk@gmail.com","jfoifonwdwd2");
+        profileRepository.addProfile(hassan);
         System.out.println(profileRepository.getAllProfiles());
 
 

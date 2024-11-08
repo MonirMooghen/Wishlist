@@ -17,7 +17,7 @@ public class WishlistRepository {
     private String db_username = System.getenv("DB_USER");
     private String db_password = System.getenv("DB_PASSWORD");
 
-    //***METHODS***--------------------------
+    //***METHODS***-----------------------------------------------------------------------------------------------------
     public List<Wish> getAllWishes(){
         System.out.println("Wishes");
         List<Wish> wishes = new ArrayList<>();
