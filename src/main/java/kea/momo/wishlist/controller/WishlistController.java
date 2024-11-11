@@ -22,6 +22,11 @@ public class WishlistController {
     }
 
     //***WISHLIST***----------------------------------------------------------------------------------------------------
+    @GetMapping("/homepage")
+    public String homepage() {
+        return "wishlist";
+    }
+
     //***CREATE WISHLIST***--------------------------------------------------------------------------------------------C
     @GetMapping("/addwishlist")
     public String addWishlist(Model model) {
