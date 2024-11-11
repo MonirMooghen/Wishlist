@@ -106,6 +106,23 @@ public class WishlistRepository {
 
     }
 
+    public Wish findWishById(int id){
+        for (Wish wish : getAllWishes()){
+            if (id == wish.getWishId()){
+                return wish;
+            }
+        } throw new IllegalArgumentException("No wish with this ID");
+    }
+
+
+    public Wishlist findWishlistById(int id){
+        for (Wishlist wishlist : getAllWishLists()){
+            if (id == wishlist.getWishlistId()){
+                return wishlist;
+            }
+        } throw new IllegalArgumentException("No wishlist with this ID");
+    }
+
     //***ADD WISH***----------------------------------------------------------------------------------------------------
     public void addWish(Wish wish) {
         System.out.println("Add wish");

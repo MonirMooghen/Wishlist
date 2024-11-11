@@ -27,14 +27,41 @@ public class WishlistService {
         return wishlistRepository.getAllWishLists();
     }
 
+    public Wishlist findWishlistById(int id) {
+        return wishlistRepository.findWishlistById(id);
+    }
+
+//    public void updateWishlist(Wishlist wishlist){
+//        wishlistRepository.updateWishlist(wishlist);
+//    }
+
+    public void deleteWishlist(Wishlist wishlist){
+        wishlistRepository.deleteWishlist(wishlist);
+    }
+
     //***WISH METHODS***------------------------------------------------------------------------------------------------
     public List<Wish> getAllWishes(){
         return wishlistRepository.getAllWishes();
     }
 
-    public void addWish(Wish wish){
+    public void addWish(Wish wish) {
         wishlistRepository.addWish(wish);
     }
+
+    public Wish findWishById(int id) {
+        return wishlistRepository.findWishById(id);
+    }
+
+    public void updateWish(Wish wish){
+        wishlistRepository.updateWish(wish);
+    }
+
+    public void deleteWish(Wish wish){
+        wishlistRepository.deleteWish(wish);
+    }
+
+
+
 
     //***END***---------------------------------------------------------------------------------------------------------
 
