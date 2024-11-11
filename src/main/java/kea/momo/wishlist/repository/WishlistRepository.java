@@ -40,6 +40,7 @@ public class WishlistRepository {
         return allWishLists;
     }
 
+
     //***ADD WISHLIST***----------------------------------------------------------------------------------------------------
     public void addWishList(Wishlist wishlist){
         System.out.println("Add wishlist");
