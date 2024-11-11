@@ -15,7 +15,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="/wishlist/homepage">
+        <a class="navbar-brand" href="/homepage">
             <img src="https://picsum.photos/50" alt="Logo" style="width: 50px; border-radius: 50%;">
             momo list corporation
         </a>
@@ -45,7 +45,7 @@
         <div class="col-md-6">
             <h3 class="text-center">Sign Up</h3>
             <!-- Form with Thymeleaf mapping -->
-            <form th:action="@{/wishlist/save}" th:object="${profile}" method="post">
+            <form th:action="@{/profile/save}" th:object="${profile}" method="post">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" id="firstName" th:field="*{profileName}" placeholder="Enter your first name">
@@ -91,7 +91,7 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
             <p class="text-center mt-3">
-                Don't have an account? <a href="/wishlist/signup">Sign up here</a>
+                Don't have an account? <a href="/profile/addprofile">Sign up here</a>
             </p>
         </form>
     </div>
