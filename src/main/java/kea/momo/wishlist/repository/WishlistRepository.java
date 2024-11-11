@@ -1,6 +1,5 @@
 package kea.momo.wishlist.repository;
 
-import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import org.springframework.stereotype.Repository;
@@ -19,7 +18,7 @@ public class WishlistRepository {
 
     //***WISHLIST METHODS***--------------------------------------------------------------------------------------------
     //***GET***---------------------------------------------------------------------------------------------------------
-    public List<Wishlist> getAllWishLists() {
+    public List<Wishlist> getAllWishlists() {
         List<Wishlist> allWishLists = new ArrayList<>();
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
@@ -42,7 +41,7 @@ public class WishlistRepository {
 
 
     //***ADD WISHLIST***----------------------------------------------------------------------------------------------------
-    public void addWishList(Wishlist wishlist){
+    public void addWishlist(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
         INSERT INTO Wishlist (wishlistName) VALUES (?)""";
@@ -51,6 +50,25 @@ public class WishlistRepository {
             PreparedStatement profileStatement = con.prepareStatement(insertWishlistQuery);
             profileStatement.setString(1, wishlist.getWishlistName());
             profileStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //***UPDATE WISHLIST***------------------------------------------------------------------------------------------------------
+    public void updateWishlist(Wishlist wishlist){
+        String updateQuery = """
+        UPDATE Wishlist
+        SET wishlistName = ?
+        WHERE wishlistId = ?
+        """;
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement wishlistStatement = con.prepareStatement(updateQuery);
+            wishlistStatement.setString(1, wishlist.getWishlistName());
+            wishlistStatement.setInt(2, wishlist.getWishlistId());
+
+            wishlistStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,7 +134,7 @@ public class WishlistRepository {
 
 
     public Wishlist findWishlistById(int id){
-        for (Wishlist wishlist : getAllWishLists()){
+        for (Wishlist wishlist : getAllWishlists()){
             if (id == wishlist.getWishlistId()){
                 return wishlist;
             }

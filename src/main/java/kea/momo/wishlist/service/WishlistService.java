@@ -5,7 +5,6 @@ import kea.momo.wishlist.model.Wishlist;
 import kea.momo.wishlist.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,20 +19,20 @@ public class WishlistService {
 
     //***WISHLIST METHODS***--------------------------------------------------------------------------------------------
     public void addWishlist(Wishlist wishlist){
-        wishlistRepository.addWishList(wishlist);
+        wishlistRepository.addWishlist(wishlist);
     }
 
     public List<Wishlist> getAllWishLists() {
-        return wishlistRepository.getAllWishLists();
+        return wishlistRepository.getAllWishlists();
     }
 
     public Wishlist findWishlistById(int id) {
         return wishlistRepository.findWishlistById(id);
     }
 
-//    public void updateWishlist(Wishlist wishlist){
-//        wishlistRepository.updateWishlist(wishlist);
-//    }
+    public void updateWishlist(Wishlist wishlist){
+        wishlistRepository.updateWishlist(wishlist);
+    }
 
     public void deleteWishlist(Wishlist wishlist){
         wishlistRepository.deleteWishlist(wishlist);
@@ -59,9 +58,6 @@ public class WishlistService {
     public void deleteWish(Wish wish){
         wishlistRepository.deleteWish(wish);
     }
-
-
-
 
     //***END***---------------------------------------------------------------------------------------------------------
 

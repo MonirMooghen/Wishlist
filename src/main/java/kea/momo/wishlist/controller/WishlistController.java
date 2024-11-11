@@ -60,7 +60,7 @@ public class WishlistController {
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishlistId", wishlist.getWishlistId());
         model.addAttribute("wishName", wishlist.getWishlist());
-        //TODO når der er lavet updateWishlist i repository: wishlistService.updateWishlist(wishlist);
+        wishlistService.updateWishlist(wishlist);
         return "redirect:/wishlist";
     }
 
