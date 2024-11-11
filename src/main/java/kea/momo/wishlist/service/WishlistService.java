@@ -31,7 +31,9 @@ public class WishlistService {
         return wishlistRepository.findWishlistById(id);
     }
 
-    //TODO updateWishlist
+//    public void updateWishlist(Wishlist wishlist){
+//        wishlistRepository.updateWishlist(wishlist);
+//    }
 
     public void deleteWishlist(Wishlist wishlist){
         wishlistRepository.deleteWishlist(wishlist);
@@ -50,7 +52,9 @@ public class WishlistService {
         return wishlistRepository.findWishById(id);
     }
 
-    //TODO updateWish
+    public void updateWish(Wish wish){
+        wishlistRepository.updateWish(wish);
+    }
 
     public void deleteWish(Wish wish){
         wishlistRepository.deleteWish(wish);

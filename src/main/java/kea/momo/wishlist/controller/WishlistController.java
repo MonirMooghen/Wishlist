@@ -120,7 +120,7 @@ public class WishlistController {
     @PostMapping("/{wish}/update")
     public String updateWish(@PathVariable("name") String name, @ModelAttribute Wish wish, Model model) {
         model.addAttribute("wish", wish);
-        //TODO når der er lavet updateWish i repository: wishlistService.updateWish(wish);
+        wishlistService.updateWish(wish);
         return "redirect:/wishlist";
     }
 
