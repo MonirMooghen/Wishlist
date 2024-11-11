@@ -8,17 +8,17 @@ public class Wish {
     private String wishDescription;
     private double wishPrice;
     private String wishLink;
+    private int wishlistId;
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
-    public Wish(String wishName, String wishDescription, double wishPrice, String wishLink, int wishId){
+    public Wish(String wishName, String wishDescription, double wishPrice, String wishLink, int wishId, int wishlistId){
         this.wishName = wishName;
         this.wishDescription = wishDescription;
         this.wishPrice = wishPrice;
         this.wishLink = wishLink;
         this.wishId = wishId;
+        this.wishlistId = wishlistId;
     }
-
-
 
     public Wish(){
     }
@@ -44,25 +44,33 @@ public class Wish {
         return wishId;
     }
 
+    public int getWishlistId() {
+        return wishlistId;
+    }
+
     //***SETTER***------------------------------------------------------------------------------------------------------
-    public void setWishName(String name) {
-        this.wishName = name;
+    public void setWishName(String wishName) {
+        this.wishName = wishName;
     }
 
     public void setWishDescription(String wishDescription) {
         this.wishDescription = wishDescription;
     }
 
-    public void setWishPrice(double price) {
-        this.wishPrice = price;
+    public void setWishPrice(double wishPrice) { //TODO skal måske rettes til int?
+        this.wishPrice = wishPrice;
     }
 
-    public void setWishLink(String link) {
-        this.wishLink = link;
+    public void setWishLink(String wishLink) {
+        this.wishLink = wishLink;
     }
 
-    public void setWishId(int id) {
-        this.wishId = id;
+    public void setWishId(int wishId) {
+        this.wishId = wishId;
+    }
+
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
     }
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
@@ -74,7 +82,8 @@ public class Wish {
                 "\n Wish ID: "          + wishId          +
                 "\n Wish description: " + wishDescription +
                 "\n Wish price: "       + wishPrice       +
-                "\n Wish link: "        + wishLink  + '\n';
+                "\n Wish link: "        + wishLink        +
+                "\n Wishlist ID: "        + wishlistId  + '\n';
     }
     //***END***---------------------------------------------------------------------------------------------------------
 }

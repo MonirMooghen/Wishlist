@@ -32,8 +32,8 @@ public class WishlistService {
         return wishlistRepository.getAllWishes();
     }
 
-    public void addWish(Wish wish, int wishlistId){
-        wishlistRepository.addWish(wish, wishlistId);
+    public void addWish(Wish wish){
+        wishlistRepository.addWish(wish);
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
