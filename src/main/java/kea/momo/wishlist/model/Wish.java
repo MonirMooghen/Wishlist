@@ -44,32 +44,32 @@ public class Wish {
         return wishId;
     }
 
-    public int getWishlistId(){
+    public int getWishlistId() {
         return wishlistId;
     }
 
     //***SETTER***------------------------------------------------------------------------------------------------------
-    public void setWishName(String name) {
-        this.wishName = name;
+    public void setWishName(String wishName) {
+        this.wishName = wishName;
     }
 
     public void setWishDescription(String wishDescription) {
         this.wishDescription = wishDescription;
     }
 
-    public void setWishPrice(double price) {
+    public void setWishPrice(double wishPrice) { //TODO skal måske rettes til int?
         this.wishPrice = wishPrice;
     }
 
-    public void setWishLink(String link) {
+    public void setWishLink(String wishLink) {
         this.wishLink = wishLink;
     }
 
-    public void setWishId(int id) {
+    public void setWishId(int wishId) {
         this.wishId = wishId;
     }
 
-    public void setWishlistId(int id){
+    public void setWishlistId(int wishlistId) {
         this.wishlistId = wishlistId;
     }
 
@@ -82,7 +82,8 @@ public class Wish {
                 "\n Wish ID: "          + wishId          +
                 "\n Wish description: " + wishDescription +
                 "\n Wish price: "       + wishPrice       +
-                "\n Wish link: "        + wishLink  + '\n';
+                "\n Wish link: "        + wishLink        +
+                "\n Wishlist ID: "        + wishlistId  + '\n';
     }
     //***END***---------------------------------------------------------------------------------------------------------
 }

@@ -40,6 +40,8 @@ public class WishlistService {
         return wishlistRepository.getAllWishes();
     }
 
+    public void addWish(Wish wish){
+        wishlistRepository.addWish(wish);
     public Wish findWishById(int id) {
         return wishlistRepository.findWishById(id);
     }

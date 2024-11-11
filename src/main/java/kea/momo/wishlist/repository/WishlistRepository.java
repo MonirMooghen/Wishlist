@@ -30,6 +30,7 @@ public class WishlistRepository {
             while (rs.next()) {
                 String wishlistName = rs.getString("wishlistName");
                 int wishlistId = rs.getInt("wishlistId");
+
                 Wishlist wishListObj = new Wishlist(wishlistName, wishlistId);
                 allWishLists.add(wishListObj);
             }
@@ -39,7 +40,8 @@ public class WishlistRepository {
         return allWishLists;
     }
 
-    //***ADD WISHLIST***------------------------------------------------------------------------------------------------
+
+    //***ADD WISHLIST***----------------------------------------------------------------------------------------------------
     public void addWishList(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
@@ -90,9 +92,10 @@ public class WishlistRepository {
                 int price = rs.getInt("wishPrice");
                 String link = rs.getString("wishLink");
                 int wishId = rs.getInt("wishId");
+                int wishlistId = rs.getInt("wishlistId");
                 // opretter ny liste af tags for nye attraction
 
-                Wish wishObj = new Wish(wishName, description, price, link, wishId);
+                Wish wishObj = new Wish(wishName, description, price, link, wishId, wishlistId);
                 wishes.add(wishObj);
             }
         } catch (SQLException ex) {
@@ -130,19 +133,56 @@ public class WishlistRepository {
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             // Prepare the insert statement
-            PreparedStatement profileStatement = con.prepareStatement(insertWishQuery);
+            PreparedStatement wishStatement = con.prepareStatement(insertWishQuery);
 
             // Set values for the wish
-            profileStatement.setString(1, wish.getWishName());
-            profileStatement.setString(2, wish.getWishDescription());
-            profileStatement.setDouble(3, wish.getWishPrice());
-            profileStatement.setString(4, wish.getWishLink());
-            profileStatement.setInt(5, wish.getWishlistId());
+            wishStatement.setString(1, wish.getWishName());
+            wishStatement.setString(2, wish.getWishDescription());
+            wishStatement.setDouble(3, wish.getWishPrice());
+            wishStatement.setString(4, wish.getWishLink());
+            wishStatement.setInt(5, wish.getWishlistId()); //addWish.html skal give id'et
 
             // Execute the insert statement
-            profileStatement.executeUpdate();
+            wishStatement.executeUpdate();
 
             System.out.println("Wish added successfully to the wishlist.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //***UPDATE***------------------------------------------------------------------------------------------------------
+    public void updateWish(Wish wish){
+        String updateQuery = """
+        UPDATE Wish
+        SET wishName = ?, wishDescription = ?, wishPrice = ?, wishLink = ?
+        WHERE wishId = ?
+        """;
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement wishStatement = con.prepareStatement(updateQuery);
+            wishStatement.setString(1, wish.getWishName());
+            wishStatement.setString(2, wish.getWishDescription());
+            wishStatement.setDouble(3, wish.getWishPrice());
+            wishStatement.setString(4, wish.getWishLink());
+            wishStatement.setInt(5, wish.getWishId());
+
+            wishStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //***DELETE WISHLIST***------------------------------------------------------------------------------------------------
+    public void deleteWish(Wish wish) {
+        String deleteQuery = "DELETE FROM Wish WHERE wishId = ?";
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
+            prepstmt.setInt(1, wish.getWishId());
+            prepstmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
