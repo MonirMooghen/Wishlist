@@ -7,11 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("wishlist")
+@RequestMapping("profile")
 public class ProfileController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
@@ -23,6 +22,7 @@ public class ProfileController {
     }
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
+
     @GetMapping("")
     public String index(Model model, HttpSession session){
         model.addAttribute("profileService", profileService);
@@ -36,9 +36,13 @@ public class ProfileController {
 
     }
 
+    @GetMapping("/profileDash")
+    public String dash() {
+        return "userProfile";
+    }
 
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
-    @GetMapping("/") // GetMapping henter data fra database
+    @GetMapping("/addprofile") // GetMapping henter data fra database
     public String addProfile(Model model) {
         Profile profile = new Profile();
         model.addAttribute("profile", profile);
@@ -46,7 +50,7 @@ public class ProfileController {
     }
 
     //TODO vi skal sikre at profile email... if(profileEmail.equals(existing) og ikke er tom
-    @PostMapping("/save") //PostMapping tilføjer data til database
+    @PostMapping("/saveprofile") //PostMapping tilføjer data til database
     public String saveProfile(@ModelAttribute Profile profile){
         profileService.addProfile(profile);
         return "redirect:/wishlist"; // TODO tilføj navn på html page

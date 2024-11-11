@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Dashboard</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<h1> this is user DashBoard </h1>
+
+<div class="container my-5">
+    <h1 class="mb-4">Welcome to Your Profile Dashboard</h1>
+
+
+
+    <!-- Button to Create New Wish List -->
+    <div class="mb-4">
+        <a href="/homepage/addwishlist" class="btn btn-success">Create New Wish List</a>
+    </div>
+
+    <!-- Existing Wish Lists -->
+    <h3>Your Wish Lists</h3>
+    <div class="row">
+        <!-- Loop through each wish list object in Thymeleaf -->
+        <div class="col-md-4 mb-4" th:each="Wishlist : ${wishLists}">
+            <div class="card">
+                <!-- Random Image from Lorem Picsum -->
+                <img th:src="'https://picsum.photos/seed/' + ${Wishlist.wishlistId} + '/300/200?random=1'"
+                     class="card-img-top" alt="Wishlist Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${Wishlist.wishlistName}">Wish List Title</h5>
+<!--                    <p class="card-text" th:text="${wishlist.description}">This is a short description of the wish list.</p>-->
+                    <a th:href="@{/wishlist/update/{id}(id=${Wishlist.wishlistId})}" class="btn btn-primary">View Wish List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
