@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("profile")
+@RequestMapping("wishlist")
 public class ProfileController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ public class ProfileController {
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
-    @GetMapping("/add") // GetMapping henter data fra database
+    @GetMapping("/") // GetMapping henter data fra database
     public String addProfile(Model model) {
         Profile profile = new Profile();
         model.addAttribute("profile", profile);

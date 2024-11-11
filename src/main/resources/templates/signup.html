@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>signup</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/main.css}">
 </head>
+
 <body>
 
 <h1>add profile here</h1>
@@ -39,7 +41,7 @@
         <div class="col-md-6">
             <h3 class="text-center">Sign Up</h3>
             <!-- Form with Thymeleaf mapping -->
-            <form th:action="@{/profile/save}" th:object="${profile}" method="post">
+            <form th:action="@{/wishlist/save}" th:object="${profile}" method="post">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" id="firstName" th:field="*{profileName}" placeholder="Enter your first name">
