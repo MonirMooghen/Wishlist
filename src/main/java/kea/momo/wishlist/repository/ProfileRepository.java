@@ -17,6 +17,7 @@ public class ProfileRepository {
     private String db_password = System.getenv("DB_PASSWORD");
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
+    //***GET PROFILE***-------------------------------------------------------------------------------------------------
     public List<Profile> getAllProfiles(){
         System.out.println("Profiles");
         List<Profile> profiles = new ArrayList<>();
@@ -41,8 +42,18 @@ public class ProfileRepository {
         }
 
         return profiles;
-
     }
+
+    public Profile findProfileById(int id) {
+        for (Profile profile : getAllProfiles()) {
+            if (id == profile.getProfileId()) {
+                return profile;
+            }
+        }
+        throw new IllegalArgumentException("No profile with this ID");
+    }
+
+
 
     //***ADD PROFILE***-------------------------------------------------------------------------------------------------
     //TODO vi skal sikre at profile objekt ikke er tomt... if(profile != null) ....
