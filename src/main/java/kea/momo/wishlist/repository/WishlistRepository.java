@@ -39,7 +39,7 @@ public class WishlistRepository {
         return allWishLists;
     }
 
-    //***ADD WISH***----------------------------------------------------------------------------------------------------
+    //***ADD WISHLIST***------------------------------------------------------------------------------------------------
     public void addWishList(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
