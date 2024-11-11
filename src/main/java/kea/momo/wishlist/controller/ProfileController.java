@@ -30,6 +30,7 @@ public class ProfileController {
         return "";  // TODO tilføj navn på html page
     }
 
+    //TODO vi skal sikre at profile email... if(profileEmail.equals(existing) og ikke er tom
     @PostMapping("/save") //PostMapping tilføjer data til database
     public String saveProfile(@ModelAttribute Profile profile){
         profileService.addProfile(profile);

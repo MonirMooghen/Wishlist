@@ -40,7 +40,7 @@ public class WishlistRepository {
     }
 
 
-    //***ADD WISHLIST***----------------------------------------------------------------------------------------------------
+    //***ADD WISHLIST***------------------------------------------------------------------------------------------------
     public void addWishlist(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
@@ -55,7 +55,7 @@ public class WishlistRepository {
             e.printStackTrace();
         }
     }
-    //***UPDATE WISHLIST***------------------------------------------------------------------------------------------------------
+    //***UPDATE WISHLIST***---------------------------------------------------------------------------------------------
     public void updateWishlist(Wishlist wishlist){
         String updateQuery = """
         UPDATE Wishlist
