@@ -20,6 +20,10 @@ public class Wishlist {
         wishlist = new ArrayList<>();
     }
 
+    public Wishlist(){
+
+    }
+
     //***GETTER METHODS***----------------------------------------------------------------------------------------------
     public String getWishlistName() {
         return wishlistName;
