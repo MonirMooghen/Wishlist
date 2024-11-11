@@ -23,6 +23,17 @@ public class WishlistController {
         this.wishlistService = wishlistService;
     }
 
+
+
+    //**** Test Method for HTML *********--------------------------------------
+        @GetMapping("") //TODO Skal rettes til
+    public String getAllWishLists(Model model) {
+       // List<Wishlist> wishLists = wishlistService.getAllWishLists();
+       // model.addAttribute("wishLists", wishLists);
+        return "wishlist";
+    }
+
+
     //***MAPPING METHODS***---------------------------------------------------------------------------------------------
 //    @GetMapping("") //TODO Skal rettes til
 //    public String getAllWishLists(Model model) {
