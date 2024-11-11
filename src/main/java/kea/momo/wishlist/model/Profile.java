@@ -1,5 +1,8 @@
 package kea.momo.wishlist.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Profile {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
