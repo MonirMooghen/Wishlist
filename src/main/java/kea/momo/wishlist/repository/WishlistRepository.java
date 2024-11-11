@@ -39,6 +39,7 @@ public class WishlistRepository {
         return allWishLists;
     }
 
+    //***ADD WISH***----------------------------------------------------------------------------------------------------
     public void addWishList(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
@@ -54,6 +55,23 @@ public class WishlistRepository {
         }
     }
 
+    //***DELETE WISHLIST***------------------------------------------------------------------------------------------------
+    public void deleteWishlist(Wishlist wishlist) {
+        String deleteQuery = "DELETE FROM Wishlist WHERE wishlistId = ?";
+        //String findIDQuery = "";
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            //PreparedStatement prepstmt2 = con.prepareStatement(findIDQuery);
+            //ResultSet rs = prepstmt2.getGeneratedKeys();
+            PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
+            prepstmt.setInt(1, wishlist.getWishlistID());
+            prepstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //***WISH METHODS***------------------------------------------------------------------------------------------------
     //***GET***---------------------------------------------------------------------------------------------------------
@@ -89,8 +107,8 @@ public class WishlistRepository {
     public void addWish(Wish wish, int wishlistId) {
         System.out.println("Add wish");
         String insertWishQuery = """
-        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink, wishlistId)  
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink)  
+        VALUES (?, ?, ?, ?)
     """;
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {

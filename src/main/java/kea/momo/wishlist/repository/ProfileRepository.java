@@ -107,7 +107,6 @@ public class ProfileRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
