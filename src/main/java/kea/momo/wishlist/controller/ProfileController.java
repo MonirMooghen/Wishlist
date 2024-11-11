@@ -1,5 +1,6 @@
 package kea.momo.wishlist.controller;
 
+import jakarta.servlet.http.HttpSession;
 import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.service.ProfileService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,20 @@ public class ProfileController {
     }
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
+    @GetMapping("")
+    public String index(Model model, HttpSession session){
+        model.addAttribute("profileService", profileService);
+        if(session.getAttribute("profile") != null){
+            model.addAttribute("profileAvailable", true);
+            model.addAttribute("profile", session.getAttribute("profile"));
+        } else {
+            model.addAttribute("profileAvailable", false);
+        }
+        return "wishlist/index"; //skal henvise til rigtige html page
+
+    }
+
+
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
     @GetMapping("/") // GetMapping henter data fra database
     public String addProfile(Model model) {
