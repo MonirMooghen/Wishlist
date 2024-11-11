@@ -18,6 +18,10 @@ public class ProfileService {
     }
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
+    public Profile getProfile(String profileEmail, String profilePassword){
+        return profileRepository.getProfile(profileEmail,profilePassword);
+    }
+
     public List<Profile> getAllProfiles(){
         return profileRepository.getAllProfiles();
     }

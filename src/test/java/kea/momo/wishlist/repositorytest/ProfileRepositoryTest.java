@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ProfileRepositoryTest {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
-    private final ProfileRepository profileRepository = new ProfileRepository();
+    //private final ProfileRepository profileRepository = new ProfileRepository();
 
     //***TEST METHODS***------------------------------------------------------------------------------------------------
 //    @Test

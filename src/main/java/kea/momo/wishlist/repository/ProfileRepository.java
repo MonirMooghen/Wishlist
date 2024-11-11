@@ -2,6 +2,10 @@ package kea.momo.wishlist.repository;
 
 import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.model.Wish;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -11,13 +15,32 @@ import java.util.List;
 @Repository
 public class ProfileRepository {
 
+
+
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
+    private final JdbcTemplate jdbcTemplate;
+
     private String db_url = System.getenv("DB_URL");
     private String db_username = System.getenv("DB_USER");
     private String db_password = System.getenv("DB_PASSWORD");
 
+    public ProfileRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     //***METHODS***-----------------------------------------------------------------------------------------------------
     //***GET PROFILE***-------------------------------------------------------------------------------------------------
+    public Profile getProfile(String profileEmail, String profilePassword){
+        String query = "SELECT * FROM Profile WHERE profileEmail = ? AND profilePassword = ?";
+        RowMapper<Profile> rowMapper = new BeanPropertyRowMapper<>(Profile.class);
+
+        try{
+            return jdbcTemplate.queryForObject(query,rowMapper,profileEmail,profilePassword);
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
     public List<Profile> getAllProfiles(){
         System.out.println("Profiles");
         List<Profile> profiles = new ArrayList<>();
