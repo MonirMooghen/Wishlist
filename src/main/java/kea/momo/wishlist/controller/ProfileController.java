@@ -23,7 +23,7 @@ public class ProfileController {
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
-    @GetMapping("/") // GetMapping henter data fra database
+    @GetMapping("/signup") // GetMapping henter data fra database
     public String addProfile(Model model) {
         Profile profile = new Profile();
         model.addAttribute("profile", profile);

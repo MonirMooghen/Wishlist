@@ -15,7 +15,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/wishlist/homepage">
             <img src="https://picsum.photos/50" alt="Logo" style="width: 50px; border-radius: 50%;">
             momo list corporation
         </a>
@@ -36,6 +36,10 @@
         </div>
     </div>
 </nav>
+
+
+
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -60,10 +64,36 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                 <p class="text-center mt-3">
-                    Already have an account? <a th:href="@{/wishlist}">Login here</a>
+                    Already have an account? <a href="#loginModal">Login here</a>
                 </p>
             </form>
         </div>
+    </div>
+</div>
+
+
+<!--Modal structure-->
+<div id="loginModal">
+    <div class="modal-content">
+        <!-- Close button -->
+        <a href="#" class="close-btn">&times;</a>
+
+        <!-- Login Form - Thymeleaf syntax -->
+        <h3 class="text-center">Login</h3>
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <p class="text-center mt-3">
+                Don't have an account? <a href="/wishlist/signup">Sign up here</a>
+            </p>
+        </form>
     </div>
 </div>
 </body>
