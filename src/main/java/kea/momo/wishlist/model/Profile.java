@@ -20,6 +20,13 @@ public class Profile {
 
     }
 
+    public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword){
+        this.profileName = profileName;
+        this.profileLastName = profileLastName;
+        this.profileEmail = profileEmail;
+        this.profilePassword = profilePassword;
+    }
+
 
     public Profile(){
     }
