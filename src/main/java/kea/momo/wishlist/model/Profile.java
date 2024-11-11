@@ -10,14 +10,16 @@ public class Profile {
     private String profilePassword;
 
     //***USER***--------------------------------------------------------------------------------------------------------
-    public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword) {
+    public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword, int profileId) {
         this.profileName = profileName;
         this.profileLastName = profileLastName;
         this.profileEmail = profileEmail;
         this.profilePassword = profilePassword;
-        int profileId1 = getProfileId(); // Giver det mening at introducere en lokal variable her?
+        this.profileId = profileId;
+        //int profileId1 = getProfileId(); // Giver det mening at introducere en lokal variable her?
 
     }
+
 
     public Profile(){
     }

@@ -40,6 +40,10 @@ public class Wish {
         return wishLink;
     }
 
+    public int getWishId(){
+        return wishId;
+    }
+
     //***SETTER***------------------------------------------------------------------------------------------------------
     public void setWishName(String name) {
         this.wishName = name;
@@ -55,6 +59,10 @@ public class Wish {
 
     public void setWishLink(String link) {
         this.wishLink = link;
+    }
+
+    public void setWishId(int id) {
+        this.wishId = id;
     }
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------

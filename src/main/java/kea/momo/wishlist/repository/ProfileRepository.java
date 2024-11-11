@@ -33,7 +33,7 @@ public class ProfileRepository {
                 String profilePassword = rs.getString("profilePassword");
                 int profileId = rs.getInt("profileId");
 
-                Profile profileObj = new Profile(profileName,profileLastName,profileEmail,profilePassword);
+                Profile profileObj = new Profile(profileName,profileLastName,profileEmail,profilePassword, profileId);
                 profiles.add(profileObj);
             }
         } catch (SQLException ex) {
