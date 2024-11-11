@@ -37,7 +37,7 @@ public class ProfileController {
     }
 
     //***READ PROFILE***-----------------------------------------------------------------------------------------------R
-    //Ved ikke om vi skal bruge den her?
+    //TODO Ved ikke om vi skal bruge den her?
     @GetMapping("")
     public String getAllProfiles(Model model) {
         List<Profile> profiles = profileService.getAllProfiles();
@@ -54,11 +54,11 @@ public class ProfileController {
         model.addAttribute("profileLastName", profile.getProfileLastName());
         model.addAttribute("profileEmail", profile.getProfileEmail());
         model.addAttribute("profilePassword",profile.getProfilePassword());
-        return "updateProfile";
+        return "updateProfile"; //TODO tilføj nav på html page
     }
 
     @PostMapping("/{profile}/update")
-    public String updateProfile(@PathVariable("name") String name, @ModelAttribute Profile profile, Model model) {
+    public String updateProfile(@PathVariable("profile") int profileId, @ModelAttribute Profile profile, Model model) {
         model.addAttribute("profile", profile);
         profileService.updateProfile(profile);
         return "redirect:/attractions"; // TODO tilføj navn på html page
@@ -69,7 +69,7 @@ public class ProfileController {
     public String removeAttraction(@PathVariable int profileId){
         Profile profile = profileService.findProfileById(profileId);
         profileService.deleteProfile(profile);
-        return "redirect:/attractions"; // tilføj navn på htmlpage
+        return "redirect:/attractions"; // TODO tilføj navn på htmlpage
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
