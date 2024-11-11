@@ -1,5 +1,6 @@
 package kea.momo.wishlist.controller;
 
+import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import kea.momo.wishlist.service.WishlistService;
@@ -26,7 +27,8 @@ public class WishlistController {
     public String addWishlist(Model model) {
         Wishlist wishlist = new Wishlist();
         model.addAttribute("wishlist", wishlist);
-        //TODO attributter? wishlistName, wishlistId
+        model.addAttribute("wishlistId", wishlist.getWishlistId());
+        model.addAttribute("wishName", wishlist.getWishlist());
         return "wishlist";
     }
 
@@ -45,8 +47,23 @@ public class WishlistController {
     }
 
     //***UPDATE WISHLIST***--------------------------------------------------------------------------------------------U
-    //TODO EDIT WISHLIST
-    //TODO UPDATE WISHLIST
+    @GetMapping("/{wishlist}/edit")
+    public String editWishlist(@PathVariable("wishlist") int wishlistId, Model model){
+        Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
+        model.addAttribute("wishlist", wishlist);
+        model.addAttribute("wishlistName", wishlist.getWishlistName());
+        return "wishlist";
+    }
+
+    @PostMapping("/{wishlist}/update")
+    public String updateWishlist(@PathVariable("name") String name, @ModelAttribute Wishlist wishlist, Model model) {
+        model.addAttribute("wishlist", wishlist);
+        model.addAttribute("wishlistId", wishlist.getWishlistId());
+        model.addAttribute("wishName", wishlist.getWishlist());
+        //TODO når der er lavet updateWishlist i repository: wishlistService.updateWishlist(wishlist);
+        return "redirect:/wishlist";
+    }
+
 
     //***DELETE WISHLIST***--------------------------------------------------------------------------------------------D
     @PostMapping("/{wishlist}/remove")
@@ -62,7 +79,12 @@ public class WishlistController {
     public String addWish(Model model) {
         Wish wish = new Wish();
         model.addAttribute("wish", wish);
-        //TODO atributter? wishName, wishDescription, wishPrice, wishLink, wishId
+        model.addAttribute("wishId", wish.getWishId());
+        model.addAttribute("wishName", wish.getWishName());
+        model.addAttribute("wishDescription", wish.getWishDescription());
+        model.addAttribute("wishPrice", wish.getWishPrice());
+        model.addAttribute("wishLink",wish.getWishLink());
+        model.addAttribute("wishlistId",wish.getWishlistId());
         return "addWish";
     }
 
@@ -82,8 +104,25 @@ public class WishlistController {
     }
 
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
-    //TODO EDIT WISH
-    //TODO UPDATE WISH
+    @GetMapping("/{wish}/edit")
+    public String editWish(@PathVariable("wish") int wishId, Model model){
+        Wish wish = wishlistService.findWishById(wishId);
+        model.addAttribute("wish", wish);
+        model.addAttribute("wishId", wish.getWishId());
+        model.addAttribute("wishName", wish.getWishName());
+        model.addAttribute("wishDescription", wish.getWishDescription());
+        model.addAttribute("wishPrice", wish.getWishPrice());
+        model.addAttribute("wishLink",wish.getWishLink());
+        model.addAttribute("wishlistId",wish.getWishlistId());
+        return "wishlist";
+    }
+
+    @PostMapping("/{wish}/update")
+    public String updateWish(@PathVariable("name") String name, @ModelAttribute Wish wish, Model model) {
+        model.addAttribute("wish", wish);
+        //TODO når der er lavet updateWish i repository: wishlistService.updateWish(wish);
+        return "redirect:/wishlist";
+    }
 
     //***DELETE WISH***------------------------------------------------------------------------------------------------D
     @PostMapping("/{wish}/remove")
@@ -92,8 +131,6 @@ public class WishlistController {
         wishlistService.deleteWish(wish);
         return "redirect:/wishlists";
     }
-
-
 
 
     //***END***---------------------------------------------------------------------------------------------------------
