@@ -29,8 +29,8 @@ public class WishlistRepository {
 
             while (rs.next()) {
                 String wishlistName = rs.getString("wishlistName");
-
-                Wishlist wishListObj = new Wishlist(wishlistName);
+                int wishlistId = rs.getInt("wishlistId");
+                Wishlist wishListObj = new Wishlist(wishlistName, wishlistId);
                 allWishLists.add(wishListObj);
             }
         } catch (SQLException ex) {
@@ -64,7 +64,7 @@ public class WishlistRepository {
             //PreparedStatement prepstmt2 = con.prepareStatement(findIDQuery);
             //ResultSet rs = prepstmt2.getGeneratedKeys();
             PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
-            prepstmt.setInt(1, wishlist.getWishlistID());
+            prepstmt.setInt(1, wishlist.getWishlistId());
             prepstmt.executeUpdate();
 
 
@@ -103,12 +103,29 @@ public class WishlistRepository {
 
     }
 
+    public Wish findWishById(int id){
+        for (Wish wish : getAllWishes()){
+            if (id == wish.getWishId()){
+                return wish;
+            }
+        } throw new IllegalArgumentException("No wish with this ID");
+    }
+
+
+    public Wishlist findWishlistById(int id){
+        for (Wishlist wishlist : getAllWishLists()){
+            if (id == wishlist.getWishlistId()){
+                return wishlist;
+            }
+        } throw new IllegalArgumentException("No wishlist with this ID");
+    }
+
     //***ADD WISH***----------------------------------------------------------------------------------------------------
-    public void addWish(Wish wish, int wishlistId) {
+    public void addWish(Wish wish) {
         System.out.println("Add wish");
         String insertWishQuery = """
-        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink)  
-        VALUES (?, ?, ?, ?)
+        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink, wishlistId)  
+        VALUES (?, ?, ?, ?, ?)
     """;
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
@@ -120,9 +137,7 @@ public class WishlistRepository {
             profileStatement.setString(2, wish.getWishDescription());
             profileStatement.setDouble(3, wish.getWishPrice());
             profileStatement.setString(4, wish.getWishLink());
-
-            // Set the wishlistId directly (this comes from the existing Wishlist object or elsewhere)
-            profileStatement.setInt(5, wishlistId);
+            profileStatement.setInt(5, wish.getWishlistId());
 
             // Execute the insert statement
             profileStatement.executeUpdate();

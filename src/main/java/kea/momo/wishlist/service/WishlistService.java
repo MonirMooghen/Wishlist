@@ -27,14 +27,32 @@ public class WishlistService {
         return wishlistRepository.getAllWishLists();
     }
 
+    public Wishlist findWishlistById(int id) {
+        return wishlistRepository.findWishlistById(id);
+    }
+
+    public void deleteWishlist(Wishlist wishlist){
+        wishlistRepository.deleteWishlist(wishlist);
+    }
+
     //***WISH METHODS***------------------------------------------------------------------------------------------------
     public List<Wish> getAllWishes(){
         return wishlistRepository.getAllWishes();
     }
 
-    public void addWish(Wish wish, int wishlistId){
-        wishlistRepository.addWish(wish, wishlistId);
+    public Wish findWishById(int id) {
+        return wishlistRepository.findWishById(id);
     }
+
+    public void addWish(Wish wish){
+        wishlistRepository.addWish(wish);
+    }
+
+    public void deleteWish(Wish wish){
+        wishlistRepository.deleteWishlist(wish);
+    }
+
+
 
     //***END***---------------------------------------------------------------------------------------------------------
 

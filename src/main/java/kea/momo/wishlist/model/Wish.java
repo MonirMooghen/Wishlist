@@ -8,17 +8,17 @@ public class Wish {
     private String wishDescription;
     private double wishPrice;
     private String wishLink;
+    private int wishlistId;
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
-    public Wish(String wishName, String wishDescription, double wishPrice, String wishLink, int wishId){
+    public Wish(String wishName, String wishDescription, double wishPrice, String wishLink, int wishId, int wishlistId){
         this.wishName = wishName;
         this.wishDescription = wishDescription;
         this.wishPrice = wishPrice;
         this.wishLink = wishLink;
         this.wishId = wishId;
+        this.wishlistId = wishlistId;
     }
-
-
 
     public Wish(){
     }
@@ -44,6 +44,10 @@ public class Wish {
         return wishId;
     }
 
+    public int getWishlistId(){
+        return wishlistId;
+    }
+
     //***SETTER***------------------------------------------------------------------------------------------------------
     public void setWishName(String name) {
         this.wishName = name;
@@ -54,15 +58,19 @@ public class Wish {
     }
 
     public void setWishPrice(double price) {
-        this.wishPrice = price;
+        this.wishPrice = wishPrice;
     }
 
     public void setWishLink(String link) {
-        this.wishLink = link;
+        this.wishLink = wishLink;
     }
 
     public void setWishId(int id) {
-        this.wishId = id;
+        this.wishId = wishId;
+    }
+
+    public void setWishlistId(int id){
+        this.wishlistId = wishlistId;
     }
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
