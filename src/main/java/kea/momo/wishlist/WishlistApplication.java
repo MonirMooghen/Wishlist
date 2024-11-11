@@ -22,17 +22,17 @@ public class WishlistApplication {
 
 
 
-        //Profile
-        ProfileRepository profileRepository = new ProfileRepository();
-        Profile hassan = new Profile("Hassan", "Katchan", "hk@gmail.com","jfoifonwdwd2");
-        profileRepository.addProfile(hassan);
-        profileRepository.updateProfile(hassan);
-        System.out.println(profileRepository.getAllProfiles());
-
-
-        //Wishlist
-        wishlistRepository.addWishList(new Wishlist("WishList1"));
-        System.out.println(wishlistRepository.getAllWishLists());
+//        //Profile
+//        ProfileRepository profileRepository = new ProfileRepository();
+//        Profile hassan = new Profile("Hassan", "Katchan", "hk@gmail.com","jfoifonwdwd2");
+//        profileRepository.addProfile(hassan);
+//        profileRepository.updateProfile(hassan);
+//        System.out.println(profileRepository.getAllProfiles());
+//
+//
+//        //Wishlist
+//        wishlistRepository.addWishList(new Wishlist("WishList1"));
+//        System.out.println(wishlistRepository.getAllWishLists());
 
 
     }
