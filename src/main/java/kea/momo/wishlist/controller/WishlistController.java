@@ -1,6 +1,5 @@
 package kea.momo.wishlist.controller;
 
-import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import kea.momo.wishlist.service.WishlistService;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("wishlist")
+@RequestMapping("homepage")
 public class WishlistController {
 
     private final WishlistService wishlistService;
@@ -22,9 +21,9 @@ public class WishlistController {
     }
 
     //***WISHLIST***----------------------------------------------------------------------------------------------------
-    @GetMapping("/homepage")
+    @GetMapping("")
     public String homepage() {
-        return "wishlist";
+        return "homepage";
     }
 
     //***CREATE WISHLIST***--------------------------------------------------------------------------------------------C
@@ -34,7 +33,7 @@ public class WishlistController {
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishlistId", wishlist.getWishlistId());
         model.addAttribute("wishName", wishlist.getWishlist());
-        return "wishlist";
+        return "homepage";
     }
 
     @PostMapping("/savewishlist")
@@ -44,11 +43,11 @@ public class WishlistController {
     }
 
     //***READ WISHLIST***----------------------------------------------------------------------------------------------R
-    @GetMapping("wishlists")
+    @GetMapping("/wishlists")
     public String getAllWishLists(Model model) {
         List<Wishlist> wishLists = wishlistService.getAllWishLists();
         model.addAttribute("wishLists", wishLists);
-        return "wishlist";
+        return "userProfile";
     }
 
     //***UPDATE WISHLIST***--------------------------------------------------------------------------------------------U
@@ -57,7 +56,7 @@ public class WishlistController {
         Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishlistName", wishlist.getWishlistName());
-        return "wishlist";
+        return "homepage";
     }
 
     @PostMapping("/{wishlist}/update")
@@ -105,7 +104,7 @@ public class WishlistController {
     public String getAllWishes(Model model) {
         List<Wish> wishes = wishlistService.getAllWishes();
         model.addAttribute("wishes", wishes);
-        return "wishlist";
+        return "homepage";
     }
 
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
@@ -119,7 +118,7 @@ public class WishlistController {
         model.addAttribute("wishPrice", wish.getWishPrice());
         model.addAttribute("wishLink",wish.getWishLink());
         model.addAttribute("wishlistId",wish.getWishlistId());
-        return "wishlist";
+        return "homepage";
     }
 
     @PostMapping("/{wish}/update")
