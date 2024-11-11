@@ -27,14 +27,14 @@ public class ProfileController {
     public String addProfile(Model model) {
         Profile profile = new Profile();
         model.addAttribute("profile", profile);
-        return "";  // TODO tilføj navn på html page
+        return "signup";  // TODO tilføj navn på html page
     }
 
     //TODO vi skal sikre at profile email... if(profileEmail.equals(existing) og ikke er tom
     @PostMapping("/save") //PostMapping tilføjer data til database
     public String saveProfile(@ModelAttribute Profile profile){
         profileService.addProfile(profile);
-        return "redirect:/attractions"; // TODO tilføj navn på html page
+        return "redirect:/wishlist"; // TODO tilføj navn på html page
     }
 
     //***READ PROFILE***-----------------------------------------------------------------------------------------------R
