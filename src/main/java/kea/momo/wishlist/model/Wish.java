@@ -3,14 +3,22 @@ package kea.momo.wishlist.model;
 public class Wish {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
-    private int wishId; // todo autoincrement kommer fra database - men vi tager det ind i objektet og henter id fra database
+    private int wishId;
     private String wishName;
     private String wishDescription;
-    private double wishPrice;
+    private double wishPrice;//TODO modtager database en double / eller skal vi rette til int?
     private String wishLink;
     private int wishlistId;
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
+    public Wish(String wishName, String wishDescription, double wishPrice, String wishLink, int wishlistId){
+        this.wishName = wishName;
+        this.wishDescription = wishDescription;
+        this.wishPrice = wishPrice;
+        this.wishLink = wishLink;
+        this.wishlistId = wishlistId;
+    }
+
     public Wish(String wishName, String wishDescription, double wishPrice, String wishLink, int wishId, int wishlistId){
         this.wishName = wishName;
         this.wishDescription = wishDescription;
@@ -57,7 +65,7 @@ public class Wish {
         this.wishDescription = wishDescription;
     }
 
-    public void setWishPrice(double wishPrice) { //TODO skal måske rettes til int?
+    public void setWishPrice(double wishPrice) {
         this.wishPrice = wishPrice;
     }
 
@@ -83,7 +91,7 @@ public class Wish {
                 "\n Wish description: " + wishDescription +
                 "\n Wish price: "       + wishPrice       +
                 "\n Wish link: "        + wishLink        +
-                "\n Wishlist ID: "        + wishlistId  + '\n';
+                "\n Wishlist ID: "      + wishlistId  + '\n';
     }
     //***END***---------------------------------------------------------------------------------------------------------
 }

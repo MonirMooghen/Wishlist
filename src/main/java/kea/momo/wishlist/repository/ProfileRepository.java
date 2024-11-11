@@ -56,7 +56,6 @@ public class ProfileRepository {
 
 
     //***ADD PROFILE***-------------------------------------------------------------------------------------------------
-    //TODO vi skal sikre at profile objekt ikke er tomt... if(profile != null) ....
     public void addProfile(Profile profile) {
         System.out.println("Add Profile");
         String insertProfileQuery = """
