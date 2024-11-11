@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+
 public class WishlistRepository {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
@@ -64,6 +65,7 @@ public class WishlistRepository {
             //PreparedStatement prepstmt2 = con.prepareStatement(findIDQuery);
             //ResultSet rs = prepstmt2.getGeneratedKeys();
             PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
+
             prepstmt.setInt(1, wishlist.getWishlistID());
             prepstmt.executeUpdate();
 
