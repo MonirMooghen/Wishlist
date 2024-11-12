@@ -17,7 +17,7 @@ public class LoginController {
     private ProfileService profileService;
 
     //***LOGIN METHODS***-----------------------------------------------------------------------------------------------
-    private boolean isLoogedIn(HttpSession session) {
+    private boolean isLoggedIn(HttpSession session) {
         return session.getAttribute("profile") != null;
     }
 
@@ -34,9 +34,8 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    public String login(@RequestParam("profileId") String profileEmail, @RequestParam("profilePassword") String profilePassword,
-                        HttpSession session,
-                        Model model) throws ProfileException {
+    public String login(@RequestParam("profileId") String profileEmail, @RequestParam("profilePassword")
+                        String profilePassword, HttpSession session, Model model) throws ProfileException {
 
         if (profileService.login(profileEmail, profilePassword)) {
             // create session for user and set session timeout to 30 sec (container default: 15 min)
@@ -53,12 +52,12 @@ public class LoginController {
 
     @GetMapping("admin1")
     public String showAdm1(HttpSession session) {
-        return isLoogedIn(session) ? "admin1" : "login";
+        return isLoggedIn(session) ? "admin1" : "login";
     }
 
     @GetMapping("admin2")
     public String showAdm2(HttpSession session) {
-        return isLoogedIn(session) ? "admin2" : "login";
+        return isLoggedIn(session) ? "admin2" : "login";
     }
 
     @GetMapping("logout")

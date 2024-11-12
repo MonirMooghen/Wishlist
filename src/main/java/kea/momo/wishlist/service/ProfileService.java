@@ -40,7 +40,6 @@ public class ProfileService {
         return profileRepository.getAllProfiles();
     }
 
-
     public void addProfile(Profile profile) throws ProfileException {
                profileRepository.addProfile(profile);
     }
