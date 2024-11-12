@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.service.ProfileService;
+import kea.momo.wishlist.util.ProfileException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class SessionController {
     @PostMapping("login")
     public String login(@RequestParam("profileId") String profileEmail, @RequestParam("profilePassword") String profilePassword,
                         HttpSession session,
-                        Model model) {
+                        Model model) throws ProfileException {
 
         if (profileService.login(profileEmail, profilePassword)) {
             // create session for user and set session timeout to 30 sec (container default: 15 min)

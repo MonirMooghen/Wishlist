@@ -18,7 +18,7 @@ public class ProfileRepository {
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
     //***GET PROFILE(S)***----------------------------------------------------------------------------------------------
-    public Profile getProfileByEmailAndPassword(String profileEmail, String profilePassword) {
+    public Profile getProfileByEmailAndPassword(String profileEmail, String profilePassword) throws ProfileException {
         for (Profile profile: getAllProfiles()) {
             if (profile.getProfileEmail().equalsIgnoreCase(profileEmail) && profile.getProfilePassword().equalsIgnoreCase(profilePassword))
                 return profile;
@@ -26,7 +26,7 @@ public class ProfileRepository {
         return null;
     }
 
-    public Profile getProfileById(int profileId) {
+    public Profile getProfileById(int profileId) throws ProfileException {
         for (Profile profile: getAllProfiles()) {
             if (profile.getProfileId() == (profileId))
                 return profile;
