@@ -1,6 +1,5 @@
 package kea.momo.wishlist.controller;
 
-import jakarta.servlet.http.HttpSession;
 import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.service.ProfileService;
 import kea.momo.wishlist.util.ProfileException;
@@ -79,7 +78,7 @@ public class ProfileController {
 
     //***DELETE PROFILE***---------------------------------------------------------------------------------------------D
     @PostMapping("/{name}/remove")
-    public String removeAttraction(@PathVariable int profileId) throws ProfileException {
+    public String removeProfile(@PathVariable int profileId) throws ProfileException {
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
         return "redirect:/profiles"; // TODO: Change to the correct HTML page if necessary
