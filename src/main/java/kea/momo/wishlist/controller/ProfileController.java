@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("profile") //skal ændres til wishlist
+@RequestMapping("profile")
 public class ProfileController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
@@ -27,10 +27,10 @@ public class ProfileController {
 //        return "login";
 //    }
 
-    @GetMapping("/profileDash")
-    public String dash() {
-        return "userProfile";
-    }
+//    @GetMapping("/profileDash")
+//    public String dash() {
+//        return "userProfile";
+//    }
 
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
     @GetMapping("/addprofile") // GetMapping henter data fra database
@@ -49,33 +49,35 @@ public class ProfileController {
 
     //***READ PROFILE***-----------------------------------------------------------------------------------------------R
     //TODO Ved ikke om vi skal bruge den her?
-//    @GetMapping("/all")
-//    public String getAllProfiles(Model model) {
-//        List<Profile> profiles = profileService.getAllProfiles();
-//        model.addAttribute("profiles", profiles);
-//        return "profiles"; // Specify the correct HTML page for displaying all profiles
-//    }
+    @GetMapping("")
+    public String getAllProfiles(Model model) {
+        List<Profile> profiles = profileService.getAllProfiles();
+        model.addAttribute("profiles", profiles);
+        return "allProfiles"; // TODO tilføj navn på html page
+    }
+
     //***UPDATE PROFILE***---------------------------------------------------------------------------------------------U
-    @GetMapping("/{profile}/edit")
-    public String editProfile(@PathVariable("profile") int profileId, Model model){
-        Profile profile = profileService.getProfileById(profileId);
+    @GetMapping("/edit/{id}")
+    public String editProfile(@PathVariable("id") int profileId, Model model){
+        Profile profile = profileService.findProfileById(profileId);
         model.addAttribute("profile", profile);
         model.addAttribute("profileName", profile.getProfileName());
         model.addAttribute("profileLastName", profile.getProfileLastName());
         model.addAttribute("profileEmail", profile.getProfileEmail());
         model.addAttribute("profilePassword",profile.getProfilePassword());
-        return "updateProfile"; //TODO tilføj nav på html page
+        return "editProfile"; //TODO tilføj nav på html page
     }
 
-    @PostMapping("/{profile}/update")
-    public String updateProfile(@PathVariable("profile") int profileId, @ModelAttribute Profile profile, Model model) {
-        model.addAttribute("profile", profile);
+    @PostMapping("/update/{id}")
+    public String updateProfile(@PathVariable("id") int profileId, @ModelAttribute Profile profile) {
+//        model.addAttribute("profile", profile);
+        profile.setProfileId(profileId);
         profileService.updateProfile(profile);
-        return "redirect:/attractions"; // TODO tilføj navn på html page
+        return "redirect:"; // TODO tilføj navn på html page
     }
 
     //***DELETE PROFILE***---------------------------------------------------------------------------------------------D
-    @PostMapping("/{profileId}/remove")
+    @PostMapping("/{name}/remove")
     public String removeAttraction(@PathVariable int profileId){
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
