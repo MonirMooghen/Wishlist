@@ -24,31 +24,30 @@ public class LoginController {
     @GetMapping("/")
     public String index() {
         // return landing page
-        return "index";
+        return "index"; // TODO change
     }
 
     @GetMapping("login")
     public String showLogin() {
         // return login form
-        return "login";
+        return "login"; // TODO rename så det passer til html page
     }
 
     @PostMapping("login")
-    public String login(@RequestParam("profileId") String profileEmail, @RequestParam("profilePassword")
+    public String login(@RequestParam("profileEmail") String profileEmail, @RequestParam("profilePassword")
                         String profilePassword, HttpSession session, Model model) throws ProfileException {
 
         if (profileService.login(profileEmail, profilePassword)) {
             // create session for user and set session timeout to 30 sec (container default: 15 min)
-            session.setAttribute("user", new Profile(profileEmail, profilePassword));
+            session.setAttribute("profile", new Profile(profileEmail, profilePassword)); // hvorfor nyt object her?
             session.setMaxInactiveInterval(30);
             // redirect to starting page - admin1
-            return "redirect:/admin1";
+            return "redirect:/admin1"; // TODO rename så det passer til html page
         }
         // wrong credentials
         model.addAttribute("wrongCredentials", true);
-        return "login";
+        return "login"; // TODO rename så det passer til html page
     }
-
 
     @GetMapping("admin1")
     public String showAdm1(HttpSession session) {
@@ -64,7 +63,7 @@ public class LoginController {
     public String logout(HttpSession session) {
         // invalidate session and return landing page
         session.invalidate();
-        return "index";
+        return "index"; // TODO rename så det passer til html page
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
