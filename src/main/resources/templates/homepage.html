@@ -48,7 +48,7 @@
             <div class="col-md-6 d-flex flex-column justify-content-center align-items-start p-5 text-white"
                  style="background: linear-gradient(135deg, rgba(255, 126, 95, 0.9), rgba(254, 180, 123, 0.9));">
                 <h1 class="display-4 font-weight-bold">Create Your Dream Wish List</h1>
-                <p class="lead mb-4">Organize, manage, and track all your wishes and goals. Start building your wish list today and turn your dreams into reality!</p>
+                <p class="lead mb-4">Organize, manage, and track all your wishes and goals. <br>Start building your wish list today and turn your dreams into reality!</p>
                 <a href="/profile/addprofile" class="btn btn-light btn-lg font-weight-bold">Sign Up</a>
             </div>
 
@@ -70,7 +70,8 @@
         <h3 class="text-center">Login</h3>
         <form th:action="@{/login}" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Email</label>
+                <!--Skal denne ændres til email?  -->
                 <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <div class="form-group">
@@ -84,9 +85,6 @@
         </form>
     </div>
 </div>
-
-
-
 
 </body>
 </html>
