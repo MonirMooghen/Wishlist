@@ -22,16 +22,6 @@ public class ProfileController {
     }
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
-//    @GetMapping("/login")
-//    public String showLoginPage() {
-//        return "login";
-//    }
-
-//    @GetMapping("/profileDash")
-//    public String dash() {
-//        return "userProfile";
-//    }
-
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
     @GetMapping("/addprofile") // GetMapping henter data fra database
     public String addProfile(Model model) {
@@ -78,7 +68,7 @@ public class ProfileController {
 
     //***DELETE PROFILE***---------------------------------------------------------------------------------------------D
     @PostMapping("/{name}/remove")
-    public String removeProfile(@PathVariable int profileId) throws ProfileException {
+    public String deleteProfile(@PathVariable int profileId) throws ProfileException {
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
         return "redirect:/profiles"; // TODO: Change to the correct HTML page if necessary

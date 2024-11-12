@@ -60,15 +60,6 @@ public class ProfileRepository {
         return profiles;
     }
 
-//    public Profile findProfileById(int id) {
-//        for (Profile profile : getAllProfiles()) {
-//            if (id == profile.getProfileId()) {
-//                return profile;
-//            }
-//        }
-//        throw new IllegalArgumentException("No profile with this ID");
-//    }
-
     //***ADD PROFILE***-------------------------------------------------------------------------------------------------
     public void addProfile(Profile profile) throws ProfileException{
         String insertProfileQuery = """
@@ -153,7 +144,6 @@ public class ProfileRepository {
         throw new ProfileException("Something wrong with updateProfile()"); //TODO ret error message så det passer til users behov
         }
     }
-
 
     //***END***---------------------------------------------------------------------------------------------------------
 }
