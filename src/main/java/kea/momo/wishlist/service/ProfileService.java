@@ -17,18 +17,31 @@ public class ProfileService {
         this.profileRepository = profileRepository;
     }
 
+    public boolean login(String profileEmail, String profilePassword) {
+        Profile profile = profileRepository.getProfileByEmailAndPassword(profileEmail,profilePassword);
+        if (profile != null)
+            // user found - check credentials
+            return profile.getProfilePassword().equals(profilePassword);
+        // user not found
+        return false;
+    }
+
     //***METHODS***-----------------------------------------------------------------------------------------------------
-    public Profile getProfile(String profileEmail, String profilePassword){
-        return profileRepository.getProfile(profileEmail,profilePassword);
+    public Profile getProfileByEmailAndPassword(String profileEmail, String profilePassword){
+        return profileRepository.getProfileByEmailAndPassword(profileEmail,profilePassword);
+    }
+
+    public Profile getProfileById(int profileId){
+        return profileRepository.getProfileById(profileId);
     }
 
     public List<Profile> getAllProfiles(){
         return profileRepository.getAllProfiles();
     }
 
-    public Profile findProfileById(int id){
-        return profileRepository.findProfileById(id);
-    }
+//    public Profile findProfileById(int id){
+//        return profileRepository.findProfileById(id);
+//    }
 
     public void addProfile(Profile profile){
                profileRepository.addProfile(profile);

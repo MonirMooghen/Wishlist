@@ -1,11 +1,6 @@
 package kea.momo.wishlist.repository;
 
 import kea.momo.wishlist.model.Profile;
-import kea.momo.wishlist.model.Wish;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -15,34 +10,30 @@ import java.util.List;
 @Repository
 public class ProfileRepository {
 
-
-
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
-    private final JdbcTemplate jdbcTemplate;
-
     private String db_url = System.getenv("DB_URL");
     private String db_username = System.getenv("DB_USER");
     private String db_password = System.getenv("DB_PASSWORD");
 
-    public ProfileRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    //***METHODS***-----------------------------------------------------------------------------------------------------
+    //***GET PROFILE(S)***----------------------------------------------------------------------------------------------
+    public Profile getProfileByEmailAndPassword(String profileEmail, String profilePassword) {
+        for (Profile profile: getAllProfiles()) {
+            if (profile.getProfileEmail().equalsIgnoreCase(profileEmail) && profile.getProfilePassword().equalsIgnoreCase(profilePassword))
+                return profile;
+        }
+        return null;
     }
 
-    //***METHODS***-----------------------------------------------------------------------------------------------------
-    //***GET PROFILE***-------------------------------------------------------------------------------------------------
-    public Profile getProfile(String profileEmail, String profilePassword){
-        String query = "SELECT * FROM Profile WHERE profileEmail = ? AND profilePassword = ?";
-        RowMapper<Profile> rowMapper = new BeanPropertyRowMapper<>(Profile.class);
-
-        try{
-            return jdbcTemplate.queryForObject(query,rowMapper,profileEmail,profilePassword);
-        } catch (EmptyResultDataAccessException e){
-            return null;
+    public Profile getProfileById(int profileId) {
+        for (Profile profile: getAllProfiles()) {
+            if (profile.getProfileId() == (profileId))
+                return profile;
         }
+        return null;
     }
 
     public List<Profile> getAllProfiles(){
-        System.out.println("Profiles");
         List<Profile> profiles = new ArrayList<>();
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
@@ -67,20 +58,17 @@ public class ProfileRepository {
         return profiles;
     }
 
-    public Profile findProfileById(int id) {
-        for (Profile profile : getAllProfiles()) {
-            if (id == profile.getProfileId()) {
-                return profile;
-            }
-        }
-        throw new IllegalArgumentException("No profile with this ID");
-    }
-
-
+//    public Profile findProfileById(int id) {
+//        for (Profile profile : getAllProfiles()) {
+//            if (id == profile.getProfileId()) {
+//                return profile;
+//            }
+//        }
+//        throw new IllegalArgumentException("No profile with this ID");
+//    }
 
     //***ADD PROFILE***-------------------------------------------------------------------------------------------------
     public void addProfile(Profile profile) {
-        System.out.println("Add Profile");
         String insertProfileQuery = """
         INSERT INTO Profile (
             profileName,

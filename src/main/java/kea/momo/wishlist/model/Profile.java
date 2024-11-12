@@ -30,6 +30,11 @@ public class Profile {
         this.profilePassword = profilePassword;
     }
 
+    public Profile(String profileEmail, String profilePassword){
+        this.profileEmail = profileEmail;
+        this.profilePassword = profilePassword;
+    }
+
 
     public Profile(){
     }

@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("homepage")
 public class WishlistController {
 
+    //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private final WishlistService wishlistService;
 
     //***CONSTRUCTOR***-------------------------------------------------------------------------------------------------
@@ -32,7 +33,7 @@ public class WishlistController {
         Wishlist wishlist = new Wishlist();
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishlistId", wishlist.getWishlistId());
-        model.addAttribute("wishName", wishlist.getWishlist());
+        model.addAttribute("wishName", wishlist.getWishlist()); //ændre attributename til wishlistName
         return "homepage";
     }
 
