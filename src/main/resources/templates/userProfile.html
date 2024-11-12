@@ -1,294 +1,48 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>User Profile Dashboard</title>-->
-<!--    <link rel="stylesheet" th:href="@{/main.css}">-->
-<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-
-
-<!--<h1> this is user DashBoard </h1>-->
-
-<!--<div class="container my-5">-->
-<!--    <h1 class="mb-4">Welcome to Your Profile Dashboard</h1>-->
-
-
-
-<!--    &lt;!&ndash; Button to Create New Wish List &ndash;&gt;-->
-<!--    <div class="mb-4">-->
-<!--        <a href="/homepage/addwishlist" class="btn btn-success">Create New Wish List</a>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; Existing Wish Lists &ndash;&gt;-->
-<!--    <h3>Your Wish Lists</h3>-->
-<!--    <div class="row">-->
-<!--        &lt;!&ndash; Loop through each wish list object in Thymeleaf &ndash;&gt;-->
-<!--        <div class="col-md-4 mb-4" th:each="Wishlist : ${wishLists}">-->
-<!--            <div class="card">-->
-<!--                &lt;!&ndash; Random Image from Lorem Picsum &ndash;&gt;-->
-<!--                <img th:src="'https://picsum.photos/seed/' + ${Wishlist.wishlistId} + '/300/200?random=1'"-->
-<!--                     class="card-img-top" alt="Wishlist Image">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title" th:text="${Wishlist.wishlistName}">Wish List Title</h5>-->
-<!--&lt;!&ndash;                    <p class="card-text" th:text="${wishlist.description}">This is a short description of the wish list.</p>&ndash;&gt;-->
-<!--                    <a th:href="@{/wishlist/update/{id}(id=${Wishlist.wishlistId})}" class="btn btn-primary">View Wish List</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
-
-<!-- second user dashboard -->
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>User Dashboard</title>-->
-<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-
-<!--&lt;!&ndash; Navbar &ndash;&gt;-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--    <a class="navbar-brand" href="#">YourLogo</a>-->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">-->
-<!--        <ul class="navbar-nav">-->
-<!--            <li class="nav-item">-->
-<!--                <button type="button" class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <form th:action="@{/logout}" method="post">-->
-<!--                    <button type="submit" class="btn btn-outline-danger">Logout</button>-->
-<!--                </form>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
-
-<!--&lt;!&ndash; Main Dashboard Content &ndash;&gt;-->
-<!--<div class="container my-5">-->
-<!--    <h1>Welcome to Your Dashboard</h1>-->
-<!--    <p>Here you can manage your profile and view your wish lists.</p>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; Edit Profile Modal &ndash;&gt;-->
-<!--<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>-->
-<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <table class="table table-bordered">-->
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">First Name</th>-->
-<!--                        <td th:text="${profile.getProfileName()}">John</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">Last Name</th>-->
-<!--                        <td th:text="${profile.getProfileLastName()}">Doe</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">Email</th>-->
-<!--                        <td th:text="${profile.getProfileEmail()}">johndoe@example.com</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">Password</th>-->
-<!--                        <td>********</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--                &lt;!&ndash; Edit Profile Form &ndash;&gt;-->
-<!--                <form th:action="@{/profile/update}" method="post">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profileName">First Name</label>-->
-<!--                        <input type="text" class="form-control" id="profileName" name="firstName" th:value="${user.firstName}" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profileLastName">Last Name</label>-->
-<!--                        <input type="text" class="form-control" id="profileLastName" name="lastName" th:value="${user.lastName}" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profileEmail">Email</label>-->
-<!--                        <input type="email" class="form-control" id="profileEmail" name="email" th:value="${user.email}" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profilePassword">Password</label>-->
-<!--                        <input type="password" class="form-control" id="profilePassword" name="password" placeholder="Enter new password">-->
-<!--                    </div>-->
-<!--                    <button type="submit" class="btn btn-primary">Save Changes</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; Bootstrap JS for Modal Functionality &ndash;&gt;-->
-<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-
-
-
-<!--try to fix user profiles-->
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>User Profile Dashboard</title>
+    <link rel="stylesheet" th:href="@{/main.css}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<!-- Navbar -->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--    <a class="navbar-brand" href="#">YourLogo</a>-->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">-->
-<!--        <ul class="navbar-nav">-->
-<!--            <li class="nav-item">-->
-<!--                <button type="button" class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <form th:action="@{/logout}" method="post">-->
-<!--                    <button type="submit" class="btn btn-outline-danger">Logout</button>-->
-<!--                </form>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
 
-<!-- Main Dashboard Content -->
+<h1> this is user DashBoard </h1>
+
 <div class="container my-5">
-    <h1>Welcome to Your Dashboard</h1>
-    <p>Here you can manage your profile and view your wish lists.</p>
-</div>
+    <h1 class="mb-4">Welcome to Your Profile Dashboard</h1>
 
 
-<div class="row">
-    <div class="col-md-4 mb-4" th:each="Profile : ${profiles}">
-        <h4>one profile</h4>
-        <div class="card">
-            &lt;!&ndash; Random Image from Lorem Picsum &ndash;&gt;
-            <img th:src="'https://picsum.photos/seed/' + ${Profile.getProfileId()} + '/300/200?random=1'"
-                 class="card-img-top" alt="Wishlist Image">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${Profile.getProfileName()}">Wish List Title</h5>
-                <!--&lt;!&ndash;                    <p class="card-text" th:text="${wishlist.description}">This is a short description of the wish list.</p>&ndash;&gt;-->
-                <!--                    <a th:href="@{/wishlist/update/{id}(id=${Wishlist.wishlistId})}" class="btn btn-primary">View Wish List</a>-->
+
+    <!-- Button to Create New Wish List -->
+    <div class="mb-4">
+        <a href="/homepage/addwishlist" class="btn btn-success">Create New Wish List</a>
+    </div>
+
+    <!-- Existing Wish Lists -->
+    <h3>Your Wish Lists</h3>
+    <div class="row">
+        <!-- Loop through each wish list object in Thymeleaf -->
+        <div class="col-md-4 mb-4" th:each="Wishlist : ${wishLists}">
+            <div class="card">
+                <!-- Random Image from Lorem Picsum -->
+                <img th:src="'https://picsum.photos/seed/' + ${Wishlist.wishlistId} + '/300/200?random=1'"
+                     class="card-img-top" alt="Wishlist Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${Wishlist.wishlistName}">Wish List Title</h5>
+<!--                    <p class="card-text" th:text="${wishlist.description}">This is a short description of the wish list.</p>-->
+                    <a th:href="@{/wishlist/update/{id}(id=${Wishlist.wishlistId})}" class="btn btn-primary">View Wish List</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Edit Profile Modal -->
-<!--<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>-->
-<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <table class="table table-bordered">-->
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">First Name</th>-->
-<!--                        <td th:text="${profile.getProfileName()}">John</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">Last Name</th>-->
-<!--                        <td th:text="${profile.getProfileLastName()}">Doe</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">Email</th>-->
-<!--                        <td th:text="${profile.getProfileEmail()}">johndoe@example.com</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="row">Password</th>-->
-<!--                        <td>********</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--                &lt;!&ndash; Edit Profile Form &ndash;&gt;-->
-<!--                <form th:action="@{/profile/update}" method="post">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profileName">First Name</label>-->
-<!--                        <input type="text" class="form-control" id="profileName" name="firstName" th:value="${user.firstName}" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profileLastName">Last Name</label>-->
-<!--                        <input type="text" class="form-control" id="profileLastName" name="lastName" th:value="${user.lastName}" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profileEmail">Email</label>-->
-<!--                        <input type="email" class="form-control" id="profileEmail" name="email" th:value="${user.email}" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="profilePassword">Password</label>-->
-<!--                        <input type="password" class="form-control" id="profilePassword" name="password" placeholder="Enter new password">-->
-<!--                    </div>-->
-<!--                    <button type="submit" class="btn btn-primary">Save Changes</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!-- Bootstrap JS for Modal Functionality -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-<!--       <div class="col-md-4 mb-4" th:each="profile : ${profiles}">-->
-<!--            <div class="card">-->
-<!--                &lt;!&ndash; Random Image from Lorem Picsum &ndash;&gt;-->
-<!--                <img th:src="'https://picsum.photos/seed/' + ${profile.getProfileId()} + '/300/200?random=1'"-->
-<!--                     class="card-img-top" alt="Wishlist Image">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title" th:text="${profile.getProfileName()}">Wish List Title</h5>-->
-<!--&lt;!&ndash;&lt;!&ndash;                    <p class="card-text" th:text="${wishlist.description}">This is a short description of the wish list.</p>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                    <a th:href="@{/wishlist/update/{id}(id=${Wishlist.wishlistId})}" class="btn btn-primary">View Wish List</a>&ndash;&gt;-->
-<!--                </div>-->
-<!--           </div>-->
-<!--       </div>-->
 
 
 

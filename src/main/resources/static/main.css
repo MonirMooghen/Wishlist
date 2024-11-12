@@ -1,4 +1,10 @@
+body {
+    font-size: 20px;
+    font-family: Verdana;
+    width: 80%;
+    padding: 50px;
 
+}
 
 /* Modal background styling */
  #loginModal {
@@ -7,8 +13,8 @@
      position: fixed;
      top: 0;
      left: 0;
-     width: 100%;
-     height: 100%;
+     width: 80%;
+     height: 80%;
      background-color: rgba(0, 0, 0, 0.5);
      justify-content: center;
      align-items: center;
@@ -22,10 +28,10 @@
 /* Modal content styling */
 .modal-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
+    padding: 100px;
+    border-radius: 30px;
+    width: 80%;
+    max-width: 300px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -43,8 +49,6 @@
     color: #000;
 }
 
-
-
 .hero-section {
     background: linear-gradient(135deg, rgba(255, 126, 95, 0.9), rgba(254, 180, 123, 0.9)),
     url('https://source.unsplash.com/random/1600x900/?wishes,present') no-repeat center center;
@@ -55,3 +59,18 @@
     align-items: center;
     padding: 3rem;
 }
+
+body.notfound-page {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, "Apfel Grotezk", sans-serif;
+    background-color: #f3f3f3;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(255, 126, 95, 0.9), rgba(254, 180, 123, 0.9)),
+    url('https://source.unsplash.com/random/1600x900/?wishes,present') no-repeat center center;
+}
+
