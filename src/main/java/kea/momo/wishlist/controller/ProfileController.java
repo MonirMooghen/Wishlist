@@ -44,7 +44,7 @@ public class ProfileController {
     @PostMapping("/saveprofile") //PostMapping tilføjer data til database
     public String saveProfile(@ModelAttribute Profile profile){
         profileService.addProfile(profile);
-        return "redirect:/wishlist"; // TODO tilføj navn på html page
+        return "redirect:/"; // TODO tilføj navn på html page
     }
 
     //***READ PROFILE***-----------------------------------------------------------------------------------------------R
@@ -59,7 +59,7 @@ public class ProfileController {
     //***UPDATE PROFILE***---------------------------------------------------------------------------------------------U
     @GetMapping("/edit/{id}")
     public String editProfile(@PathVariable("id") int profileId, Model model){
-        Profile profile = profileService.findProfileById(profileId);
+        Profile profile = profileService.getProfileById(profileId);
         model.addAttribute("profile", profile);
         model.addAttribute("profileName", profile.getProfileName());
         model.addAttribute("profileLastName", profile.getProfileLastName());
