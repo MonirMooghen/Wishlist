@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller("wishlist")
+@Controller
 public class LoginController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
@@ -21,35 +21,38 @@ public class LoginController {
         return session.getAttribute("profile") != null;
     }
 
-    @GetMapping("/")
-    public String index() {
-        // return landing page
-        return "index"; // TODO change
-    }
+//    @GetMapping("/profile")
+//    public String index() {
+//        // return landing page
+//        return "index"; // TODO change
+//    }
+//
+//    @GetMapping("profile#loginModal")
+//    public String showLogin() {
+//        // return login form
+//        return "homepage"; // TODO rename så det passer til html page
+//    }
 
-    @GetMapping("login")
-    public String showLogin() {
-        // return login form
-        return "login"; // TODO rename så det passer til html page
-    }
-
-    @PostMapping("login")
+    @PostMapping("homepage#loginModal")
     public String login(@RequestParam("profileEmail") String profileEmail, @RequestParam("profilePassword")
                         String profilePassword, HttpSession session, Model model) throws ProfileException {
+        Profile profileToCheck = new Profile();
+        profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
 
-        if (profileService.login(profileEmail, profilePassword)) {
+        if (profileToCheck!=null) {
             // create session for user and set session timeout to 30 sec (container default: 15 min)
-            session.setAttribute("profile", new Profile(profileEmail, profilePassword)); // hvorfor nyt object her?
+            session.setAttribute("profile", new Profile
+                    (profileToCheck.getProfileName(), profileToCheck.getProfileLastName(),profileToCheck.getProfileEmail(),profileToCheck.getProfilePassword())); // hvorfor nyt object her?
             session.setMaxInactiveInterval(30);
             // redirect to starting page - admin1
-            return "redirect:/admin1"; // TODO rename så det passer til html page
+            return "redirect:/homepage"; // TODO rename så det passer til html page user dashboard
         }
         // wrong credentials
         model.addAttribute("wrongCredentials", true);
-        return "login"; // TODO rename så det passer til html page
+        return "signup"; // TODO rename så det passer til html page
     }
 
-    @GetMapping("admin1")
+    @GetMapping("/profile/edit/{id}")
     public String showAdm1(HttpSession session) {
         return isLoggedIn(session) ? "admin1" : "login";
     }
