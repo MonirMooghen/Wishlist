@@ -3,6 +3,7 @@ package kea.momo.wishlist.controller;
 import jakarta.servlet.http.HttpSession;
 import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.service.ProfileService;
+import kea.momo.wishlist.util.ProfileException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -80,6 +81,13 @@ public class ProfileController {
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
         return "redirect:/profiles"; // TODO: Change to the correct HTML page if necessary
+    }
+
+    //***EXCEPTION HANDLING***------------------------------------------------------------------------------------------
+    @ExceptionHandler(ProfileException.class)
+    public String handleError(Model model, Exception exception) {
+        model.addAttribute("message",exception.getMessage());
+        return "errorPage";
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
