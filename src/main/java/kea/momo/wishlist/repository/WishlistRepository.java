@@ -39,6 +39,13 @@ public class WishlistRepository {
         return allWishLists;
     }
 
+    public Wishlist findWishlistById(int id){
+        for (Wishlist wishlist : getAllWishlists()){
+            if (id == wishlist.getWishlistId()){
+                return wishlist;
+            }
+        } throw new IllegalArgumentException("No wishlist with this ID");
+    }
 
     //***ADD WISHLIST***------------------------------------------------------------------------------------------------
     public void addWishlist(Wishlist wishlist){
@@ -132,14 +139,6 @@ public class WishlistRepository {
         } throw new IllegalArgumentException("No wish with this ID");
     }
 
-
-    public Wishlist findWishlistById(int id){
-        for (Wishlist wishlist : getAllWishlists()){
-            if (id == wishlist.getWishlistId()){
-                return wishlist;
-            }
-        } throw new IllegalArgumentException("No wishlist with this ID");
-    }
 
     //***ADD WISH***----------------------------------------------------------------------------------------------------
     public void addWish(Wish wish) {
