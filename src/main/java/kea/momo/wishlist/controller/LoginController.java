@@ -1,11 +1,9 @@
 package kea.momo.wishlist.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kea.momo.wishlist.model.Profile;
 import kea.momo.wishlist.service.ProfileService;
 import kea.momo.wishlist.util.ProfileException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("wishlist")
-public class SessionController {
+public class LoginController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private ProfileService profileService;

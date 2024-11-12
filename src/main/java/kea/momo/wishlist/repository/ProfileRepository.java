@@ -85,6 +85,11 @@ public class ProfileRepository {
             profileStatement.setString(1, profile.getProfileName());
             profileStatement.setString(2, profile.getProfileLastName());
             profileStatement.setString(3, profile.getProfileEmail());
+            for (Profile p : getAllProfiles()){
+                if(profile.getProfileEmail().equalsIgnoreCase(p.getProfileEmail())){
+                    throw new ProfileException("Profile already exist"); // sikrer at man ikke kan oprette ny profil med samme email
+                }
+            }
             profileStatement.setString(4, profile.getProfilePassword());
             profileStatement.executeUpdate();
 
