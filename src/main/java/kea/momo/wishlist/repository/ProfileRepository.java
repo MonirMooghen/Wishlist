@@ -95,29 +95,68 @@ public class ProfileRepository {
     }
 
     //***UPDATE***------------------------------------------------------------------------------------------------------
-    public void updateProfile(Profile profile){
-    String updateQuery = """
+//    public void updateProfile(Profile profile){
+//    String updateQuery = """
+//        UPDATE Profile
+//        SET profileName = ?, profileLastName = ?, profileEmail = ?, profilePassword = ?
+//        WHERE profileId = ?
+//    """;
+//
+//    try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+//            PreparedStatement profileStatement = con.prepareStatement(updateQuery);
+//            profileStatement.setString(1, profile.getProfileName());
+//            profileStatement.setString(2, profile.getProfileLastName());
+//            profileStatement.setString(3, profile.getProfileEmail());
+//            profileStatement.setString(4, profile.getProfilePassword());
+//
+//            //profilId
+//            profileStatement.setInt(5, profile.getProfileId());
+//
+//            profileStatement.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void updateProfile(Profile profile) {
+        String updateQuery = """
         UPDATE Profile
         SET profileName = ?, profileLastName = ?, profileEmail = ?, profilePassword = ?
         WHERE profileId = ?
     """;
 
-    try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
-            PreparedStatement profileStatement = con.prepareStatement(updateQuery);
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password);
+             PreparedStatement profileStatement = con.prepareStatement(updateQuery)) {
+
+            // Set parameter values
             profileStatement.setString(1, profile.getProfileName());
             profileStatement.setString(2, profile.getProfileLastName());
             profileStatement.setString(3, profile.getProfileEmail());
-            profileStatement.setString(4, profile.getProfilePassword());
 
-            //profilId
+            // Handle possible null values for password
+            if (profile.getProfilePassword() != null) {
+                profileStatement.setString(4, profile.getProfilePassword());
+            } else {
+                profileStatement.setNull(4, java.sql.Types.VARCHAR);
+            }
+
+            // Set profile ID
             profileStatement.setInt(5, profile.getProfileId());
 
-            profileStatement.executeUpdate();
+            // Execute the update
+            int rowsUpdated = profileStatement.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("Update failed: No profile found with ID " + profile.getProfileId());
+            } else {
+                System.out.println("Profile updated successfully for ID " + profile.getProfileId());
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     //***END***---------------------------------------------------------------------------------------------------------
 }

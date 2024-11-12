@@ -21,10 +21,10 @@ public class ProfileController {
     }
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
-    @GetMapping("/profileDash")
-    public String dash() {
-        return "userProfile";
-    }
+//    @GetMapping("/profileDash")
+//    public String dash() {
+//        return "userProfile";
+//    }
     //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
     @GetMapping("/addprofile") // GetMapping henter data fra database
     public String addProfile(Model model) {
@@ -46,26 +46,27 @@ public class ProfileController {
     public String getAllProfiles(Model model) {
         List<Profile> profiles = profileService.getAllProfiles();
         model.addAttribute("profiles", profiles);
-        return ""; // TODO tilføj navn på html page
+        return "allProfiles"; // TODO tilføj navn på html page
     }
 
     //***UPDATE PROFILE***---------------------------------------------------------------------------------------------U
-    @GetMapping("/{profile}/edit")
-    public String editProfile(@PathVariable("profile") int profileId, Model model){
+    @GetMapping("/edit/{id}")
+    public String editProfile(@PathVariable("id") int profileId, Model model){
         Profile profile = profileService.findProfileById(profileId);
         model.addAttribute("profile", profile);
         model.addAttribute("profileName", profile.getProfileName());
         model.addAttribute("profileLastName", profile.getProfileLastName());
         model.addAttribute("profileEmail", profile.getProfileEmail());
         model.addAttribute("profilePassword",profile.getProfilePassword());
-        return "updateProfile"; //TODO tilføj nav på html page
+        return "editProfile"; //TODO tilføj nav på html page
     }
 
-    @PostMapping("/{profile}/update")
-    public String updateProfile(@PathVariable("profile") int profileId, @ModelAttribute Profile profile, Model model) {
-        model.addAttribute("profile", profile);
+    @PostMapping("/update/{id}")
+    public String updateProfile(@PathVariable("id") int profileId, @ModelAttribute Profile profile) {
+//        model.addAttribute("profile", profile);
+        profile.setProfileId(profileId);
         profileService.updateProfile(profile);
-        return "redirect:/attractions"; // TODO tilføj navn på html page
+        return "redirect:"; // TODO tilføj navn på html page
     }
 
     //***DELETE PROFILE***---------------------------------------------------------------------------------------------D
