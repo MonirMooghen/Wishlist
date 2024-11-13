@@ -30,12 +30,10 @@ public class WishlistController {
         this.profileService = profileService;
     }
 
-
     //***LOGIN METHODS***-----------------------------------------------------------------------------------------------
     private boolean isLoggedIn(HttpSession session) {
         return session.getAttribute("profile") != null;
     }
-
 
     @GetMapping("/login")
     public String showLogin() {
@@ -61,9 +59,6 @@ public class WishlistController {
         return "login"; // TODO rename så det passer til html page
     }
 
-
-
-
     @GetMapping("/userProfile")
     public String showProfileDashboard(HttpSession session, Model model) throws WishlistException {
         Profile profile = (Profile) session.getAttribute("profile");
@@ -78,7 +73,6 @@ public class WishlistController {
         model.addAttribute("wishLists", wishLists);
         return "userProfile"; // Name of your Thymeleaf template for the profile dashboard
     }
-
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -104,30 +98,28 @@ public class WishlistController {
         return "homepage";
     }
 
-
-@PostMapping("/savewishlist")
-public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session, Model model) {
+    @PostMapping("/savewishlist")
+    public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session, Model model) {
 
     // Retrieve the Profile object from the session
     Profile profile = (Profile) session.getAttribute("profile");
 
-    // Check if the profile is available in the session
-    if (profile != null) {
-        // Set the profileId in the wishList object
-        wishList.setProfileId(profile.getProfileId());
+        // Check if the profile is available in the session
+        if (profile != null) {
+            // Set the profileId in the wishList object
+            wishList.setProfileId(profile.getProfileId());
 
-        // Save the wish list through the service
-        wishlistService.addWishlist(wishList);
+            // Save the wish list through the service
+            wishlistService.addWishlist(wishList);
 
         // Redirect to the user profile or dashboard page after saving
-        return "redirect:/profile";
-    } else {
-        // If the profile is not in the session, redirect to login or show an error
-        model.addAttribute("error", "Please log in to create a wish list.");
-        return "redirect:/login";
+            return "redirect:/profile";
+        } else {
+            // If the profile is not in the session, redirect to login or show an error
+            model.addAttribute("error", "Please log in to create a wish list.");
+            return "redirect:/login";
+        }
     }
-}
-
 
     //***READ WISHLIST***----------------------------------------------------------------------------------------------R
     @GetMapping("/wishlists")

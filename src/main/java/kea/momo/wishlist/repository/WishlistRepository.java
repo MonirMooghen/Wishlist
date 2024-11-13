@@ -18,7 +18,24 @@ public class WishlistRepository {
     private String db_password = System.getenv("DB_PASSWORD");
 
     //***WISHLIST METHODS***--------------------------------------------------------------------------------------------
-    //***GET***---------------------------------------------------------------------------------------------------------
+    //***CREATE WISHLIST***--------------------------------------------------------------------------------------------C
+    public void addWishlist(Wishlist wishlist) {
+        String insertWishlistQuery = """
+                
+                INSERT INTO Wishlist (wishlistName,profileId) VALUES (?,?)""";
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            PreparedStatement profileStatement = con.prepareStatement(insertWishlistQuery);
+            profileStatement.setString(1, wishlist.getWishlistName());
+            profileStatement.setInt(2, wishlist.getProfileId());
+            profileStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //***READ WISHLIST***----------------------------------------------------------------------------------------------R
     public List<Wishlist> getAllWishlists() {
         List<Wishlist> allWishLists = new ArrayList<>();
 
@@ -39,25 +56,26 @@ public class WishlistRepository {
             throw new RuntimeException(ex);
         }
 
-
         return allWishLists;
     }
 
-    public Wishlist findWishlistById(int wishlistId){
-        for (Wishlist wishlist : getAllWishlists()){
-            if (wishlistId == wishlist.getWishlistId()){
+    public Wishlist findWishlistById(int wishlistId) {
+        for (Wishlist wishlist : getAllWishlists()) {
+            if (wishlistId == wishlist.getWishlistId()) {
                 return wishlist;
             }
-        } throw new IllegalArgumentException("No wishlist with this ID");
+        }
+        throw new IllegalArgumentException("No wishlist with this ID");
     }
 
     public List<Wishlist> getWishListFromProfile(int profileId)  {
         List<Wishlist> wishlists = new ArrayList<>();
-        for (Wishlist wishlist : getAllWishlists()){
-            if(wishlist.getProfileId() == profileId){
+        for (Wishlist wishlist : getAllWishlists()) {
+            if (wishlist.getProfileId() == profileId) {
                 wishlists.add(wishlist);
             }
         }
+
 
         return wishlists;
     }
@@ -77,11 +95,15 @@ public class WishlistRepository {
             profileStatement.executeUpdate();
             System.out.println("Wishlist added");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        if (!wishlists.isEmpty()) {
+            throw new WishlistException("No wishlist exist for this profile");
         }
+
+        return wishlists;
     }
-    //***UPDATE WISHLIST***---------------------------------------------------------------------------------------------
+
+    //***UPDATE WISHLIST***--------------------------------------------------------------------------------------------U
     public void updateWishlist(Wishlist wishlist){
         String updateQuery = """
         UPDATE Wishlist
@@ -101,18 +123,14 @@ public class WishlistRepository {
         }
     }
 
-    //***DELETE WISHLIST***------------------------------------------------------------------------------------------------
+    //***DELETE WISHLIST***--------------------------------------------------------------------------------------------D
     public void deleteWishlist(Wishlist wishlist) {
         String deleteQuery = "DELETE FROM Wishlist WHERE wishlistId = ?";
-        //String findIDQuery = "";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
-            //PreparedStatement prepstmt2 = con.prepareStatement(findIDQuery);
-            //ResultSet rs = prepstmt2.getGeneratedKeys();
             PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
             prepstmt.setInt(1, wishlist.getWishlistId());
             prepstmt.executeUpdate();
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,9 +138,34 @@ public class WishlistRepository {
     }
 
     //***WISH METHODS***------------------------------------------------------------------------------------------------
-    //***GET***---------------------------------------------------------------------------------------------------------
+    //***CREATE WISH***------------------------------------------------------------------------------------------------C
+    public void addWish(Wish wish) {
+        System.out.println("Add wish");
+        String insertWishQuery = """
+        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink, wishlistId)  
+        VALUES (?, ?, ?, ?, ?)
+    """;
+
+        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
+            // Prepare the insert statement
+            PreparedStatement wishStatement = con.prepareStatement(insertWishQuery);
+
+            // Set values for the wish
+            wishStatement.setString(1, wish.getWishName());
+            wishStatement.setString(2, wish.getWishDescription());
+            wishStatement.setDouble(3, wish.getWishPrice());
+            wishStatement.setString(4, wish.getWishLink());
+            wishStatement.setInt(5, wish.getWishlistId()); //addWish.html skal give id'et
+
+            // Execute the insert statement
+            wishStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //***READ WISH***--------------------------------------------------------------------------------------------------R
     public List<Wish> getAllWishes(){
-        System.out.println("Wishes");
         List<Wish> wishes = new ArrayList<>();
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
@@ -158,42 +201,15 @@ public class WishlistRepository {
         } throw new IllegalArgumentException("No wish with this ID");
     }
 
-
-    //***ADD WISH***----------------------------------------------------------------------------------------------------
-    public void addWish(Wish wish) {
-        System.out.println("Add wish");
-        String insertWishQuery = """
-        INSERT INTO Wish (wishName, wishDescription, wishPrice, wishLink, wishlistId)  
-        VALUES (?, ?, ?, ?, ?)
-    """;
-
-        try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
-            // Prepare the insert statement
-            PreparedStatement wishStatement = con.prepareStatement(insertWishQuery);
-
-            // Set values for the wish
-            wishStatement.setString(1, wish.getWishName());
-            wishStatement.setString(2, wish.getWishDescription());
-            wishStatement.setDouble(3, wish.getWishPrice());
-            wishStatement.setString(4, wish.getWishLink());
-            wishStatement.setInt(5, wish.getWishlistId()); //addWish.html skal give id'et
-
-            // Execute the insert statement
-            wishStatement.executeUpdate();
-
-            System.out.println("Wish added successfully to the wishlist.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //***UPDATE***------------------------------------------------------------------------------------------------------
+    //***UPDATE WISH***------------------------------------------------------------------------------------------------U
     public void updateWish(Wish wish){
         String updateQuery = """
-        UPDATE Wish
-        SET wishName = ?, wishDescription = ?, wishPrice = ?, wishLink = ?
-        WHERE wishId = ?
-        """;
+                            UPDATE Wish
+                            SET wishName = ?,
+                                wishDescription = ?, 
+                                wishPrice = ?, 
+                                wishLink = ?                              
+                            WHERE wishId = ?""";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             PreparedStatement wishStatement = con.prepareStatement(updateQuery);
@@ -202,7 +218,6 @@ public class WishlistRepository {
             wishStatement.setDouble(3, wish.getWishPrice());
             wishStatement.setString(4, wish.getWishLink());
             wishStatement.setInt(5, wish.getWishId());
-
             wishStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -210,9 +225,9 @@ public class WishlistRepository {
         }
     }
 
-    //***DELETE WISHLIST***------------------------------------------------------------------------------------------------
+    //***DELETE WISH***------------------------------------------------------------------------------------------------D
     public void deleteWish(Wish wish) {
-        String deleteQuery = "DELETE FROM Wish WHERE wishId = ?";
+        String deleteQuery = " DELETE FROM Wish WHERE wishId = ?";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             PreparedStatement prepstmt = con.prepareStatement(deleteQuery);
@@ -224,7 +239,7 @@ public class WishlistRepository {
         }
     }
 
-    //***END***-----------------------------------------------------------------------------------------------------
+    //***END***---------------------------------------------------------------------------------------------------------
 }
 
 
