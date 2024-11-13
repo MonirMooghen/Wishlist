@@ -4,26 +4,23 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+@Component // TODO skal model klasserne have annotationer?
 public class Profile {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
-    private int profileId;
     private String profileName;
     private String profileLastName;
     private String profileEmail;
     private String profilePassword;
-//    private List<Wishlist> wishlists;
+    private int profileId;
 
-    //***USER***--------------------------------------------------------------------------------------------------------
+    //***CONSTRUCTOR***-------------------------------------------------------------------------------------------------
     public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword, int profileId) {
         this.profileName = profileName;
         this.profileLastName = profileLastName;
         this.profileEmail = profileEmail;
         this.profilePassword = profilePassword;
         this.profileId = profileId;
-        //int profileId1 = getProfileId(); // Giver det mening at introducere en lokal variable her?
-
     }
 
     public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword){
@@ -38,11 +35,10 @@ public class Profile {
         this.profilePassword = profilePassword;
     }
 
-
     public Profile(){
     }
 
-    //***GETTER & SETTER***---------------------------------------------------------------------------------------------
+    //***GETTER METHODS***----------------------------------------------------------------------------------------------
     public String getProfileName() {
         return profileName;
     }
@@ -63,7 +59,7 @@ public class Profile {
         return profileId;
     }
 
-    //***SETTER***------------------------------------------------------------------------------------------------------
+    //***SETTER METHODS***----------------------------------------------------------------------------------------------
     public void setProfileName(String profileName) {
         this.profileName = profileName;
     }
@@ -80,7 +76,6 @@ public class Profile {
         this.profilePassword = profilePassword;
     }
 
-
     public void setProfileId(int profileId) {
         this.profileId = profileId;
     }
@@ -88,11 +83,10 @@ public class Profile {
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return
-                "\nProfile name: "     + profileName     +
+        return  "\nProfile name: "     + profileName     +
                 "\nProfile lastname: " + profileLastName +
-                "\nProfile Id: "       + profileId       +
-                "\nProfile Id: "       + profilePassword + '\n' ;
+                "\nProfile password: " + profilePassword +
+                "\nProfile id: "       + profileId       ;
     }
 
     //***END***---------------------------------------------------------------------------------------------------------
