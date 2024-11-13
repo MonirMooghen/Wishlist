@@ -8,13 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("login")
 public class LoginController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private ProfileService profileService;
+    public LoginController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
     //***LOGIN METHODS***-----------------------------------------------------------------------------------------------
     private boolean isLoggedIn(HttpSession session) {
@@ -27,46 +32,62 @@ public class LoginController {
 //        return "index"; // TODO change
 //    }
 //
-//    @GetMapping("profile#loginModal")
-//    public String showLogin() {
-//        // return login form
-//        return "homepage"; // TODO rename så det passer til html page
-//    }
+    @GetMapping("")
+    public String showLogin() {
+        // return login form
+        return "login"; // TODO rename så det passer til html page
+    }
 
-    @PostMapping("homepage#loginModal")
+    @PostMapping("")
     public String login(@RequestParam("profileEmail") String profileEmail, @RequestParam("profilePassword")
                         String profilePassword, HttpSession session, Model model) throws ProfileException {
-        Profile profileToCheck = new Profile();
-        profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
 
-        if (profileToCheck!=null) {
+//        profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
+
+        if (profileService.login(profileEmail, profilePassword)) {
+                   Profile profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
             // create session for user and set session timeout to 30 sec (container default: 15 min)
-            session.setAttribute("profile", new Profile
-                    (profileToCheck.getProfileName(), profileToCheck.getProfileLastName(),profileToCheck.getProfileEmail(),profileToCheck.getProfilePassword())); // hvorfor nyt object her?
+            session.setAttribute("profile", profileToCheck); // hvorfor nyt object her?
             session.setMaxInactiveInterval(30);
             // redirect to starting page - admin1
-            return "redirect:/homepage"; // TODO rename så det passer til html page user dashboard
+            return "redirect:/login/userProfile"; // TODO rename så det passer til html page user dashboard
         }
         // wrong credentials
         model.addAttribute("wrongCredentials", true);
-        return "signup"; // TODO rename så det passer til html page
+        return "login"; // TODO rename så det passer til html page
     }
 
-    @GetMapping("/profile/edit/{id}")
-    public String showAdm1(HttpSession session) {
-        return isLoggedIn(session) ? "admin1" : "login";
+
+    @GetMapping("/userProfile")
+    public String showProfileDashboard(HttpSession session, Model model) {
+        Profile profile = (Profile) session.getAttribute("profile");
+        if (profile == null) {
+            // Redirect to login page if the profile is not in session (i.e., not logged in)
+            return "redirect:/login";
+        }
+        model.addAttribute("profile", profile);
+        return "userProfile"; // Name of your Thymeleaf template for the profile dashboard
     }
 
-    @GetMapping("admin2")
-    public String showAdm2(HttpSession session) {
-        return isLoggedIn(session) ? "admin2" : "login";
-    }
+//
+//    @GetMapping("admin2")
+//    public String showAdm2(HttpSession session) {
+//        return isLoggedIn(session) ? "admin2" : "homepage";
+//    }
 
-    @GetMapping("logout")
+//    @GetMapping("logout")
+//    public String logout(HttpSession session) {
+//        // invalidate session and return landing page
+//        session.invalidate();
+//        return "homepage"; // TODO rename så det passer til html page
+//    }
+
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
-        // invalidate session and return landing page
+        // Invalidate the session to log out the user
         session.invalidate();
-        return "index"; // TODO rename så det passer til html page
+        // Redirect to the homepage or login page
+        return "redirect:/homepage"; // Adjust redirect as needed
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

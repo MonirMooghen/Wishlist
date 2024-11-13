@@ -70,15 +70,15 @@ public class ProfileController {
     public String deleteProfile(@PathVariable int profileId) throws ProfileException {
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
-        return "redirect:/profiles"; // TODO: Change to the correct HTML page if necessary
+        return "redirect:/profile"; // TODO: Change to the correct HTML page if necessary
     }
 
     //***EXCEPTION HANDLING***------------------------------------------------------------------------------------------
-    @ExceptionHandler(ProfileException.class)
-    public String handleError(Model model, Exception exception) {
-        model.addAttribute("message",exception.getMessage());
-        return "errorPage";
-    }
+//    @ExceptionHandler(ProfileException.class)
+//    public String handleError(Model model, Exception exception) {
+//        model.addAttribute("message",exception.getMessage());
+//        return "errorPage";
+//    }
 
     //***END***---------------------------------------------------------------------------------------------------------
 }
