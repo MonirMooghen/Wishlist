@@ -2,6 +2,7 @@ package kea.momo.wishlist.repository;
 
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
+import kea.momo.wishlist.util.WishlistException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -40,12 +41,24 @@ public class WishlistRepository {
         return allWishLists;
     }
 
-    public Wishlist findWishlistById(int id){
+    public Wishlist findWishlistById(int wishlistId){
         for (Wishlist wishlist : getAllWishlists()){
-            if (id == wishlist.getWishlistId()){
+            if (wishlistId == wishlist.getWishlistId()){
                 return wishlist;
             }
         } throw new IllegalArgumentException("No wishlist with this ID");
+    }
+
+    public List<Wishlist> getWishListFromProfile(int profileId) throws WishlistException {
+        List<Wishlist> wishlists = null;
+        for (Wishlist wishlist : getAllWishlists()){
+            if(wishlist.getProfileId() == profileId){
+                wishlists.add(wishlist);
+            } else {
+                throw new WishlistException("No wishlist exist for this profile");
+            }
+        }
+        return wishlists;
     }
 
     //***ADD WISHLIST***------------------------------------------------------------------------------------------------

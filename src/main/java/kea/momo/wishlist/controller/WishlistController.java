@@ -216,6 +216,14 @@ public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session
         return "redirect:/wishlists";
     }
 
+    //***GET WISHLIST FROM PROFILE***-----------------------------------------------------------------------------------
+    @GetMapping("")
+    public String getWishListFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
+        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
+        model.addAttribute("wishlists", wishLists);
+        return "";
+    }
+
 
     //***END***---------------------------------------------------------------------------------------------------------
 

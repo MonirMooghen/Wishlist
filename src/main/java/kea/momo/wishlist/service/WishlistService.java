@@ -3,6 +3,7 @@ package kea.momo.wishlist.service;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import kea.momo.wishlist.repository.WishlistRepository;
+import kea.momo.wishlist.util.WishlistException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,10 @@ public class WishlistService {
 
     public void deleteWishlist(Wishlist wishlist){
         wishlistRepository.deleteWishlist(wishlist);
+    }
+
+    public List<Wishlist> getWishlistsFromProfile(int profileId) throws WishlistException {
+        return wishlistRepository.getWishListFromProfile(profileId);
     }
 
     //***WISH METHODS***------------------------------------------------------------------------------------------------
