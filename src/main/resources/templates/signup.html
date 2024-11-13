@@ -45,22 +45,22 @@
         <div class="col-md-6">
             <h3 class="text-center">Sign Up</h3>
             <!-- Form with Thymeleaf mapping -->
-            <form th:action="@{/profile/saveprofile}" th:object="${profile}" method="post">
+            <form th:action="@{/profile/save}" th:object="${profile}" method="post">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" th:field="*{profileName}" placeholder="Enter your first name" required>
+                    <input type="text" class="form-control" id="firstName" th:field="*{profileName}" placeholder="Enter your first name">
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" th:field="*{profileLastName}" placeholder="Enter your last name" required>
+                    <input type="text" class="form-control" id="lastName" th:field="*{profileLastName}" placeholder="Enter your last name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" th:field="*{profileEmail}" placeholder="Enter your email" required>
+                    <input type="email" class="form-control" id="email" th:field="*{profileEmail}" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" th:field="*{profilePassword}" placeholder="Create a password" required>
+                    <input type="password" class="form-control" id="password" th:field="*{profilePassword}" placeholder="Create a password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                 <p class="text-center mt-3">
