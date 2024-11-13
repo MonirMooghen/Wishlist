@@ -71,7 +71,8 @@ public class Wishlist {
         return
                 "\n Wishlist name: " + wishlistName +
                 "\n Wishlist Id: "   + wishlistId   +
-                "\n Wishes: "        + wishlist     ;
+                "\n Wishes: "        + wishlist     +
+                        "\n Profile Id: "   + profileId  ;
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

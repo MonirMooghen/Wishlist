@@ -2,6 +2,8 @@ package kea.momo.wishlist.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class Profile {
 
@@ -11,6 +13,7 @@ public class Profile {
     private String profileLastName;
     private String profileEmail;
     private String profilePassword;
+//    private List<Wishlist> wishlists;
 
     //***USER***--------------------------------------------------------------------------------------------------------
     public Profile(String profileName, String profileLastName, String profileEmail, String profilePassword, int profileId) {

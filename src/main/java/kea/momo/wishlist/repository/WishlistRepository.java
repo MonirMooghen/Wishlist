@@ -38,6 +38,8 @@ public class WishlistRepository {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+        System.out.println(allWishLists);
+
         return allWishLists;
     }
 
@@ -50,7 +52,7 @@ public class WishlistRepository {
     }
 
     public List<Wishlist> getWishListFromProfile(int profileId) throws WishlistException {
-        List<Wishlist> wishlists = null;
+        List<Wishlist> wishlists = new ArrayList<>();
         for (Wishlist wishlist : getAllWishlists()){
             if(wishlist.getProfileId() == profileId){
                 wishlists.add(wishlist);
@@ -60,6 +62,8 @@ public class WishlistRepository {
         }
         return wishlists;
     }
+
+
 
     //***ADD WISHLIST***------------------------------------------------------------------------------------------------
     public void addWishlist(Wishlist wishlist){
@@ -223,4 +227,6 @@ public class WishlistRepository {
 
     //***END***-----------------------------------------------------------------------------------------------------
 }
+
+
 

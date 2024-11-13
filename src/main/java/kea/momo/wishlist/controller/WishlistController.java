@@ -7,6 +7,7 @@ import kea.momo.wishlist.model.Wishlist;
 import kea.momo.wishlist.service.ProfileService;
 import kea.momo.wishlist.service.WishlistService;
 import kea.momo.wishlist.util.ProfileException;
+import kea.momo.wishlist.util.WishlistException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,15 +61,31 @@ public class WishlistController {
         return "login"; // TODO rename så det passer til html page
     }
 
+//    @GetMapping("/userProfile/{id}")
+//    public String getWishListsFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
+//        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
+//        model.addAttribute("wishlists", wishLists);
+//        return "";
+//    }
+
 
     @GetMapping("/userProfile")
-    public String showProfileDashboard(HttpSession session, Model model) {
+    public String showProfileDashboard(HttpSession session, Model model) throws WishlistException {
         Profile profile = (Profile) session.getAttribute("profile");
+
         if (profile == null) {
             // Redirect to login page if the profile is not in session (i.e., not logged in)
             return "redirect:/login";
         }
+
+
+
+
         model.addAttribute("profile", profile);
+        System.out.println("Profile ID: " + profile.getProfileId());
+        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profile.getProfileId());
+        System.out.println(wishLists);
+        model.addAttribute("wishLists", wishLists);
         return "userProfile"; // Name of your Thymeleaf template for the profile dashboard
     }
 
@@ -217,12 +234,12 @@ public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session
     }
 
     //***GET WISHLIST FROM PROFILE***-----------------------------------------------------------------------------------
-    @GetMapping("")
-    public String getWishListFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
-        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
-        model.addAttribute("wishlists", wishLists);
-        return "";
-    }
+//    @GetMapping("/userProfile/{id}")
+//    public String getWishListsFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
+//        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
+//        model.addAttribute("wishlists", wishLists);
+//        return "";
+//    }
 
 
     //***END***---------------------------------------------------------------------------------------------------------
