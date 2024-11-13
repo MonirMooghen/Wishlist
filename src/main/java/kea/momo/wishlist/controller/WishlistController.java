@@ -97,11 +97,7 @@ public class WishlistController {
         return "homepage";
     }
 
-//    @PostMapping("/savewishlist")
-//    public String saveWishlist(@ModelAttribute Wishlist wishlist){
-//        wishlistService.addWishlist(wishlist);
-//        return "redirect:/wishlist";
-//    }
+
 @PostMapping("/savewishlist")
 public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session, Model model) {
 
