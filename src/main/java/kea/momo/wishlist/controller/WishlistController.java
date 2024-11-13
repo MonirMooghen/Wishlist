@@ -61,12 +61,7 @@ public class WishlistController {
         return "login"; // TODO rename så det passer til html page
     }
 
-//    @GetMapping("/userProfile/{id}")
-//    public String getWishListsFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
-//        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
-//        model.addAttribute("wishlists", wishLists);
-//        return "";
-//    }
+
 
 
     @GetMapping("/userProfile")
@@ -78,13 +73,8 @@ public class WishlistController {
             return "redirect:/login";
         }
 
-
-
-
         model.addAttribute("profile", profile);
-        System.out.println("Profile ID: " + profile.getProfileId());
         List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profile.getProfileId());
-        System.out.println(wishLists);
         model.addAttribute("wishLists", wishLists);
         return "userProfile"; // Name of your Thymeleaf template for the profile dashboard
     }
@@ -233,13 +223,6 @@ public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session
         return "redirect:/wishlists";
     }
 
-    //***GET WISHLIST FROM PROFILE***-----------------------------------------------------------------------------------
-//    @GetMapping("/userProfile/{id}")
-//    public String getWishListsFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
-//        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
-//        model.addAttribute("wishlists", wishLists);
-//        return "";
-//    }
 
 
     //***END***---------------------------------------------------------------------------------------------------------

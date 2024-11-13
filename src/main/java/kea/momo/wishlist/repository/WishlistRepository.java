@@ -38,7 +38,7 @@ public class WishlistRepository {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        System.out.println(allWishLists);
+
 
         return allWishLists;
     }
@@ -56,7 +56,7 @@ public class WishlistRepository {
         for (Wishlist wishlist : getAllWishlists()){
             if(wishlist.getProfileId() == profileId){
                 wishlists.add(wishlist);
-            } else {
+            } else if(wishlists.isEmpty()){
                 throw new WishlistException("No wishlist exist for this profile");
             }
         }
