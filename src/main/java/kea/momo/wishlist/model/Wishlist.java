@@ -20,6 +20,12 @@ public class Wishlist {
         wishlist = new ArrayList<>();
     }
 
+    public Wishlist(String wishlistName, int wishlistId, int profileId){
+        this.wishlistName = wishlistName;
+        this.wishlistId = wishlistId;
+        this.profileId = profileId;
+    }
+
     public Wishlist(){
 
     }
@@ -37,6 +43,9 @@ public class Wishlist {
         return wishlistId;
     }
 
+    public int getProfileId() {
+        return profileId;
+    }
 
     //***SETTER METHODS***----------------------------------------------------------------------------------------------
     public void setWishlistName(String wishlistName) {
@@ -51,12 +60,11 @@ public class Wishlist {
         this.wishlistId = wishlistId;
     }
 
-    //***ADD METHODS***-------------------------------------------------------------------------------------------------
-
-
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
+    }
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
-
     @Override
     public String toString() {
         return
