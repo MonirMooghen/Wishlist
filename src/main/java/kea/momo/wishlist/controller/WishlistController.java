@@ -3,6 +3,7 @@ package kea.momo.wishlist.controller;
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
 import kea.momo.wishlist.service.WishlistService;
+import kea.momo.wishlist.util.WishlistException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -135,6 +136,14 @@ public class WishlistController {
         Wish wish = wishlistService.findWishById(id);
         wishlistService.deleteWish(wish);
         return "redirect:/wishlists";
+    }
+
+    //***GET WISHLIST FROM PROFILE***-----------------------------------------------------------------------------------
+    @GetMapping("")
+    public String getWishListFromProfile(Model model, @PathVariable int profileId) throws WishlistException {
+        List<Wishlist> wishLists = wishlistService.getWishlistsFromProfile(profileId);
+        model.addAttribute("wishlists", wishLists);
+        return "";
     }
 
 
