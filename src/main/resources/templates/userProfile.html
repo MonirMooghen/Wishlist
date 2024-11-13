@@ -35,6 +35,9 @@
 <div class="container">
     <div class="row">
         <!-- Iterate through wish lists and display each as a card -->
+        <div th:if="${#lists.isEmpty(wishLists)}">
+            <p>You have no wishlists yet.</p>
+        </div>
         <div class="col-md-4 mb-4" th:each="wishlist : ${wishLists}">
             <div class="card">
                 <img class="card-img-top" src="https://picsum.photos/300/200" alt="Random Image">
