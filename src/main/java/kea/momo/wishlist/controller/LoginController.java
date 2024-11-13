@@ -26,12 +26,7 @@ public class LoginController {
         return session.getAttribute("profile") != null;
     }
 
-//    @GetMapping("/profile")
-//    public String index() {
-//        // return landing page
-//        return "index"; // TODO change
-//    }
-//
+
     @GetMapping("")
     public String showLogin() {
         // return login form
@@ -42,14 +37,13 @@ public class LoginController {
     public String login(@RequestParam("profileEmail") String profileEmail, @RequestParam("profilePassword")
                         String profilePassword, HttpSession session, Model model) throws ProfileException {
 
-//        profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
 
         if (profileService.login(profileEmail, profilePassword)) {
                    Profile profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
             // create session for user and set session timeout to 30 sec (container default: 15 min)
-            session.setAttribute("profile", profileToCheck); // hvorfor nyt object her?
+            session.setAttribute("profile", profileToCheck);
             session.setMaxInactiveInterval(30);
-            // redirect to starting page - admin1
+
             return "redirect:/login/userProfile"; // TODO rename så det passer til html page user dashboard
         }
         // wrong credentials
@@ -69,18 +63,6 @@ public class LoginController {
         return "userProfile"; // Name of your Thymeleaf template for the profile dashboard
     }
 
-//
-//    @GetMapping("admin2")
-//    public String showAdm2(HttpSession session) {
-//        return isLoggedIn(session) ? "admin2" : "homepage";
-//    }
-
-//    @GetMapping("logout")
-//    public String logout(HttpSession session) {
-//        // invalidate session and return landing page
-//        session.invalidate();
-//        return "homepage"; // TODO rename så det passer til html page
-//    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

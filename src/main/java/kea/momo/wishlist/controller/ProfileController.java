@@ -74,11 +74,11 @@ public class ProfileController {
     }
 
     //***EXCEPTION HANDLING***------------------------------------------------------------------------------------------
-//    @ExceptionHandler(ProfileException.class)
-//    public String handleError(Model model, Exception exception) {
-//        model.addAttribute("message",exception.getMessage());
-//        return "errorPage";
-//    }
+    @ExceptionHandler(ProfileException.class)
+    public String handleError(Model model, Exception exception) {
+        model.addAttribute("message",exception.getMessage());
+        return "errorPage";
+    }
 
     //***END***---------------------------------------------------------------------------------------------------------
 }
