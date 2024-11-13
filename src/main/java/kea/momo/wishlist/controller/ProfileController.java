@@ -30,7 +30,6 @@ public class ProfileController {
         return "signup";  // TODO tilføj navn på html page
     }
 
-    //TODO vi skal sikre at profile email... if(profileEmail.equals(existing) og ikke er tom
     @PostMapping("/saveprofile") //PostMapping tilføjer data til database
     public String saveProfile(@ModelAttribute Profile profile) throws ProfileException {
         profileService.addProfile(profile);
@@ -71,7 +70,7 @@ public class ProfileController {
     public String deleteProfile(@PathVariable int profileId) throws ProfileException {
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
-        return "redirect:/profiles"; // TODO: Change to the correct HTML page if necessary
+        return "redirect:/profile"; // TODO: Change to the correct HTML page if necessary
     }
 
     //***EXCEPTION HANDLING***------------------------------------------------------------------------------------------

@@ -16,9 +16,9 @@ public class WishlistApplication {
     public static void main(String[] args) {
         SpringApplication.run(WishlistApplication.class, args);
 
-        //Wishes
-        WishlistRepository wishlistRepository = new WishlistRepository();
-        System.out.println(wishlistRepository.getAllWishes());
+//        //Wishes
+//        WishlistRepository wishlistRepository = new WishlistRepository();
+//        System.out.println(wishlistRepository.getAllWishes());
 
 
 

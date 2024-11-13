@@ -17,7 +17,7 @@ public class ProfileRepository {
     private String db_password = System.getenv("DB_PASSWORD");
 
     //***METHODS***-----------------------------------------------------------------------------------------------------
-    //***GET PROFILE(S)***----------------------------------------------------------------------------------------------
+    //***READ PROFILE(S)***--------------------------------------------------------------------------------------------R
     public Profile getProfileByEmailAndPassword(String profileEmail, String profilePassword) throws ProfileException {
         for (Profile profile: getAllProfiles()) {
             if (profile.getProfileEmail().equalsIgnoreCase(profileEmail) && profile.getProfilePassword().equalsIgnoreCase(profilePassword))
@@ -60,7 +60,7 @@ public class ProfileRepository {
         return profiles;
     }
 
-    //***ADD PROFILE***-------------------------------------------------------------------------------------------------
+    //***CREATE PROFILE***---------------------------------------------------------------------------------------------C
     public void addProfile(Profile profile) throws ProfileException{
         String insertProfileQuery = """
         INSERT INTO Profile (
@@ -90,7 +90,7 @@ public class ProfileRepository {
         }
     }
 
-    //***DELETE PROFILE***------------------------------------------------------------------------------------------------
+    //***DELETE PROFILE***---------------------------------------------------------------------------------------------D
     public void deleteProfile(Profile profile) throws ProfileException{
         String deleteQuery = "DELETE FROM Profile WHERE profileId = ?";
 
@@ -105,7 +105,7 @@ public class ProfileRepository {
         }
     }
 
-    //***UPDATE***------------------------------------------------------------------------------------------------------
+    //***UPDATE***-----------------------------------------------------------------------------------------------------U
     public void updateProfile(Profile profile) throws ProfileException{
     String updateQuery = """
         UPDATE Profile

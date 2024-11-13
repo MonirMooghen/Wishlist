@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container my-5">
+    <h1>Edit Profile</h1>
+    <p>Update your profile information below:</p>
+
+    <!-- Profile Information Table and Form -->
+<!--    <form th:action="@{/profile/update}" method="post">-->
+<!--    @{/profile/update/{profileId}(profileId=${profile.id})}-->
+         <form th:action="@{/profile/update/{id}(id=${profile.getProfileId()})}"
+               th:object="${profile}"
+               method="post">
+
+
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th scope="row">First Name</th>
+                <td>
+                    <label>
+                        <input type="text" class="form-control" name="firstName" th:field="*{profileName}" th:value="${profile.getProfileName()}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Last Name</th>
+                <td>
+                    <label>
+                        <input type="text" class="form-control" name="lastName" th:field="*{profileLastName}" th:value="${profile.getProfileLastName()}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>
+                    <label>
+                        <input type="email" class="form-control" name="email" th:field="*{profileEmail}" th:value="${profile.getProfileEmail()}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Password</th>
+                <td>
+                    <label>
+                        <input type="password" class="form-control" name="password" th:field="*{profilePassword}" th:value="${profile.getProfilePassword()}" placeholder="Enter new password" required>
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- Save and Delete Buttons -->
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+
+    <form th:action="@{/profile/delete}" method="post" class="mt-3">
+        <button type="submit" class="btn btn-danger">Delete Profile</button>
+    </form>
+</div>
+
+<!-- Bootstrap CSS and JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+<!-- Edit Profile Modal -->
+<!--<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <table class="table table-bordered">-->
+<!--                    <tbody>-->
+<!--                    <tr>-->
+<!--                        <th scope="row">First Name</th>-->
+<!--                        <td th:text="${Profile.getProfileName()}">John</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th scope="row">Last Name</th>-->
+<!--                        <td th:text="${Profile.getProfileLastName()}">Doe</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th scope="row">Email</th>-->
+<!--                        <td th:text="${Profile.getProfileEmail()}">johndoe@example.com</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th scope="row">Password</th>-->
+<!--                        <td>********</td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                &lt;!&ndash; Edit Profile Form &ndash;&gt;-->
+<!--                <form th:action="@{/profile/update}" method="post">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="profileName">First Name</label>-->
+<!--                        <input type="text" class="form-control" id="profileName" name="firstName" th:value="${Profile.getProfileName()}" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="profileLastName">Last Name</label>-->
+<!--                        <input type="text" class="form-control" id="profileLastName" name="lastName" th:value="${Profile.getProfileLastName()}" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="profileEmail">Email</label>-->
+<!--                        <input type="email" class="form-control" id="profileEmail" name="email" th:value="${Profile.getProfileEmail()}" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="profilePassword">Password</label>-->
+<!--                        <input type="password" class="form-control" id="profilePassword" name="password" placeholder="Enter new password">-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Save Changes</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

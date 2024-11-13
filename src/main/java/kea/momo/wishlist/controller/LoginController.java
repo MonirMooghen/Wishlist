@@ -8,64 +8,68 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller("wishlist")
+@Controller
+@RequestMapping("login")
 public class LoginController {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private ProfileService profileService;
+    public LoginController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
     //***LOGIN METHODS***-----------------------------------------------------------------------------------------------
-    private boolean isLoogedIn(HttpSession session) {
+    private boolean isLoggedIn(HttpSession session) {
         return session.getAttribute("profile") != null;
     }
 
-    @GetMapping("/")
-    public String index() {
-        // return landing page
-        return "index";
-    }
 
-    @GetMapping("login")
+    @GetMapping("")
     public String showLogin() {
         // return login form
-        return "login";
+        return "login"; // TODO rename så det passer til html page
     }
 
-    @PostMapping("login")
-    public String login(@RequestParam("profileId") String profileEmail, @RequestParam("profilePassword") String profilePassword,
-                        HttpSession session,
-                        Model model) throws ProfileException {
+    @PostMapping("")
+    public String login(@RequestParam("profileEmail") String profileEmail, @RequestParam("profilePassword")
+                        String profilePassword, HttpSession session, Model model) throws ProfileException {
+
 
         if (profileService.login(profileEmail, profilePassword)) {
+                   Profile profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
             // create session for user and set session timeout to 30 sec (container default: 15 min)
-            session.setAttribute("user", new Profile(profileEmail, profilePassword));
+            session.setAttribute("profile", profileToCheck);
             session.setMaxInactiveInterval(30);
-            // redirect to starting page - admin1
-            return "redirect:/admin1";
+
+            return "redirect:/login/userProfile"; // TODO rename så det passer til html page user dashboard
         }
         // wrong credentials
         model.addAttribute("wrongCredentials", true);
-        return "login";
+        return "login"; // TODO rename så det passer til html page
     }
 
 
-    @GetMapping("admin1")
-    public String showAdm1(HttpSession session) {
-        return isLoogedIn(session) ? "admin1" : "login";
+    @GetMapping("/userProfile")
+    public String showProfileDashboard(HttpSession session, Model model) {
+        Profile profile = (Profile) session.getAttribute("profile");
+        if (profile == null) {
+            // Redirect to login page if the profile is not in session (i.e., not logged in)
+            return "redirect:/login";
+        }
+        model.addAttribute("profile", profile);
+        return "userProfile"; // Name of your Thymeleaf template for the profile dashboard
     }
 
-    @GetMapping("admin2")
-    public String showAdm2(HttpSession session) {
-        return isLoogedIn(session) ? "admin2" : "login";
-    }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
-        // invalidate session and return landing page
+        // Invalidate the session to log out the user
         session.invalidate();
-        return "index";
+        // Redirect to the homepage or login page
+        return "redirect:/homepage"; // Adjust redirect as needed
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

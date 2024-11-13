@@ -3,43 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile Dashboard</title>
-    <link rel="stylesheet" th:href="@{/main.css}">
+    <title>Profile Dashboard</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-
-<h1> this is user DashBoard </h1>
-
-<div class="container my-5">
-    <h1 class="mb-4">Welcome to Your Profile Dashboard</h1>
-
-
-
-    <!-- Button to Create New Wish List -->
-    <div class="mb-4">
-        <a href="/homepage/addwishlist" class="btn btn-success">Create New Wish List</a>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Your Logo</a>
+    <div class="ml-auto">
+        <a th:object="${session.profile}" th:href="@{/profile/edit/{profileId}(profileId=${session.profile.getProfileId()})}" class="btn btn-outline-secondary mr-2">Edit Profile</a>
+        <a th:href="@{/login/logout}" class="btn btn-danger">Logout</a>
     </div>
+</nav>
 
-    <!-- Existing Wish Lists -->
-    <h3>Your Wish Lists</h3>
-    <div class="row">
-        <!-- Loop through each wish list object in Thymeleaf -->
-        <div class="col-md-4 mb-4" th:each="Wishlist : ${wishLists}">
-            <div class="card">
-                <!-- Random Image from Lorem Picsum -->
-                <img th:src="'https://picsum.photos/seed/' + ${Wishlist.wishlistId} + '/300/200?random=1'"
-                     class="card-img-top" alt="Wishlist Image">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${Wishlist.wishlistName}">Wish List Title</h5>
-<!--                    <p class="card-text" th:text="${wishlist.description}">This is a short description of the wish list.</p>-->
-                    <a th:href="@{/wishlist/update/{id}(id=${Wishlist.wishlistId})}" class="btn btn-primary">View Wish List</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Welcome Message -->
+<div class="container my-4">
+    <h1>Welcome to your profile, <span th:text="${session.profile.getProfileName()}"></span>!</h1>
 </div>
+
+<!-- Dashboard Content: Wish Lists -->
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        &lt;!&ndash; Iterate through wish lists and display each as a card &ndash;&gt;-->
+<!--        <div class="col-md-4 mb-4" th:each="wishList : ${wishLists}">-->
+<!--            <div class="card">-->
+<!--                <img class="card-img-top" src="https://picsum.photos/300/200" alt="Random Image">-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title" th:text="${wishList.title}">Wish List Title</h5>-->
+<!--                    <a th:href="@{/wishlist/edit/{id}(id=${wishList.id})}" class="btn btn-primary">Edit</a>-->
+<!--                    <a th:href="@{/wishlist/delete/{id}(id=${wishList.id})}" class="btn btn-danger">Delete</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Add New Wish List Form Card &ndash;&gt;-->
+<!--        <div class="col-md-4 mb-4">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center" style="height: 200px;">-->
+<!--                    <h5 class="card-title">Add New Wish List</h5>-->
+<!--                    &lt;!&ndash; Form for adding new wish list &ndash;&gt;-->
+<!--                    <form th:action="@{/wishlist/add}" method="post">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="wishListName">Wish List Name</label>-->
+<!--                            <input type="text" class="form-control" id="wishListName" name="wishListName" placeholder="Enter wish list name" required>-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-success mt-2">Create Wish List</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 </body>
 </html>
