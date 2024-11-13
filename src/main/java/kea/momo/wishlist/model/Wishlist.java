@@ -5,13 +5,11 @@ import java.util.List;
 
 public class Wishlist {
 
-
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private int wishlistId; //
     private String wishlistName;
     private int profileId;
     private List<Wish> wishlist;
-
 
     //***CONSTRUCTORS***------------------------------------------------------------------------------------------------
     public Wishlist(String wishlistName, int wishlistId){
@@ -27,7 +25,6 @@ public class Wishlist {
     }
 
     public Wishlist(){
-
     }
 
     //***GETTER METHODS***----------------------------------------------------------------------------------------------
@@ -65,14 +62,13 @@ public class Wishlist {
     }
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
-
     @Override
     public String toString() {
         return
                 "\n Wishlist name: " + wishlistName +
-                "\n Wishlist Id: "   + wishlistId   +
+                "\n Wishlist id: "   + wishlistId   +
                 "\n Wishes: "        + wishlist     +
-                        "\n Profile Id: "   + profileId  ;
+                "\n Profile id: "    + profileId    ;
     }
 
     //***END***---------------------------------------------------------------------------------------------------------

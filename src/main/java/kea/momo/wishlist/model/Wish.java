@@ -1,12 +1,13 @@
 package kea.momo.wishlist.model;
 
+// TODO skal model klasserne have annotationer?
 public class Wish {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private int wishId;
     private String wishName;
     private String wishDescription;
-    private double wishPrice;//TODO modtager database en double / eller skal vi rette til int?
+    private double wishPrice; //TODO modtager database en double / eller skal vi rette til int?
     private String wishLink;
     private int wishlistId;
 
@@ -31,7 +32,7 @@ public class Wish {
     public Wish(){
     }
 
-    //***GETTER***------------------------------------------------------------------------------------------------------
+    //***GETTER METHODS***----------------------------------------------------------------------------------------------
     public String getWishName() {
         return wishName;
     }
@@ -56,7 +57,7 @@ public class Wish {
         return wishlistId;
     }
 
-    //***SETTER***------------------------------------------------------------------------------------------------------
+    //***SETTER METHODS***----------------------------------------------------------------------------------------------
     public void setWishName(String wishName) {
         this.wishName = wishName;
     }
@@ -82,7 +83,6 @@ public class Wish {
     }
 
     //***TO STRING METHOD***--------------------------------------------------------------------------------------------
-
     @Override
     public String toString() {
         return
@@ -91,7 +91,7 @@ public class Wish {
                 "\n Wish description: " + wishDescription +
                 "\n Wish price: "       + wishPrice       +
                 "\n Wish link: "        + wishLink        +
-                "\n Wishlist ID: "      + wishlistId  + '\n';
+                "\n Wishlist ID: "      + wishlistId      ;
     }
     //***END***---------------------------------------------------------------------------------------------------------
 }
