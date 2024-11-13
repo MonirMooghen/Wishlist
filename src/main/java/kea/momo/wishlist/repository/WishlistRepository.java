@@ -104,7 +104,6 @@ public class WishlistRepository {
     //***DELETE WISHLIST***------------------------------------------------------------------------------------------------
     public void deleteWishlist(Wishlist wishlist) {
         String deleteQuery = "DELETE FROM Wishlist WHERE wishlistId = ?";
-        //String findIDQuery = "";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             //PreparedStatement prepstmt2 = con.prepareStatement(findIDQuery);
