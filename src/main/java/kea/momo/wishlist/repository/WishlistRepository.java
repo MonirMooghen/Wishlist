@@ -30,13 +30,16 @@ public class WishlistRepository {
             while (rs.next()) {
                 String wishlistName = rs.getString("wishlistName");
                 int wishlistId = rs.getInt("wishlistId");
+                int profileId = rs.getInt("profileId");
 
-                Wishlist wishListObj = new Wishlist(wishlistName, wishlistId);
+                Wishlist wishListObj = new Wishlist(wishlistName, wishlistId, profileId);
                 allWishLists.add(wishListObj);
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+
+
         return allWishLists;
     }
 
@@ -49,27 +52,31 @@ public class WishlistRepository {
     }
 
     public List<Wishlist> getWishListFromProfile(int profileId) throws WishlistException {
-        List<Wishlist> wishlists = null;
+        List<Wishlist> wishlists = new ArrayList<>();
         for (Wishlist wishlist : getAllWishlists()){
             if(wishlist.getProfileId() == profileId){
                 wishlists.add(wishlist);
-            } else {
+            } else if(wishlists.isEmpty()){
                 throw new WishlistException("No wishlist exist for this profile");
             }
         }
         return wishlists;
     }
 
+
+
     //***ADD WISHLIST***------------------------------------------------------------------------------------------------
     public void addWishlist(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
-        INSERT INTO Wishlist (wishlistName) VALUES (?)""";
+        INSERT INTO Wishlist (wishlistName,profileId) VALUES (?,?)""";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             PreparedStatement profileStatement = con.prepareStatement(insertWishlistQuery);
             profileStatement.setString(1, wishlist.getWishlistName());
+            profileStatement.setInt(2, wishlist.getProfileId());
             profileStatement.executeUpdate();
+            System.out.println("Wishlist added");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -220,4 +227,6 @@ public class WishlistRepository {
 
     //***END***-----------------------------------------------------------------------------------------------------
 }
+
+
 
