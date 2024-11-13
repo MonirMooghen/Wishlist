@@ -51,15 +51,14 @@ public class WishlistRepository {
         } throw new IllegalArgumentException("No wishlist with this ID");
     }
 
-    public List<Wishlist> getWishListFromProfile(int profileId) throws WishlistException {
+    public List<Wishlist> getWishListFromProfile(int profileId)  {
         List<Wishlist> wishlists = new ArrayList<>();
         for (Wishlist wishlist : getAllWishlists()){
             if(wishlist.getProfileId() == profileId){
                 wishlists.add(wishlist);
-            } else if(wishlists.isEmpty()){
-                throw new WishlistException("No wishlist exist for this profile");
             }
         }
+
         return wishlists;
     }
 
