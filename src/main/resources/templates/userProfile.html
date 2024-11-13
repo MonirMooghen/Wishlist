@@ -10,10 +10,19 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Your Logo</a>
+    <a class="navbar-brand" href="/homepage">
+        <img src="https://picsum.photos/50" alt="Logo" style="width: 50px; border-radius: 50%;">
+        momo list corporation
+    </a>
+
+    <!-- Navbar toggle (for mobile view) -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="ml-auto">
         <a th:object="${session.profile}" th:href="@{/profile/edit/{profileId}(profileId=${session.profile.getProfileId()})}" class="btn btn-outline-secondary mr-2">Edit Profile</a>
-        <a th:href="@{/login/logout}" class="btn btn-danger">Logout</a>
+        <a th:href="@{/homepage/logout}" class="btn btn-danger">Logout</a>
     </div>
 </nav>
 
@@ -37,22 +46,24 @@
 <!--            </div>-->
 <!--        </div>-->
 
-<!--        &lt;!&ndash; Add New Wish List Form Card &ndash;&gt;-->
-<!--        <div class="col-md-4 mb-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center" style="height: 200px;">-->
-<!--                    <h5 class="card-title">Add New Wish List</h5>-->
-<!--                    &lt;!&ndash; Form for adding new wish list &ndash;&gt;-->
-<!--                    <form th:action="@{/wishlist/add}" method="post">-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="wishListName">Wish List Name</label>-->
-<!--                            <input type="text" class="form-control" id="wishListName" name="wishListName" placeholder="Enter wish list name" required>-->
-<!--                        </div>-->
-<!--                        <button type="submit" class="btn btn-success mt-2">Create Wish List</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!-- Add New Wish List Form Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center" style="height: 200px;">
+                    <h5 class="card-title">Add New Wish List</h5>
+                    <!-- Form for adding new wish list -->
+                    <form  th:action="@{/homepage/savewishlist}" th:object="${wishList}" method="post">
+<!--                        <input type="hidden" th:name="profileId" th:value="${profileId}(profileId=${session.profile.getProfileId()})" />-->
+                        <div class="form-group">
+                            <label for="wishlistName">Wish List Name</label>
+                            <input type="text" class="form-control" id="wishlistName" name="wishlistName" placeholder="Enter wish list name" required>
+
+                        </div>
+                        <button type="submit" class="btn btn-success mt-2">Create Wish List</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 <!--    </div>-->
 <!--</div>-->
 

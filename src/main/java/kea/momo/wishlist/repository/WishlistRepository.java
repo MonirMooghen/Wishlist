@@ -29,8 +29,9 @@ public class WishlistRepository {
             while (rs.next()) {
                 String wishlistName = rs.getString("wishlistName");
                 int wishlistId = rs.getInt("wishlistId");
+                int profileId = rs.getInt("profileId");
 
-                Wishlist wishListObj = new Wishlist(wishlistName, wishlistId);
+                Wishlist wishListObj = new Wishlist(wishlistName, wishlistId, profileId);
                 allWishLists.add(wishListObj);
             }
         } catch (SQLException ex) {
@@ -51,12 +52,14 @@ public class WishlistRepository {
     public void addWishlist(Wishlist wishlist){
         System.out.println("Add wishlist");
         String insertWishlistQuery = """
-        INSERT INTO Wishlist (wishlistName) VALUES (?)""";
+        INSERT INTO Wishlist (wishlistName,profileId) VALUES (?,?)""";
 
         try (Connection con = DriverManager.getConnection(db_url, db_username, db_password)) {
             PreparedStatement profileStatement = con.prepareStatement(insertWishlistQuery);
             profileStatement.setString(1, wishlist.getWishlistName());
+            profileStatement.setInt(2, wishlist.getProfileId());
             profileStatement.executeUpdate();
+            System.out.println("Wishlist added");
 
         } catch (SQLException e) {
             e.printStackTrace();
