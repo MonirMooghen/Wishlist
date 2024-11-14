@@ -147,7 +147,6 @@ public class WishlistController {
         return "redirect:/wishlist";
     }
 
-
     //***DELETE WISHLIST***--------------------------------------------------------------------------------------------D
     @PostMapping("/{wishlist}/remove")
     public String removeWishlist(@PathVariable int id){
@@ -170,7 +169,6 @@ public class WishlistController {
         model.addAttribute("wishlistId",wish.getWishlistId());
         return "addWish";
     }
-
 
     @PostMapping("/savewish")
     public String saveWish(@ModelAttribute Wish wish){
@@ -215,9 +213,5 @@ public class WishlistController {
         return "redirect:/wishlists";
     }
 
-
-
     //***END***---------------------------------------------------------------------------------------------------------
-
-
 }
