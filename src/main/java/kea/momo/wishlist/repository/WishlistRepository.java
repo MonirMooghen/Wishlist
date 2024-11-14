@@ -2,7 +2,6 @@ package kea.momo.wishlist.repository;
 
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
-import kea.momo.wishlist.util.WishlistException;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
