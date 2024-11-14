@@ -134,7 +134,6 @@ public class WishlistController {
     @GetMapping("/wishlist/edit/{id}")
     public String editWishlist(@PathVariable("id") int wishlistId, Model model){
         Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
-        System.out.println(wishlist);
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishlistName", wishlist.getWishlistName());
         return "profileWishlist";
@@ -226,9 +225,4 @@ public String updateWishlist(@PathVariable("id") int wishlistId, Model model) {
         return "redirect:/homepage/userProfile";
     }
     //***END***---------------------------------------------------------------------------------------------------------
-
 }
-
-
-
-

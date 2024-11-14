@@ -30,7 +30,7 @@ public class ProfileControllerTest {
 //    //***TEST***--------------------------------------------------------------------------------------------------------
 //    @Test
 //    void getAllProfiles() throws Exception {
-//        mockMvc.perform(get(""))
+//        mockMvc.perform(get("/homepage"))
 //                .andExpect(status().isOk())
 //                .andExpect(view()
 //                        .name(""));

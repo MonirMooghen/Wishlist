@@ -1,6 +1,8 @@
 package kea.momo.wishlist.model;
 
-// TODO skal model klasserne have annotationer?
+import org.springframework.stereotype.Component;
+
+@Component
 public class Wish {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
