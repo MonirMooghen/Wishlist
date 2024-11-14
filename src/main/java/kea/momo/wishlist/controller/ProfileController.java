@@ -36,14 +36,7 @@ public class ProfileController {
         return "redirect:/"; // TODO tilføj navn på html page
     }
 
-    //***READ PROFILE***-----------------------------------------------------------------------------------------------R
-//    //TODO Ved ikke om vi skal bruge den her?
-//    @GetMapping("")
-//    public String getAllProfiles(Model model) throws ProfileException {
-//        List<Profile> profiles = profileService.getAllProfiles();
-//        model.addAttribute("profiles", profiles);
-//        return "allProfiles"; // TODO tilføj navn på html page
-//    }
+
 
     //***UPDATE PROFILE***---------------------------------------------------------------------------------------------U
     @GetMapping("/edit/{id}")
@@ -59,18 +52,18 @@ public class ProfileController {
 
     @PostMapping("/update/{id}")
     public String updateProfile(@PathVariable("id") int profileId, @ModelAttribute Profile profile) throws ProfileException {
-//        model.addAttribute("profile", profile);
+
         profile.setProfileId(profileId);
         profileService.updateProfile(profile);
         return "redirect:/profile"; // TODO tilføj navn på html page
     }
 
     //***DELETE PROFILE***---------------------------------------------------------------------------------------------D
-    @PostMapping("/{name}/remove")
-    public String deleteProfile(@PathVariable int profileId) throws ProfileException {
+    @PostMapping("/delete/{id}")
+    public String deleteProfile(@PathVariable("id") int profileId) throws ProfileException {
         Profile profile = profileService.getProfileById(profileId);
         profileService.deleteProfile(profile);
-        return "redirect:/profile"; // TODO: Change to the correct HTML page if necessary
+        return "redirect:/homepage"; // TODO: Change to the correct HTML page if necessary
     }
 
     //***EXCEPTION HANDLING***------------------------------------------------------------------------------------------

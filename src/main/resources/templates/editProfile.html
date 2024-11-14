@@ -13,8 +13,7 @@
     <p>Update your profile information below:</p>
 
     <!-- Profile Information Table and Form -->
-<!--    <form th:action="@{/profile/update}" method="post">-->
-<!--    @{/profile/update/{profileId}(profileId=${profile.id})}-->
+
          <form th:action="@{/profile/update/{id}(id=${profile.getProfileId()})}"
                th:object="${profile}"
                method="post">
