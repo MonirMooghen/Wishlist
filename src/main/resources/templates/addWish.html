@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Add wish</title>
-    <link rel="stylesheet" th:href="@{/main.css}">
+    <title>Add Wish</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Tilføj ønske</h1>
+<div class="container mt-5">
+    <h2>Add a New Wish</h2>
+    <form th:action="@{/homepage/savewish}" th:object="${wish}" method="post">
+        <!-- Pass the wishlistId as a hidden input -->
+        <input type="hidden" name="wishlistId" th:value="${wishlistId}" />
+
+        <div class="mb-3">
+            <label for="wishName" class="form-label">Wish Name</label>
+            <input type="text" class="form-control" id="wishName" name="wishName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="wishDescription" class="form-label">Wish Description</label>
+            <textarea class="form-control" id="wishDescription" name="wishDescription" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="wishPrice" class="form-label">Wish Price</label>
+            <input type="number" class="form-control" id="wishPrice" name="wishPrice" step="0.01">
+        </div>
+
+        <div class="mb-3">
+            <label for="wishLink" class="form-label">Wish Link</label>
+            <input type="url" class="form-control" id="wishLink" name="wishLink">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Wish</button>
+        <a th:href="@{/homepage/userProfile}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 </body>
 </html>

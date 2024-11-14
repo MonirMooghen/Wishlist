@@ -43,8 +43,8 @@
                 <img class="card-img-top" src="https://picsum.photos/300/200" alt="Random Image">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${wishlist.getWishlistName()}">Wish List Title</h5>
-                    <a th:href="@{/wishlist/edit/{id}(id=${wishlist.getWishlistId()})}" class="btn btn-primary">Edit</a>
-                    <a th:href="@{/wishlist/delete/{id}(id=${wishlist.getWishlistId()})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/homepage/wishlist/edit/{id}(id=${wishlist.getWishlistId()})}" class="btn btn-primary">Edit</a>
+                    <a th:href="@{/homepage/wishlist/delete/{id}(id=${wishlist.getWishlistId()})}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>
@@ -72,6 +72,13 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 

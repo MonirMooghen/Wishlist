@@ -62,6 +62,7 @@ public class WishlistRepository {
     public Wishlist findWishlistById(int wishlistId) {
         for (Wishlist wishlist : getAllWishlists()) {
             if (wishlistId == wishlist.getWishlistId()) {
+                wishlist.setWishlist(getWishFromWishlistId(wishlist.getWishlistId()));
                 return wishlist;
             }
         }
@@ -72,6 +73,7 @@ public class WishlistRepository {
         List<Wishlist> wishlists = new ArrayList<>();
         for (Wishlist wishlist : getAllWishlists()) {
             if (wishlist.getProfileId() == profileId) {
+                wishlist.setWishlist(getWishFromWishlistId(wishlist.getWishlistId()));
                 wishlists.add(wishlist);
             }
         }
@@ -177,6 +179,22 @@ public class WishlistRepository {
         } throw new IllegalArgumentException("No wish with this ID");
     }
 
+
+
+    public List<Wish> getWishFromWishlistId(int wishlistId) {
+        List<Wish> wishes = new ArrayList<>();
+        for (Wish wish : getAllWishes()) {
+            if (wish.getWishlistId() == wishlistId) {
+                wishes.add(wish);
+            }
+        }
+
+        return wishes;
+    }
+
+
+
+
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
     public void updateWish(Wish wish){
         String updateQuery = """
@@ -200,6 +218,7 @@ public class WishlistRepository {
             e.printStackTrace();
         }
     }
+
 
     //***DELETE WISH***------------------------------------------------------------------------------------------------D
     public void deleteWish(Wish wish) {
