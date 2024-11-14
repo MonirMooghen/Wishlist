@@ -113,15 +113,16 @@ public class WishlistController {
             wishlistService.addWishlist(wishList);
 
         // Redirect to the user profile or dashboard page after saving
-            return "redirect:/profile";
+            return "redirect:/homepage/userProfile";
         } else {
             // If the profile is not in the session, redirect to login or show an error
             model.addAttribute("error", "Please log in to create a wish list.");
-            return "redirect:/login";
+            return "redirect:/homepage/login";
         }
     }
 
-    //***READ WISHLIST***----------------------------------------------------------------------------------------------R
+
+
     @GetMapping("/wishlists")
     public String getAllWishLists(Model model) {
         List<Wishlist> wishLists = wishlistService.getAllWishLists();
@@ -130,50 +131,61 @@ public class WishlistController {
     }
 
     //***UPDATE WISHLIST***--------------------------------------------------------------------------------------------U
-    @GetMapping("/{wishlist}/edit")
-    public String editWishlist(@PathVariable("wishlist") int wishlistId, Model model){
+    @GetMapping("/wishlist/edit/{id}")
+    public String editWishlist(@PathVariable("id") int wishlistId, Model model){
         Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
         model.addAttribute("wishlist", wishlist);
         model.addAttribute("wishlistName", wishlist.getWishlistName());
-        return "homepage";
+        return "profileWishlist";
     }
 
-    @PostMapping("/{wishlist}/update")
-    public String updateWishlist(@PathVariable("name") String name, @ModelAttribute Wishlist wishlist, Model model) {
-        model.addAttribute("wishlist", wishlist);
-        model.addAttribute("wishlistId", wishlist.getWishlistId());
-        model.addAttribute("wishName", wishlist.getWishlist());
-        wishlistService.updateWishlist(wishlist);
-        return "redirect:/wishlist";
-    }
+@PostMapping("/wishlist/update/{id}")
+public String updateWishlist(@PathVariable("id") int wishlistId, Model model) {
+    Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
+    model.addAttribute("wishlist", wishlist);
+    model.addAttribute("wishlistId", wishlist.getWishlistId());
+    model.addAttribute("wishName", wishlist.getWishlist());
+    wishlistService.updateWishlist(wishlist);
+    return "profileWishlist";
+}
+
 
     //***DELETE WISHLIST***--------------------------------------------------------------------------------------------D
-    @PostMapping("/{wishlist}/remove")
-    public String removeWishlist(@PathVariable int id){
-        Wishlist wishlist = wishlistService.findWishlistById(id);
+    @PostMapping("/wishlist/remove/{id}")
+    public String removeWishlist(@PathVariable("id") int wishlistId){
+        Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
         wishlistService.deleteWishlist(wishlist);
-        return "redirect:/wishlists";
+        return "redirect:/homepage/userProfile";
     }
 
     //***WISHES***------------------------------------------------------------------------------------------------------
     //***CREATE WISH***------------------------------------------------------------------------------------------------C
     @GetMapping("/addwish")
-    public String addWish(Model model) {
-        Wish wish = new Wish();
-        model.addAttribute("wish", wish);
-        model.addAttribute("wishId", wish.getWishId());
-        model.addAttribute("wishName", wish.getWishName());
-        model.addAttribute("wishDescription", wish.getWishDescription());
-        model.addAttribute("wishPrice", wish.getWishPrice());
-        model.addAttribute("wishLink",wish.getWishLink());
-        model.addAttribute("wishlistId",wish.getWishlistId());
+    public String addWish(@RequestParam("wishlistId") int wishlistId, Model model) {
+        model.addAttribute("wishlistId", wishlistId);
         return "addWish";
     }
 
+
     @PostMapping("/savewish")
-    public String saveWish(@ModelAttribute Wish wish){
-        wishlistService.addWish(wish);
-        return "redirect:/wishlist";
+    public String saveWish(@RequestParam("wishlistId") int wishlistId,
+                          @RequestParam("wishName") String wishName,
+                          @RequestParam("wishDescription") String wishDescription,
+                          @RequestParam("wishPrice") Double wishPrice,
+                          @RequestParam("wishLink") String wishLink){
+
+        //        // Create a new Wish object
+        Wish newWish = new Wish();
+        newWish.setWishName(wishName);
+        newWish.setWishDescription(wishDescription);
+        newWish.setWishPrice(wishPrice);
+        newWish.setWishLink(wishLink);
+        newWish.setWishlistId(wishlistId);
+
+        // Associate the wish with the wishlist and save it
+//        wishlistService.addWishToWishlist(wishlistId, newWish);
+                wishlistService.addWish(newWish);
+        return "redirect:/homepage/userProfile";
     }
 
     //***READ WISH***--------------------------------------------------------------------------------------------------R
@@ -185,8 +197,8 @@ public class WishlistController {
     }
 
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
-    @GetMapping("/{wish}/edit")
-    public String editWish(@PathVariable("wish") int wishId, Model model){
+    @GetMapping("/wish/edit/{id}")
+    public String editWish(@PathVariable("id") int wishId, Model model){
         Wish wish = wishlistService.findWishById(wishId);
         model.addAttribute("wish", wish);
         model.addAttribute("wishId", wish.getWishId());
@@ -195,23 +207,22 @@ public class WishlistController {
         model.addAttribute("wishPrice", wish.getWishPrice());
         model.addAttribute("wishLink",wish.getWishLink());
         model.addAttribute("wishlistId",wish.getWishlistId());
-        return "homepage";
+        return "userProfile";
     }
 
-    @PostMapping("/{wish}/update")
-    public String updateWish(@PathVariable("name") String name, @ModelAttribute Wish wish, Model model) {
+    @PostMapping("/wish/update/{id}")
+    public String updateWish(@PathVariable("id") int wishId, @ModelAttribute Wish wish, Model model) {
         model.addAttribute("wish", wish);
         wishlistService.updateWish(wish);
-        return "redirect:/wishlist";
+        return "userProfile";
     }
 
     //***DELETE WISH***------------------------------------------------------------------------------------------------D
-    @PostMapping("/{wish}/remove")
-    public String removeWish(@PathVariable int id){
+    @PostMapping("/wish/remove/{id}")
+    public String removeWish(@PathVariable("id") int id){
         Wish wish = wishlistService.findWishById(id);
         wishlistService.deleteWish(wish);
-        return "redirect:/wishlists";
+        return "redirect:/homepage/userProfile";
     }
-
     //***END***---------------------------------------------------------------------------------------------------------
 }
