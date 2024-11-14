@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component // TODO skal model klasserne have annotationer?
+@Component
 public class Profile {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
