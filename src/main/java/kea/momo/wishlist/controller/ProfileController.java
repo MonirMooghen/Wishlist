@@ -37,13 +37,13 @@ public class ProfileController {
     }
 
     //***READ PROFILE***-----------------------------------------------------------------------------------------------R
-    //TODO Ved ikke om vi skal bruge den her?
-    @GetMapping("")
-    public String getAllProfiles(Model model) throws ProfileException {
-        List<Profile> profiles = profileService.getAllProfiles();
-        model.addAttribute("profiles", profiles);
-        return "allProfiles"; // TODO tilføj navn på html page
-    }
+//    //TODO Ved ikke om vi skal bruge den her?
+//    @GetMapping("")
+//    public String getAllProfiles(Model model) throws ProfileException {
+//        List<Profile> profiles = profileService.getAllProfiles();
+//        model.addAttribute("profiles", profiles);
+//        return "allProfiles"; // TODO tilføj navn på html page
+//    }
 
     //***UPDATE PROFILE***---------------------------------------------------------------------------------------------U
     @GetMapping("/edit/{id}")

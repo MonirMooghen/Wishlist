@@ -174,7 +174,6 @@ public String updateWishlist(@PathVariable("id") int wishlistId, Model model) {
                           @RequestParam("wishPrice") Double wishPrice,
                           @RequestParam("wishLink") String wishLink){
 
-        //        // Create a new Wish object
         Wish newWish = new Wish();
         newWish.setWishName(wishName);
         newWish.setWishDescription(wishDescription);
@@ -182,8 +181,6 @@ public String updateWishlist(@PathVariable("id") int wishlistId, Model model) {
         newWish.setWishLink(wishLink);
         newWish.setWishlistId(wishlistId);
 
-        // Associate the wish with the wishlist and save it
-//        wishlistService.addWishToWishlist(wishlistId, newWish);
                 wishlistService.addWish(newWish);
         return "redirect:/homepage/userProfile";
     }
@@ -196,10 +193,20 @@ public String updateWishlist(@PathVariable("id") int wishlistId, Model model) {
         return "homepage";
     }
 
+
+//    @GetMapping("/edit/{wishId}")
+//    public String showEditWishForm(@PathVariable int wishId, Model model) {
+//        Wish wish = wishService.getWishById(wishId);
+//        model.addAttribute("wish", wish);
+//        return "edit-wish";
+//    }
+
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
     @GetMapping("/wish/edit/{id}")
-    public String editWish(@PathVariable("id") int wishId, Model model){
-        Wish wish = wishlistService.findWishById(wishId);
+    public String editWish(@PathVariable int id, Model model){
+        Wish wish = wishlistService.findWishById(id);
+        System.out.println(id);
+        System.out.println(wish);
         model.addAttribute("wish", wish);
         model.addAttribute("wishId", wish.getWishId());
         model.addAttribute("wishName", wish.getWishName());
@@ -207,15 +214,22 @@ public String updateWishlist(@PathVariable("id") int wishlistId, Model model) {
         model.addAttribute("wishPrice", wish.getWishPrice());
         model.addAttribute("wishLink",wish.getWishLink());
         model.addAttribute("wishlistId",wish.getWishlistId());
-        return "userProfile";
+        return "editWish";
     }
 
-    @PostMapping("/wish/update/{id}")
-    public String updateWish(@PathVariable("id") int wishId, @ModelAttribute Wish wish, Model model) {
-        model.addAttribute("wish", wish);
-        wishlistService.updateWish(wish);
-        return "userProfile";
-    }
+//    @PostMapping("/wish/update/{id}")
+//    public String updateWish(@PathVariable("id") int wishId, @ModelAttribute Wish wish, Model model) {
+//        model.addAttribute("wish", wish);
+//        wishlistService.updateWish(wish);
+//        return "userProfile";
+//    }
+@PostMapping("/wish/update")
+public String updateWish( @ModelAttribute Wish wish) {
+//    model.addAttribute("wish", wish);
+    int id = wish.getWishId();
+    wishlistService.updateWish(wish);
+    return "redirect:/homepage/wishlist/edit/"+id;
+}
 
     //***DELETE WISH***------------------------------------------------------------------------------------------------D
     @PostMapping("/wish/remove/{id}")
