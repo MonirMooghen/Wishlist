@@ -2,6 +2,7 @@ package kea.momo.wishlist.repository;
 
 import kea.momo.wishlist.model.Wish;
 import kea.momo.wishlist.model.Wishlist;
+import kea.momo.wishlist.util.WishlistRSInterface;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class WishlistRepository {
+public class WishlistRepository implements WishlistRSInterface {
 
     //***ATTRIBUTES***--------------------------------------------------------------------------------------------------
     private String db_url = System.getenv("DB_URL");
@@ -18,6 +19,7 @@ public class WishlistRepository {
 
     //***WISHLIST METHODS***--------------------------------------------------------------------------------------------
     //***CREATE WISHLIST***--------------------------------------------------------------------------------------------C
+    @Override
     public void addWishlist(Wishlist wishlist) {
         String insertWishlistQuery = """
                 
@@ -35,6 +37,7 @@ public class WishlistRepository {
     }
 
     //***READ WISHLIST***----------------------------------------------------------------------------------------------R
+    @Override
     public List<Wishlist> getAllWishlists() {
         List<Wishlist> allWishLists = new ArrayList<>();
 
@@ -58,6 +61,7 @@ public class WishlistRepository {
         return allWishLists;
     }
 
+    @Override
     public Wishlist findWishlistById(int wishlistId) {
         for (Wishlist wishlist : getAllWishlists()) {
             if (wishlistId == wishlist.getWishlistId()) {
@@ -68,7 +72,8 @@ public class WishlistRepository {
         throw new IllegalArgumentException("No wishlist with this ID");
     }
 
-    public List<Wishlist> getWishListFromProfile(int profileId) {
+    @Override
+    public List<Wishlist> getWishlistsFromProfile(int profileId) {
         List<Wishlist> wishlists = new ArrayList<>();
         for (Wishlist wishlist : getAllWishlists()) {
             if (wishlist.getProfileId() == profileId) {
@@ -81,6 +86,7 @@ public class WishlistRepository {
     }
 
     //***UPDATE WISHLIST***--------------------------------------------------------------------------------------------U
+    @Override
     public void updateWishlist(Wishlist wishlist){
         String updateQuery = """
         UPDATE Wishlist
@@ -101,6 +107,7 @@ public class WishlistRepository {
     }
 
     //***DELETE WISHLIST***--------------------------------------------------------------------------------------------D
+    @Override
     public void deleteWishlist(Wishlist wishlist) {
         String deleteQuery = "DELETE FROM Wishlist WHERE wishlistId = ?";
 
@@ -116,6 +123,7 @@ public class WishlistRepository {
 
     //***WISH METHODS***------------------------------------------------------------------------------------------------
     //***CREATE WISH***------------------------------------------------------------------------------------------------C
+    @Override
     public void addWish(Wish wish) {
         System.out.println("Add wish");
         String insertWishQuery = """
@@ -141,7 +149,9 @@ public class WishlistRepository {
             e.printStackTrace();
         }
     }
+
     //***READ WISH***--------------------------------------------------------------------------------------------------R
+    @Override
     public List<Wish> getAllWishes(){
         List<Wish> wishes = new ArrayList<>();
 
@@ -170,6 +180,7 @@ public class WishlistRepository {
 
     }
 
+    @Override
     public Wish findWishById(int id){
         for (Wish wish : getAllWishes()){
             if (id == wish.getWishId()){
@@ -178,8 +189,7 @@ public class WishlistRepository {
         } throw new IllegalArgumentException("No wish with this ID");
     }
 
-
-
+    @Override
     public List<Wish> getWishFromWishlistId(int wishlistId) {
         List<Wish> wishes = new ArrayList<>();
         for (Wish wish : getAllWishes()) {
@@ -191,10 +201,8 @@ public class WishlistRepository {
         return wishes;
     }
 
-
-
-
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
+    @Override
     public void updateWish(Wish wish){
         String updateQuery = """
                             UPDATE Wish
@@ -218,8 +226,8 @@ public class WishlistRepository {
         }
     }
 
-
     //***DELETE WISH***------------------------------------------------------------------------------------------------D
+    @Override
     public void deleteWish(Wish wish) {
         String deleteQuery = " DELETE FROM Wish WHERE wishId = ?";
 
