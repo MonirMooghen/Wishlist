@@ -1,0 +1,37 @@
+<!-- edit-wish.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Wish</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Edit Wish</h2>
+
+    <form th:action="@{/homepage/wish/update}" method="post">
+        <!-- Hidden field to pass the wish ID -->
+        <input type="hidden" name="wishId" th:value="${wish.getWishId()}"/>
+
+        <div class="mb-3">
+            <label for="wishName" class="form-label">Wish Name</label>
+            <input type="text" class="form-control" id="wishName" name="wishName" th:value="${wish.getWishName()}" required>
+        </div>
+        <div class="mb-3">
+            <label for="wishDescription" class="form-label">Wish Description</label>
+            <textarea class="form-control" id="wishDescription" name="wishDescription" rows="3" th:text="${wish.getWishDescription()}"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="wishPrice" class="form-label">Wish Price</label>
+            <input type="number" class="form-control" id="wishPrice" name="wishPrice" th:value="${wish.getWishPrice()}" step="0.01">
+        </div>
+        <div class="mb-3">
+            <label for="wishLink" class="form-label">Wish Link</label>
+            <input type="url" class="form-control" id="wishLink" name="wishLink" th:value="${wish.getWishLink()}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+
+    </form>
+</div>
+</body>
+</html>
