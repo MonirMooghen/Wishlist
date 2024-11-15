@@ -45,7 +45,6 @@ public class WishlistController {
     public String login(@RequestParam("profileEmail") String profileEmail, @RequestParam("profilePassword")
     String profilePassword, HttpSession session, Model model) throws ProfileException {
 
-
         if (profileService.login(profileEmail, profilePassword)) {
             Profile profileToCheck = profileService.getProfileByEmailAndPassword(profileEmail, profilePassword);
             // create session for user and set session timeout to 30 sec (container default: 15 min)
@@ -100,7 +99,6 @@ public class WishlistController {
 
     @PostMapping("/savewishlist")
     public String addWishList(@ModelAttribute Wishlist wishList, HttpSession session, Model model) {
-
     // Retrieve the Profile object from the session
     Profile profile = (Profile) session.getAttribute("profile");
 
@@ -121,10 +119,6 @@ public class WishlistController {
         }
     }
 
-
-
-
-
     @GetMapping("/wishlist/{id}")
     public String wishlistById(@PathVariable("id") int wishlistId, Model model){
         Wishlist wishlist = wishlistService.findWishlistById(wishlistId);
@@ -141,15 +135,12 @@ public class WishlistController {
         return "editWishlist";
     }
 
-
-
-@PostMapping("/wishlist/update")
-public String updateWishlist(@ModelAttribute Wishlist wishlist) {
-    int wishlistId = wishlist.getWishlistId();
-    wishlistService.updateWishlist(wishlist);
-    return "redirect:/homepage/wishlist/"+ wishlistId;
-}
-
+    @PostMapping("/wishlist/update")
+    public String updateWishlist(@ModelAttribute Wishlist wishlist) {
+        int wishlistId = wishlist.getWishlistId();
+        wishlistService.updateWishlist(wishlist);
+        return "redirect:/homepage/wishlist/"+ wishlistId;
+    }
 
     //***DELETE WISHLIST***--------------------------------------------------------------------------------------------D
     @PostMapping("/wishlist/remove/{id}")
@@ -171,10 +162,10 @@ public String updateWishlist(@ModelAttribute Wishlist wishlist) {
 
     @PostMapping("/savewish")
     public String saveWish(@RequestParam("wishlistId") int wishlistId,
-                          @RequestParam("wishName") String wishName,
-                          @RequestParam("wishDescription") String wishDescription,
-                          @RequestParam("wishPrice") Double wishPrice,
-                          @RequestParam("wishLink") String wishLink){
+                           @RequestParam("wishName") String wishName,
+                           @RequestParam("wishDescription") String wishDescription,
+                           @RequestParam("wishPrice") Double wishPrice,
+                           @RequestParam("wishLink") String wishLink){
 
         Wish newWish = new Wish();
         newWish.setWishName(wishName);
@@ -195,8 +186,6 @@ public String updateWishlist(@ModelAttribute Wishlist wishlist) {
         return "homepage";
     }
 
-
-
     //***UPDATE WISH***------------------------------------------------------------------------------------------------U
     @GetMapping("/wish/edit/{id}")
     public String editWish(@PathVariable int id, Model model){
@@ -211,13 +200,12 @@ public String updateWishlist(@ModelAttribute Wishlist wishlist) {
         return "editWish";
     }
 
-
-@PostMapping("/wish/update")
-public String updateWish( @ModelAttribute Wish wish) {
-    int id = wish.getWishId();
-    wishlistService.updateWish(wish);
-    return "redirect:/homepage/wishlist/edit/"+id;
-}
+    @PostMapping("/wish/update")
+    public String updateWish( @ModelAttribute Wish wish) {
+        int id = wish.getWishId();
+        wishlistService.updateWish(wish);
+        return "redirect:/homepage/wishlist/edit/"+id;
+    }
 
     //***DELETE WISH***------------------------------------------------------------------------------------------------D
     @PostMapping("/wish/remove/{id}")
